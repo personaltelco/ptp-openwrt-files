@@ -6,7 +6,6 @@ GATEWAY=/usr/nocatauth/bin/gateway
 CONF=/etc/nocat.conf
 
 start() {
-#	$GATEWAY -f $CONF
 	$GATEWAY -F -f $CONF 2>&1 | logger -t gateway &
 }
 
