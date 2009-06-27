@@ -1,0 +1,29 @@
+config 'olsrd'
+	option 'DebugLevel' '2'
+	option 'IpVersion' '4'
+	option 'FIBMetric' 'flat'
+	option 'LinkQualityAlgorithm' 'etx_ff'
+	option 'AllowNoInt' 'yes'
+	option 'LinkQualityLevel' '2'
+	option 'Pollrate' '0.05'
+	option 'NicChgsPollInt' '3.0'
+	option 'TcRedundancy'	'2'
+	option 'MprCoverage'	'3'
+	option 'ClearScreen' 'no'
+
+config 'LoadPlugin'
+	option 'library' 'olsrd_txtinfo.so.0.1'
+	option 'accept' '127.0.0.1'
+
+config 'Interface'
+	option 'interface' 'ath0'
+	
+config 'Interface'
+	option 'interface' 'tap0'
+
+	
+config 'Hna4'
+	option 'netaddr' '10.11.3.0'
+	option 'netmask' '255.255.255.192'	
+	
+

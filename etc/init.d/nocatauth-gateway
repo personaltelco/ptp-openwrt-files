@@ -1,0 +1,19 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006 OpenWrt.org
+
+START=90
+GATEWAY=/usr/nocatauth/bin/gateway
+CONF=/etc/nocat.conf
+
+start() {
+#	$GATEWAY -f $CONF
+	$GATEWAY -F -f $CONF 2>&1 | logger -t gateway &
+}
+
+stop() {
+	killall gateway
+	iptables -t filter -F
+	iptables -t mangle -F
+	iptables -t nat -F
+	/etc/init.d/firewall_rss start
+}

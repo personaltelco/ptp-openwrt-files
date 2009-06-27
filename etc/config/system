@@ -1,0 +1,4 @@
+config system
+	option hostname	freedom
+	option timezone	PST8PDT
+	option log_ip	70.102.34.162

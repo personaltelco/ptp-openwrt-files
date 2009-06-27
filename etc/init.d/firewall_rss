@@ -1,0 +1,12 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2008 OpenWrt.org
+
+START=45
+
+start() {
+	iptables -t nat -I POSTROUTING -o eth0.1 -j MASQUERADE
+}
+
+stop() {
+	iptables -t nat -D POSTROUTING -o eth0.1 -j MASQUERADE
+}
