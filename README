@@ -26,8 +26,9 @@ directory tree.  The node database contains the following fields:
         typically 26 for coffee shop nodes, but also 25, 24 and 22
         occur.
 
-  LOGOFILE : the name of a logo to use on the splash page, found in
-        the www/images/nodes directory along with the generic images.
+  LOGOFILE : the name of a logo file to use on the splash page, found
+        in the www/images/nodes directory along with the generic
+        images.
 
 Two additional variable can be computed or selected based on the other
 values:
@@ -38,14 +39,14 @@ values:
         25 -> 255.255.255.128
         26 -> 255.255.255.192
 
-  LOCALNET : the LOCALADDR logically-anded against the LOCALNETMASK.
+  LOCALNET : the LOCALADDR bitwise-AND'd against the LOCALNETMASK.
 
 The configurator should recreate the files from the etc, root, and usr
 directories, making the substitutions for the variables noted above in
 a new tree.  The files in the www and www/images directories should
 also be copied into the corresponding directories in the new tree, and
-the file in www/images/nodes/$(LOGOFILE) should be copied to
-www/images in the new tree.
+the file www/images/nodes/$(LOGOFILE) should be copied to www/images
+in the new tree.
 
 Additionally, unique openvpn keys are needed for each gateway device.
 If possible, keys from existing NuCabs can be used.  If necessary,
@@ -54,11 +55,12 @@ they can be computed on donk using the mkvpnclient utility:
   sudo mkvpnclient $(HOSTNAME)
 
 with the resulting $(HOSTNAME).crt and $(HOSTNAME).key files copied
-into the new tree in etc/openvpn/keys.
+into the new tree in etc/openvpn/keys.  This part probably needs doing
+manually.
 
 In the near term, we can assume that the upstream network is assigned
-using DHCP, but ultimately it is desirable to handle static address
-configurations on the upstream interface.
+using DHCP, but ultimately it is desirable to extend the system to
+handle static address configurations on the upstream interface.
 
 OTHER ISSUES:
 
