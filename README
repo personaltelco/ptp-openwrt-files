@@ -1,0 +1,93 @@
+This tree is intended as a configurator, for generating OpenWrt
+$(TOPDIR)/files trees for individual nodes (or suitable for rsync'ing
+over a generic FooCab image.
+
+A tab-delimited node database (nodedb.txt) contains the basic
+configuration information needed for filling in the template files.
+The basic idea is to substitute for PTP_<string>_PTP instances in the
+template files, dumping the result into a nearby node-specific
+directory tree.  The node database contains the following fields:
+
+  NODE : the node name in wiki name format, prepending "Node" to the
+         string value of this variable should generate a valid node
+         wiki page name.
+
+  NODENAME : a string value representing the name of the business or
+         area sponsoring the node.
+
+  HOSTNAME : a hostname for the gateway device, hopefully already in
+         PTP's DNS system.
+
+  LOCALADDR : an ipv4 address in the 10.11.x.y range for the gateway
+         device, typically the first valid host ipaddr in the local
+         network.
+
+  LOCALNETCIDR : the number of ipv4 bits in the network portion,
+        typically 26 for coffee shop nodes, but also 25, 24 and 22
+        occur.
+
+  LOGOFILE : the name of a logo to use on the splash page, found in
+        the www/images/nodes directory along with the generic images.
+
+Two additional variable can be computed or selected based on the other
+values:
+
+  LOCALNETMASK : Based on the value of the LOCALNETCIDR, thusly:
+        22 -> 255.255.252.0
+        24 -> 255.255.255.0
+        25 -> 255.255.255.128
+        26 -> 255.255.255.192
+
+  LOCALNET : the LOCALADDR logically-anded against the LOCALNETMASK.
+
+The configurator should recreate the files from the etc, root, and usr
+directories, making the substitutions for the variables noted above in
+a new tree.  The files in the www and www/images directories should
+also be copied into the corresponding directories in the new tree, and
+the file in www/images/nodes/$(LOGOFILE) should be copied to
+www/images in the new tree.
+
+Additionally, unique openvpn keys are needed for each gateway device.
+If possible, keys from existing NuCabs can be used.  If necessary,
+they can be computed on donk using the mkvpnclient utility:
+
+  sudo mkvpnclient $(HOSTNAME)
+
+with the resulting $(HOSTNAME).crt and $(HOSTNAME).key files copied
+into the new tree in etc/openvpn/keys.
+
+In the near term, we can assume that the upstream network is assigned
+using DHCP, but ultimately it is desirable to handle static address
+configurations on the upstream interface.
+
+OTHER ISSUES:
+
+1) In some cases, like at the First Unitarian Church node(s), local
+   administrators have developed their own permutations of the splash
+   and accompanying pages.  These should be retained in practice,
+   whether by integrating them by hand, or by some automated means.
+
+2) In some cases, splash pages have multiple sponsors
+   (NodePioneerSquare and NodeMississippi come to mind).  Again, these
+   should be retained in practice, whether by integrating them by
+   hand, or by some automated means.
+
+3) The current template files assume interfaces for the WgtCab.  The
+   interface names are different on the AlixCab.  There should be an
+   option to select which one device you are targeting.
+
+4) Some node hosts might want their local wired networks and wifi
+   separated and others might want or need them bridged.  There should
+   be an option to select which is desired.
+
+5) If the local wired networks are split, there should be an option to
+   administratively prevent access from the public network to the
+   private one.
+
+6) For cases where our router sits on the node hosts private network,
+   there should be an option to administratively prevent public users
+   from addressing any devices on the private network.
+
+7) Should consider whether to routinely apply my bittorrent auto-nuker
+   iptables rules.  Should test layer7 tools in a live node
+   environment as a possible alternative to prevent abuse.
