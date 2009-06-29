@@ -19,7 +19,7 @@ chomp $header;
 
 my $hi = undef;
 my $ni = undef;
-my $di = undef; # index of LOCALMASKLEN
+my $di = undef; # index of DHCPSTART
 
 for ($i = 0 ; $i < @vars ; $i++)
 {
