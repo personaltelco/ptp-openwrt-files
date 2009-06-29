@@ -22,7 +22,7 @@ directory tree.  The node database contains the following fields:
          device, typically the first valid host ipaddr in the local
          network.
 
-  LOCALNETCIDR : the number of ipv4 bits in the network portion,
+  LOCALMASKLEN : the number of ipv4 bits in the network portion,
         typically 26 for coffee shop nodes, but also 25, 24 and 22
         occur.
 
@@ -33,7 +33,7 @@ directory tree.  The node database contains the following fields:
 Two additional variable can be computed or selected based on the other
 values:
 
-  LOCALNETMASK : Based on the value of the LOCALNETCIDR, thusly:
+  LOCALNETMASK : Based on the value of the LOCALMASKLEN, thusly:
         22 -> 255.255.252.0
         24 -> 255.255.255.0
         25 -> 255.255.255.128

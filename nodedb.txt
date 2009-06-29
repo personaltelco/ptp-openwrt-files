@@ -1,4 +1,4 @@
-NODE	NODENAME	HOSTNAME	LOCALADDR	LOCALNETCIDR	LOGOFILE
+NODE	NODENAME	HOSTNAME	LOCALADDR	LOCALMASKLEN	LOGOFILE	DHCPSTART
 Rerun	Rerun	rerun	10.11.0.65	26	RERUN-Logo.png
 Slabtown	Slabtown	slabtown	10.11.0.129	26	
 CedarHillsCrossing	Cedar Hills Crossing	filth	10.11.1.1	24	
@@ -44,4 +44,4 @@ Communitecture	Communitecture Architecture and Planning	dryrot	10.11.62.129	25
 FirstUnitarian	First Unitarian Church	clara	10.11.63.1	24	
 Beaterville	Beaterville Cafe	wreck	10.11.70.1	24	
 Hawthorne	H.I. Portland Hawthorne Hostel	ballista	10.11.100.1	22	portlandhostel.gif
-Mississippi	Historic Mississippi Community Network	naya	10.11.104.1	22	
+Mississippi	Historic Mississippi Community Network	naya	10.11.104.1	22		256

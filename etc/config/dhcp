@@ -24,8 +24,8 @@ config dhcp lan
 
 config dhcp wireless
 	option interface	wireless
-	option start	70
-	option limit	50
+	option start	PTP_DHCPSTART_PTP
+	option limit	1024
 	option leasetime	1h
 
 config dhcp wan
