@@ -9,6 +9,7 @@ LuckyLabSW	Lucky Labrador Public House	spot	10.11.2.193	26	multnomah.jpg
 RedAndBlack	Red and Black Cafe	hugh	10.11.3.1	26	workspace_10.jpg
 UglyMug	Ugly Mug Coffeehouse	cycle	10.11.3.65	26	ugly-mug.png
 HotPepper	Hot Pepper Studios	lester	10.11.3.129	26	
+Contrary	Cafe Contrary	doctorno	10.11.5.1	26	
 CoffeeHouseFive	Coffeehouse-Five	vonnegut	10.11.5.65	26	coffee-house-five.jpg
 PixelFace	Pixelface Creative Services	acne	10.11.5.129	26	
 PeteForsyth	Pete Forsyth	hero	10.11.5.193	26	

@@ -107,6 +107,22 @@ while(<FILES>) {
     chown($uid,$gid,$dest);
 }
 
+open(LINKS,"find etc usr root -type l |");
+
+while(<LINKS>) {
+    chomp;
+
+    my $src = $_;
+    my @path = split('/',$src);
+    my $fname = pop @path;
+    my $outdir = join('/',"output",@path);
+    my $dest = join('/',"output",@path,$fname);
+
+    unless (-d $outdir) { system("mkdir -p $outdir"); }
+
+    system("cp -d $src $dest");
+}
+
 open(WWW,"find www -type f | grep -v nodes |");
 
 while(<WWW>) {
