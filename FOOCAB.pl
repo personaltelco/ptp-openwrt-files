@@ -75,3 +75,25 @@ while(<NODEDB>) {
 
     }
 }
+
+open(FILES,"find etc usr root -type f |");
+
+while(<FILES>) {
+    chomp;
+    my $src = $_;
+    my @path = split('/',$src);
+    my $fname = pop @path;
+    my $outdir = join('/',"output",@path);
+    my $dest = join('/',"output",@path,$fname);
+
+    print "source = $src ; outdir = $outdir ; dest = $dest\n";
+
+    ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($src);
+
+    unless (-d $outdir) { system("mkdir -p $outdir"); }
+
+    system("sed -f foocab.sed < $src > $dest");
+
+    chmod($mode,$dest);
+    chown($uid,$gid,$dest);
+}
