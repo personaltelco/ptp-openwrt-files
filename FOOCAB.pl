@@ -147,7 +147,7 @@ while(<WWW>) {
 }
 
 if (defined($logo) && $logo ne "") {
-    my $src = "www/images/node/$logo";
+    my $src = "www/images/nodes/$logo";
 
     system("cp -p $src output/www/images/$logo");
 }
