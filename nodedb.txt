@@ -1,48 +1,48 @@
-NODE	NODENAME	HOSTNAME	LOCALADDR	LOCALMASKLEN	LOGOFILE	DHCPSTART
-Rerun	Rerun	rerun	10.11.0.65	26	RERUN-Logo.png
-Slabtown	Slabtown	slabtown	10.11.0.129	26	
-CedarHillsCrossing	Cedar Hills Crossing	filth	10.11.1.1	24	
-BasementPub	Basement Pub	zeus	10.11.2.1	26	local1028.png
-CrowBar	Crow Bar	loki	10.11.2.65	26	
-Soapbox	Soapbox Design and Screw Loose Studios	soapbox	10.11.2.129	26	
-LuckyLabSW	Lucky Labrador Public House	spot	10.11.2.193	26	multnomah.jpg
-RedAndBlack	Red and Black Cafe	hugh	10.11.3.1	26	workspace_10.jpg
-UglyMug	Ugly Mug Coffeehouse	cycle	10.11.3.65	26	ugly-mug.png
-HotPepper	Hot Pepper Studios	lester	10.11.3.129	26	
-Contrary	Cafe Contrary	doctorno	10.11.5.1	26	
-CoffeeHouseFive	Coffeehouse-Five	vonnegut	10.11.5.65	26	coffee-house-five.jpg
-PixelFace	Pixelface Creative Services	acne	10.11.5.129	26	
-PeteForsyth	Pete Forsyth	hero	10.11.5.193	26	
-AnnaBannanas	Anna Bannanas Coffee House	frick	10.11.6.1	26	anna_bannanas.gif
-PowellsBooks	Powell's City of Books	vinge	10.11.6.65	26	powellsbooks_logo.gif
-Goldrush	Goldrush Coffee Bar	shiva	10.11.6.129	26
-OldTownPizza	Old Town Pizza	thehut	10.11.7.65	26
-FreshPot	The Fresh Pot	liberace	10.11.7.193	26	FPhead.jpg
-BuffaloGap	Buffalo Gap Saloon and Eatery	buffalogap	10.11.9.65	26	
-LuckyLab	Lucky Labrador Brew Pub	luckylab	10.11.9.193	26	hawthorne.jpg
-RodneyAndSkidmore	Rodney and Skidmore	wicket	10.11.10.1	26
-PioneerSquare	Pioneer Courthouse Square	frack	10.11.12.1	24	easystreet.gif
-Shack	Shack	shack	10.11.13.1	24	
-OakTree	OakTree Digital	quercus	10.11.15.1	24	oaktree.gif
-UrbanGrind	Urban Grind Coffeehouse and Roasters	grunker	10.11.19.1	26	urbangrind.jpg
-StaccatoGelato	Staccato Gelato	strongmad	10.11.23.193	26	Staccato_Logo.png
-LuckyLabNW	Lucky Labrador Beer Hall	bowser	10.11.24.1	26	beerhalldoor.jpg
-WorldCup	World Cup Coffee and Tea	circe	10.11.33.1	24	worldcup.gif
-Labarre	LaBarre Machine Works	metal	10.11.36.1	24	labarre.jpg
-Ecotrust	Ecotrust	number-one	10.11.38.1	24	ecotrust.jpg
-YukonTavern	Yukon Tavern	potato	10.11.41.1	26	
-AnnaBannanasStJohns	Anna Bannanas St Johns	kong	10.11.42.129	26	anna_bannanas.gif
-Northstar	North Star Coffeehouse	star	10.11.43.65	26	NSLogo.gif
-Crema	Crema Bakery and Cafe	phillie	10.11.45.1	24	crema.gif
-UrbanGrindNW	Urban Grind Coffeehouse	grank	10.11.47.1	24	urbangrind.jpg
-Westover	Westover Tower	overlook	10.11.51.1	24	
-PowellsTech	Powell's Technical Bookstore	cantos	10.11.53.1	24	powellsbooks_logo.gif
-BillyRays	Billy Ray's Neighborhood Dive	billyrays	10.11.59.65	26
-Concordia	Concordia Neighborhood	zoe	10.11.60.1	24	
-FirstUnitarian	First Unitarian Church	servetus	10.11.61.1	24	
-Hollywood	Hollywood Neighborhood	ramona	10.11.62.1	25	
-Communitecture	Communitecture Architecture and Planning	dryrot	10.11.62.129	25	
-FirstUnitarian	First Unitarian Church	clara	10.11.63.1	24	
-Beaterville	Beaterville Cafe	wreck	10.11.70.1	24	
-Hawthorne	H.I. Portland Hawthorne Hostel	ballista	10.11.100.1	22	portlandhostel.gif
-Mississippi	Historic Mississippi Community Network	naya	10.11.104.1	22		256
+NODE	NODENAME	HOSTNAME	BRIDGE	LOCALADDR	LOCALMASKLEN	LOGOFILE	DHCPSTART
+Rerun	Rerun	rerun	1	10.11.0.65	26	RERUN-Logo.png
+Slabtown	Slabtown	slabtown	0	10.11.0.129	26	
+CedarHillsCrossing	Cedar Hills Crossing	filth	1	10.11.1.1	24	
+BasementPub	Basement Pub	zeus	1	10.11.2.1	26	local1028.png
+CrowBar	Crow Bar	loki	1	10.11.2.65	26	
+Soapbox	Soapbox Design and Screw Loose Studios	soapbox	1	10.11.2.129	26	
+LuckyLabSW	Lucky Labrador Public House	spot		10.11.2.193	26	multnomah.jpg
+RedAndBlack	Red and Black Cafe	hugh	1	10.11.3.1	26	workspace_10.jpg
+UglyMug	Ugly Mug Coffeehouse	cycle	1	10.11.3.65	26	ugly-mug.png
+HotPepper	Hot Pepper Studios	lester	1	10.11.3.129	26	
+Contrary	Cafe Contrary	doctorno	1	10.11.5.1	26	
+CoffeeHouseFive	Coffeehouse-Five	vonnegut	1	10.11.5.65	26	coffee-house-five.jpg
+PixelFace	Pixelface Creative Services	acne	1	10.11.5.129	26	
+PeteForsyth	Pete Forsyth	hero	0	10.11.5.193	26	
+AnnaBannanas	Anna Bannanas Coffee House	frick	1	10.11.6.1	26	anna_bannanas.gif
+PowellsBooks	Powell's City of Books	vinge	1	10.11.6.65	26	powellsbooks_logo.gif
+Goldrush	Goldrush Coffee Bar	shiva	1	10.11.6.129	26
+OldTownPizza	Old Town Pizza	thehut	1	10.11.7.65	26
+FreshPot	The Fresh Pot	liberace	1	10.11.7.193	26	FPhead.jpg
+BuffaloGap	Buffalo Gap Saloon and Eatery	buffalogap	1	10.11.9.65	26	
+LuckyLab	Lucky Labrador Brew Pub	luckylab	1	10.11.9.193	26	hawthorne.jpg
+RodneyAndSkidmore	Rodney and Skidmore	wicket	1	10.11.10.1	26
+PioneerSquare	Pioneer Courthouse Square	frack	1	10.11.12.1	24	easystreet.gif
+Shack	Shack	shack	1	10.11.13.1	24	
+OakTree	OakTree Digital	quercus	1	10.11.15.1	24	oaktree.gif
+UrbanGrind	Urban Grind Coffeehouse and Roasters	grunker	1	10.11.19.1	26	urbangrind.jpg
+StaccatoGelato	Staccato Gelato	strongmad	1	10.11.23.193	26	Staccato_Logo.png
+LuckyLabNW	Lucky Labrador Beer Hall	bowser	1	10.11.24.1	26	beerhalldoor.jpg
+WorldCup	World Cup Coffee and Tea	circe	1	10.11.33.1	24	worldcup.gif
+Labarre	LaBarre Machine Works	metal	1	10.11.36.1	24	labarre.jpg
+Ecotrust	Ecotrust	number-one	1	10.11.38.1	24	ecotrust.jpg
+YukonTavern	Yukon Tavern	potato	1	10.11.41.1	26	
+AnnaBannanasStJohns	Anna Bannanas St Johns	kong	1	10.11.42.129	26	anna_bannanas.gif
+Northstar	North Star Coffeehouse	star	1	10.11.43.65	26	NSLogo.gif
+Crema	Crema Bakery and Cafe	phillie	1	10.11.45.1	24	crema.gif
+UrbanGrindNW	Urban Grind Coffeehouse	grank	1	10.11.47.1	24	urbangrind.jpg
+Westover	Westover Tower	overlook	1	10.11.51.1	24	
+PowellsTech	Powell's Technical Bookstore	cantos	1	10.11.53.1	24	powellsbooks_logo.gif
+BillyRays	Billy Ray's Neighborhood Dive	billyrays	1	10.11.59.65	26
+Concordia	Concordia Neighborhood	zoe	1	10.11.60.1	24	
+FirstUnitarian	First Unitarian Church	servetus	1	10.11.61.1	24	
+Hollywood	Hollywood Neighborhood	ramona	1	10.11.62.1	25	
+Communitecture	Communitecture Architecture and Planning	dryrot	1	10.11.62.129	25	
+FirstUnitarian	First Unitarian Church	clara	1	10.11.63.1	24	
+Beaterville	Beaterville Cafe	wreck	1	10.11.70.1	24	
+Hawthorne	H.I. Portland Hawthorne Hostel	ballista	1	10.11.100.1	22	portlandhostel.gif
+Mississippi	Historic Mississippi Community Network	naya	1	10.11.104.1	22		256

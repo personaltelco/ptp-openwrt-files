@@ -21,28 +21,29 @@ my $hi = undef;
 my $ni = undef;
 my $di = undef; # index of DHCPSTART
 my $li = undef; # index of LOGOFILE
+my $bi = undef; # index of BRIDGE
 
 for ($i = 0 ; $i < @vars ; $i++)
 {
-    if (defined $host && ($vars[$i] eq "HOSTNAME"))
-    {
+    if (defined $host && ($vars[$i] eq "HOSTNAME")) {
 	$hi = $i;
     }
-    elsif (defined $node && ($vars[$i] eq "NODE"))
-    {
+    elsif (defined $node && ($vars[$i] eq "NODE")) {
 	$ni = $i;
     }
-    elsif ($vars[$i] eq "DHCPSTART")
-    {
+    elsif ($vars[$i] eq "DHCPSTART") {
 	$di = $i;
     }
-    elsif ($vars[$i] eq "LOGOFILE")
-    {
+    elsif ($vars[$i] eq "LOGOFILE") {
 	$li = $i;
+    }
+    elsif ($vars[$i] eq "BRIDGE") {
+	$bi = $i;
     }
 }
 
 my $logo = undef;
+my $bridge = undef;
 
 while(<NODEDB>) {
     chomp;
@@ -71,6 +72,9 @@ while(<NODEDB>) {
 	    if ($vars[$i] eq "LOGOFILE") {
 		$logo = $vals[$i];
 	    }
+	    if ($vars[$i] eq "BRIDGE") {
+		$bridge = $vals[$i];
+	    }
 	}
 	
 	(defined $masklen && defined $localaddr) || die "Not enough information to compute network!";
@@ -82,6 +86,12 @@ while(<NODEDB>) {
 
 	print SED "s/PTP_LOCALNET_PTP/$netaddr/g\n";
 	print SED "s/PTP_LOCALNETMASK_PTP/$mask/g\n";
+	
+	if ($bridge) {
+	    print SED "s/PTP_LOCALIFACE_PTP/br-lan/g\n";
+	} else {
+	    print SED "s/PTP_LOCALIFACE_PTP/ath0/g\n";
+	}
     }
 }
 
@@ -105,6 +115,31 @@ while(<FILES>) {
 
     chmod($mode,$dest);
     chown($uid,$gid,$dest);
+}
+
+if ($bridge) {
+    open(BRIDGE,"find bridge/etc -type f |");
+
+    while(<BRIDGE>) {
+	chomp;
+	my $src = $_;
+	my @path = split('/',$src);
+	my $fname = pop @path;
+	shift @path; # scrape off "bridge" from path
+	my $outdir = join('/',"output",@path);
+	my $dest = join('/',"output",@path,$fname);
+	
+	# print "source = $src ; outdir = $outdir ; dest = $dest\n";
+	
+	($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($src);
+	
+	unless (-d $outdir) { system("mkdir -p $outdir"); }
+	
+	system("sed -f foocab.sed < $src > $dest");
+	
+	chmod($mode,$dest);
+	chown($uid,$gid,$dest);
+    }
 }
 
 open(LINKS,"find etc usr root -type l |");
