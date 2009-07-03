@@ -12,7 +12,7 @@ HotPepper	Hot Pepper Studios	lester	1	10.11.3.129	26
 Contrary	Cafe Contrary	doctorno	1	10.11.5.1	26	
 CoffeeHouseFive	Coffeehouse-Five	vonnegut	1	10.11.5.65	26	coffee-house-five.jpg
 PixelFace	Pixelface Creative Services	acne	1	10.11.5.129	26	
-PeteForsyth	Pete Forsyth	hero	0	10.11.5.193	26	
+PeteForsyth	Pete Forsyth	lapin	0	10.11.5.193	26	pete.jpg
 AnnaBannanas	Anna Bannanas Coffee House	frick	1	10.11.6.1	26	anna_bannanas.gif
 PowellsBooks	Powell's City of Books	vinge	1	10.11.6.65	26	powellsbooks_logo.gif
 Goldrush	Goldrush Coffee Bar	shiva	1	10.11.6.129	26
