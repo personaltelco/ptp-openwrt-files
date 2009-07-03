@@ -111,6 +111,8 @@ while(<FILES>) {
 
     unless (-d $outdir) { system("mkdir -p $outdir"); }
 
+    print "sed -f foocab.sed < $src > $dest\n";
+
     system("sed -f foocab.sed < $src > $dest");
 
     chmod($mode,$dest);
@@ -135,6 +137,8 @@ if ($bridge) {
 	
 	unless (-d $outdir) { system("mkdir -p $outdir"); }
 	
+	print "sed -f foocab.sed < $src > $dest\n";
+
 	system("sed -f foocab.sed < $src > $dest");
 	
 	chmod($mode,$dest);
@@ -154,6 +158,8 @@ while(<LINKS>) {
     my $dest = join('/',"output",@path,$fname);
 
     unless (-d $outdir) { system("mkdir -p $outdir"); }
+
+    print "cp -d $src $dest\n";
 
     system("cp -d $src $dest");
 }
@@ -175,6 +181,8 @@ while(<WWW>) {
 
     unless (-d $outdir) { system("mkdir -p $outdir"); }
 
+    print "sed -f foocab.sed < $src > $dest\n";
+
     system("sed -f foocab.sed < $src > $dest");
 
     chmod($mode,$dest);
@@ -183,6 +191,8 @@ while(<WWW>) {
 
 if (defined($logo) && $logo ne "") {
     my $src = "www/images/nodes/$logo";
+
+    print "cp -p $src output/www/images/$logo\n";
 
     system("cp -p $src output/www/images/$logo");
 }
