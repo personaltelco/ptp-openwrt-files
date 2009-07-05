@@ -18,6 +18,7 @@ PowellsBooks	Powell's City of Books	vinge	1	10.11.6.65	26	powellsbooks_logo.gif
 Goldrush	Goldrush Coffee Bar	shiva	1	10.11.6.129	26
 OldTownPizza	Old Town Pizza	thehut	1	10.11.7.65	26
 FreshPot	The Fresh Pot	liberace	1	10.11.7.193	26	FPhead.jpg
+BillyRays	Billy Ray's Neighborhood Dive	billyrays	1	10.11.8.1	26
 BuffaloGap	Buffalo Gap Saloon and Eatery	buffalogap	1	10.11.9.65	26	
 LuckyLab	Lucky Labrador Brew Pub	luckylab	1	10.11.9.193	26	hawthorne.jpg
 RodneyAndSkidmore	Rodney and Skidmore	wicket	1	10.11.10.1	26
@@ -37,7 +38,6 @@ Crema	Crema Bakery and Cafe	phillie	1	10.11.45.1	24	crema.gif
 UrbanGrindNW	Urban Grind Coffeehouse	grank	1	10.11.47.1	24	urbangrind.jpg
 Westover	Westover Tower	overlook	1	10.11.51.1	24	
 PowellsTech	Powell's Technical Bookstore	cantos	1	10.11.53.1	24	powellsbooks_logo.gif
-BillyRays	Billy Ray's Neighborhood Dive	billyrays	1	10.11.59.65	26
 Concordia	Concordia Neighborhood	zoe	1	10.11.60.1	24	
 FirstUnitarian	First Unitarian Church	servetus	1	10.11.61.1	24	
 Hollywood	Hollywood Neighborhood	ramona	1	10.11.62.1	25	
