@@ -20,8 +20,6 @@ chomp $header;
 my $hi = undef;
 my $ni = undef;
 my $di = undef; # index of DHCPSTART
-my $li = undef; # index of LOGOFILE
-my $bi = undef; # index of BRIDGE
 
 for ($i = 0 ; $i < @vars ; $i++)
 {
@@ -33,12 +31,6 @@ for ($i = 0 ; $i < @vars ; $i++)
     }
     elsif ($vars[$i] eq "DHCPSTART") {
 	$di = $i;
-    }
-    elsif ($vars[$i] eq "LOGOFILE") {
-	$li = $i;
-    }
-    elsif ($vars[$i] eq "BRIDGE") {
-	$bi = $i;
     }
 }
 
@@ -54,14 +46,16 @@ while(<NODEDB>) {
     {
 	my $masklen = undef;
 	my $localaddr = undef;
+	my $privaddr = undef;
+	my $privmasklen = undef;
 
 	for ($i = 0 ; $i < @vars ; $i++)
 	{
             # provide an overridable default value for DHCPSTART
-	    if ($i == $di && not defined($vals[$i])) { 
+	    if ($i == $di && ((not defined($vals[$i])) || ($vals[$i] eq ""))) { 
 		$vals[$i] = 5;
 	    }
-	       
+   
 	    print SED "s/PTP_$vars[$i]_PTP/$vals[$i]/g\n";
 	    if ($vars[$i] eq "LOCALMASKLEN") {
 		$masklen = $vals[$i];
@@ -75,6 +69,13 @@ while(<NODEDB>) {
 	    if ($vars[$i] eq "BRIDGE") {
 		$bridge = $vals[$i];
 	    }
+	    if ($vars[$i] eq "PRIVADDR") {
+		$privaddr = $vals[$i];
+	    }
+	    if ($vars[$i] eq "PRIVMASKLEN") {
+		$privmasklen = $vals[$i];
+	    }
+	    
 	}
 	
 	(defined $masklen && defined $localaddr) || die "Not enough information to compute network!";
@@ -86,11 +87,18 @@ while(<NODEDB>) {
 
 	print SED "s/PTP_LOCALNET_PTP/$netaddr/g\n";
 	print SED "s/PTP_LOCALNETMASK_PTP/$mask/g\n";
-	
+
 	if ($bridge) {
 	    print SED "s/PTP_LOCALIFACE_PTP/br-lan/g\n";
 	} else {
+	    $ip = NetAddr::IP::Lite->new("$privaddr/$privmasklen");
+	    $network = $ip->network();
+	    $netaddr = $network->addr();
+	    $mask = $ip->mask();
+	
 	    print SED "s/PTP_LOCALIFACE_PTP/ath0/g\n";
+	    print SED "s/PTP_PRIVNET_PTP/$netaddr/g\n";
+	    print SED "s/PTP_PRIVNETMASK_PTP/$mask/g\n";
 	}
     }
 }
@@ -120,7 +128,7 @@ while(<FILES>) {
 }
 
 if ($bridge) {
-    open(BRIDGE,"find bridge/etc -type f |");
+    open(BRIDGE,"find bridge -type f |");
 
     while(<BRIDGE>) {
 	chomp;

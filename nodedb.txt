@@ -1,24 +1,24 @@
-NODE	NODENAME	HOSTNAME	BRIDGE	LOCALADDR	LOCALMASKLEN	LOGOFILE	DHCPSTART
+NODE	NODENAME	HOSTNAME	BRIDGE	LOCALADDR	LOCALMASKLEN	LOGOFILE	DHCPSTART	PRIVADDR	PRIVMASKLEN
 Rerun	Rerun	rerun	1	10.11.0.65	26	RERUN-Logo.png
-Slabtown	Slabtown	slabtown	0	10.11.0.129	26	
+Slabtown	Slabtown	slabtown	0	10.11.0.129	26			192.168.1.1	24
 CedarHillsCrossing	Cedar Hills Crossing	filth	1	10.11.1.1	24	
 BasementPub	Basement Pub	zeus	1	10.11.2.1	26	local1028.png
 CrowBar	Crow Bar	loki	1	10.11.2.65	26	
 Soapbox	Soapbox Design and Screw Loose Studios	soapbox	1	10.11.2.129	26	
-LuckyLabSW	Lucky Labrador Public House	spot		10.11.2.193	26	multnomah.jpg
+LuckyLabSW	Lucky Labrador Public House	spot	1	10.11.2.193	26	multnomah.jpg
 RedAndBlack	Red and Black Cafe	hugh	1	10.11.3.1	26	workspace_10.jpg
 UglyMug	Ugly Mug Coffeehouse	cycle	1	10.11.3.65	26	ugly-mug.png
 HotPepper	Hot Pepper Studios	lester	1	10.11.3.129	26	
 Contrary	Cafe Contrary	doctorno	1	10.11.5.1	26	
 CoffeeHouseFive	Coffeehouse-Five	vonnegut	1	10.11.5.65	26	coffee-house-five.jpg
 PixelFace	Pixelface Creative Services	acne	1	10.11.5.129	26	
-PeteForsyth	Pete Forsyth	lapin	0	10.11.5.193	26	pete.jpg
+PeteForsyth	Pete Forsyth	lapin	0	10.11.5.193	26	pete.jpg		192.168.1.1	24
 AnnaBannanas	Anna Bannanas Coffee House	frick	1	10.11.6.1	26	anna_bannanas.gif
 PowellsBooks	Powell's City of Books	vinge	1	10.11.6.65	26	powellsbooks_logo.gif
 Goldrush	Goldrush Coffee Bar	shiva	1	10.11.6.129	26
 UrbanGrind	Urban Grind Coffeehouse and Roasters	grunker	1	10.11.7.1	26	urbangrind.jpg
 OldTownPizza	Old Town Pizza	thehut	1	10.11.7.65	26
-Cascadia	New Cascadia Traditional	muffin	0	10.11.7.129	26	newcascadia.png
+Cascadia	New Cascadia Traditional	muffin	0	10.11.7.129	26	newcascadia.png		192.168.1.1	24
 FreshPot	The Fresh Pot	liberace	1	10.11.7.193	26	FPhead.jpg
 BillyRays	Billy Ray's Neighborhood Dive	billyrays	1	10.11.8.1	26
 BuffaloGap	Buffalo Gap Saloon and Eatery	buffalogap	1	10.11.9.65	26	
