@@ -16,6 +16,7 @@ PeteForsyth	Pete Forsyth	lapin	0	10.11.5.193	26	pete.jpg
 AnnaBannanas	Anna Bannanas Coffee House	frick	1	10.11.6.1	26	anna_bannanas.gif
 PowellsBooks	Powell's City of Books	vinge	1	10.11.6.65	26	powellsbooks_logo.gif
 Goldrush	Goldrush Coffee Bar	shiva	1	10.11.6.129	26
+UrbanGrind	Urban Grind Coffeehouse and Roasters	grunker	1	10.11.7.1	26	urbangrind.jpg
 OldTownPizza	Old Town Pizza	thehut	1	10.11.7.65	26
 Cascadia	New Cascadia Traditional	muffin	0	10.11.7.129	26	newcascadia.png
 FreshPot	The Fresh Pot	liberace	1	10.11.7.193	26	FPhead.jpg
@@ -26,7 +27,6 @@ RodneyAndSkidmore	Rodney and Skidmore	wicket	1	10.11.10.1	26
 PioneerSquare	Pioneer Courthouse Square	frack	1	10.11.12.1	24	easystreet.gif
 Shack	Shack	shack	1	10.11.13.1	24	
 OakTree	OakTree Digital	quercus	1	10.11.15.1	24	oaktree.gif
-UrbanGrind	Urban Grind Coffeehouse and Roasters	grunker	1	10.11.19.1	26	urbangrind.jpg
 StaccatoGelato	Staccato Gelato	strongmad	1	10.11.23.193	26	Staccato_Logo.png
 LuckyLabNW	Lucky Labrador Beer Hall	bowser	1	10.11.24.1	26	beerhalldoor.jpg
 WorldCup	World Cup Coffee and Tea	circe	1	10.11.33.1	24	worldcup.gif
