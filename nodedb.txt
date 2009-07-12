@@ -15,7 +15,7 @@ PixelFace	Pixelface Creative Services	acne	1	10.11.5.129	26
 PeteForsyth	Pete Forsyth	lapin	0	10.11.5.193	26	pete.jpg		192.168.1.1	24
 AnnaBannanas	Anna Bannanas Coffee House	frick	1	10.11.6.1	26	anna_bannanas.gif
 PowellsBooks	Powell's City of Books	vinge	1	10.11.6.65	26	powellsbooks_logo.gif
-Goldrush	Goldrush Coffee Bar	shiva	1	10.11.6.129	26
+Goldrush	Goldrush Coffee Bar	nugget	1	10.11.6.129	26
 UrbanGrind	Urban Grind Coffeehouse and Roasters	grunker	1	10.11.7.1	26	urbangrind.jpg
 OldTownPizza	Old Town Pizza	thehut	1	10.11.7.65	26
 Cascadia	New Cascadia Traditional	muffin	0	10.11.7.129	26	newcascadia.png		192.168.1.1	24
@@ -32,7 +32,7 @@ LuckyLabNW	Lucky Labrador Beer Hall	bowser	1	10.11.24.1	26	beerhalldoor.jpg
 WorldCup	World Cup Coffee and Tea	circe	1	10.11.33.1	24	worldcup.gif
 Labarre	LaBarre Machine Works	metal	1	10.11.36.1	24	labarre.jpg
 Ecotrust	Ecotrust	number-one	1	10.11.38.1	24	ecotrust.jpg
-YukonTavern	Yukon Tavern	potato	1	10.11.41.1	26	
+YukonTavern	Yukon Tavern	yukon	1	10.11.41.1	26	
 AnnaBannanasStJohns	Anna Bannanas St Johns	kong	1	10.11.42.129	26	anna_bannanas.gif
 Northstar	North Star Coffeehouse	star	1	10.11.43.65	26	NSLogo.gif
 Crema	Crema Bakery and Cafe	phillie	1	10.11.45.1	24	crema.gif

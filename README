@@ -18,6 +18,10 @@ directory tree.  The node database contains the following fields:
   HOSTNAME : a hostname for the gateway device, hopefully already in
          PTP's DNS system.
 
+  BRIDGE : indicates whether or not the LAN ports and wireless should
+         be bridged together or on separate networks. (1 = yes, 0 = no).
+
+
   LOCALADDR : an ipv4 address in the 10.11.x.y range for the gateway
          device, typically the first valid host ipaddr in the local
          network.
@@ -30,6 +34,15 @@ directory tree.  The node database contains the following fields:
         in the www/images/nodes directory along with the generic
         images.
 
+  DHCPSTART : indicates the offset from the LOCALNET to begin
+        allocating addresses.
+
+  PRIVADDR : indicates in non-bridging cases the ipaddr of the
+        device's private network interface.
+
+  PRIVMASKLEN : indicates the number of ipv4 bits in the network
+        portion for the private network.
+
 Two additional variable can be computed or selected based on the other
 values:
 
@@ -40,6 +53,12 @@ values:
         26 -> 255.255.255.192
 
   LOCALNET : the LOCALADDR bitwise-AND'd against the LOCALNETMASK.
+
+likewise, in non-bridging cases,
+
+  PRIVNETMASK 
+
+  PRIVNET
 
 The configurator should recreate the files from the etc, root, and usr
 directories, making the substitutions for the variables noted above in
@@ -78,18 +97,14 @@ OTHER ISSUES:
    interface names are different on the AlixCab.  There should be an
    option to select which one device you are targeting.
 
-4) Some node hosts might want their local wired networks and wifi
-   separated and others might want or need them bridged.  There should
-   be an option to select which is desired.
-
-5) If the local wired networks are split, there should be an option to
+4) If the local wired networks are split, there should be an option to
    administratively prevent access from the public network to the
    private one.
 
-6) For cases where our router sits on the node hosts private network,
+5) For cases where our router sits on the node hosts private network,
    there should be an option to administratively prevent public users
    from addressing any devices on the private network.
 
-7) Should consider whether to routinely apply my bittorrent auto-nuker
+6) Should consider whether to routinely apply my bittorrent auto-nuker
    iptables rules.  Should test layer7 tools in a live node
    environment as a possible alternative to prevent abuse.
