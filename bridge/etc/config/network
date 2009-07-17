@@ -15,15 +15,15 @@ config interface loopback
 #### LAN configuration
 config interface lan
 	option type 	bridge
-	option ifname	"eth0.0"
+	option ifname	"PTP_PUBIFACE_PTP PTP_PRIVIFACE_PTP"
 	option proto	static
-	option ipaddr	PTP_LOCALADDR_PTP
-	option netmask	PTP_LOCALNETMASK_PTP
+	option ipaddr	PTP_PUBADDR_PTP
+	option netmask	PTP_PUBNETMASK_PTP
 
 
 #### WAN configuration
 config interface	wan
-	option ifname	"eth0.1"
+	option ifname	"PTP_WANIFACE_PTP"
 	option proto	dhcp
 	#option proto	static
 	#option ipaddr	10.1.10.2

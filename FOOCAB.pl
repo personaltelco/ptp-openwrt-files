@@ -36,6 +36,7 @@ for ($i = 0 ; $i < @vars ; $i++)
 
 my $logo = undef;
 my $bridge = undef;
+my $device = undef;
 
 while(<NODEDB>) {
     chomp;
@@ -57,10 +58,10 @@ while(<NODEDB>) {
 	    }
    
 	    print SED "s/PTP_$vars[$i]_PTP/$vals[$i]/g\n";
-	    if ($vars[$i] eq "LOCALMASKLEN") {
+	    if ($vars[$i] eq "PUBMASKLEN") {
 		$masklen = $vals[$i];
 	    }
-	    if ($vars[$i] eq "LOCALADDR") {
+	    if ($vars[$i] eq "PUBADDR") {
 		$localaddr = $vals[$i];
 	    }
 	    if ($vars[$i] eq "LOGOFILE") {
@@ -68,6 +69,9 @@ while(<NODEDB>) {
 	    }
 	    if ($vars[$i] eq "BRIDGE") {
 		$bridge = $vals[$i];
+	    }
+	    if ($vars[$i] eq "DEVICE") {
+		$device = $vals[$i];
 	    }
 	    if ($vars[$i] eq "PRIVADDR") {
 		$privaddr = $vals[$i];
@@ -77,7 +81,17 @@ while(<NODEDB>) {
 	    }
 	    
 	}
-	
+
+	print "DEVICE=$device\n";
+
+	if($device eq "WGT") {
+	    print SED "s/PTP_WANIFACE_PTP/eth0.1/g\n";
+	    print SED "s/PTP_PRIVIFACE_PTP/eth0.0/g\n";
+	} elsif ($device eq "ALIX") {
+	    print SED "s/PTP_WANIFACE_PTP/eth0/g\n";
+	    print SED "s/PTP_PRIVIFACE_PTP/eth2/g\n";
+	}   
+
 	(defined $masklen && defined $localaddr) || die "Not enough information to compute network!";
 
 	my $ip = NetAddr::IP::Lite->new("$localaddr/$masklen");
@@ -85,8 +99,13 @@ while(<NODEDB>) {
 	my $netaddr = $network->addr();
 	my $mask = $ip->mask();
 
-	print SED "s/PTP_LOCALNET_PTP/$netaddr/g\n";
-	print SED "s/PTP_LOCALNETMASK_PTP/$mask/g\n";
+	print SED "s/PTP_PUBNET_PTP/$netaddr/g\n";
+	print SED "s/PTP_PUBNETMASK_PTP/$mask/g\n";
+	if ($device eq "WGT") {
+	    print SED "s/PTP_PUBIFACE_PTP/ath0/g\n";
+	} elsif ($device eq "ALIX") {
+	    print SED "s/PTP_PUBIFACE_PTP/eth1/g\n";
+	}
 
 	if ($bridge) {
 	    print SED "s/PTP_LOCALIFACE_PTP/br-lan/g\n";
@@ -95,8 +114,12 @@ while(<NODEDB>) {
 	    $network = $ip->network();
 	    $netaddr = $network->addr();
 	    $mask = $ip->mask();
-	
-	    print SED "s/PTP_LOCALIFACE_PTP/ath0/g\n";
+
+	    if ($device eq "WGT") {
+		print SED "s/PTP_LOCALIFACE_PTP/ath0/g\n";
+	    } elsif ($device eq "ALIX") {
+		print SED "s/PTP_LOCALIFACE_PTP/eth1/g\n";
+	    }
 	    print SED "s/PTP_PRIVNET_PTP/$netaddr/g\n";
 	    print SED "s/PTP_PRIVNETMASK_PTP/$mask/g\n";
 	}
@@ -153,6 +176,16 @@ if ($bridge) {
 	chown($uid,$gid,$dest);
     }
 }
+
+if ($device eq "WGT") {
+    # remove redundant interface, in cases of bridging
+    system("mv output/etc/config/network output/etc/config/network.orig ; sed 's/eth0.0 ath0/eth0.0/' output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
+} elsif ($device eq "ALIX") {
+    # if alix, remove the vlan configuration from etc/config/network
+    # and delete the etc/config/wireless
+    system("mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n '#### Loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig output/etc/config/wireless");
+}
+    
 
 open(LINKS,"find etc usr root -type l |");
 

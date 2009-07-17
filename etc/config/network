@@ -15,7 +15,7 @@ config interface loopback
 #### LAN configuration
 config interface lan
 #	option type 	bridge
-	option ifname	"eth0.0"
+	option ifname	"PTP_PRIVIFACE_PTP"
 	option proto	static
 	option ipaddr	PTP_PRIVADDR_PTP	
 	option netmask	PTP_PRIVNETMASK_PTP
@@ -23,7 +23,7 @@ config interface lan
 
 #### WAN configuration
 config interface	wan
-	option ifname	"eth0.1"
+	option ifname	"PTP_WANIFACE_PTP"
 	option proto	dhcp
 	#option proto	static
 	#option ipaddr	10.1.10.2
@@ -31,8 +31,8 @@ config interface	wan
 	#option gateway	10.1.10.1
 	#option dns		10.1.10.1
 	
-config interface        wireless
-        option ifname   "ath0"
+config interface        public
+        option ifname   "PTP_PUBIFACE_PTP"
         option proto    static
-        option ipaddr   PTP_LOCALADDR_PTP
-        option netmask  PTP_LOCALNETMASK_PTP
+        option ipaddr   PTP_PUBADDR_PTP
+        option netmask  PTP_PUBNETMASK_PTP

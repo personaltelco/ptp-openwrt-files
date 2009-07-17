@@ -22,11 +22,11 @@ directory tree.  The node database contains the following fields:
          be bridged together or on separate networks. (1 = yes, 0 = no).
 
 
-  LOCALADDR : an ipv4 address in the 10.11.x.y range for the gateway
+  PUBADDR : an ipv4 address in the 10.11.x.y range for the gateway
          device, typically the first valid host ipaddr in the local
          network.
 
-  LOCALMASKLEN : the number of ipv4 bits in the network portion,
+  PUBMASKLEN : the number of ipv4 bits in the network portion,
         typically 26 for coffee shop nodes, but also 25, 24 and 22
         occur.
 
@@ -46,13 +46,13 @@ directory tree.  The node database contains the following fields:
 Two additional variable can be computed or selected based on the other
 values:
 
-  LOCALNETMASK : Based on the value of the LOCALMASKLEN, thusly:
+  PUBNETMASK : Based on the value of the PUBMASKLEN, thusly:
         22 -> 255.255.252.0
         24 -> 255.255.255.0
         25 -> 255.255.255.128
         26 -> 255.255.255.192
 
-  LOCALNET : the LOCALADDR bitwise-AND'd against the LOCALNETMASK.
+  PUBNET : the PUBADDR bitwise-AND'd against the PUBNETMASK.
 
 likewise, in non-bridging cases,
 
@@ -93,18 +93,14 @@ OTHER ISSUES:
    should be retained in practice, whether by integrating them by
    hand, or by some automated means.
 
-3) The current template files assume interfaces for the WgtCab.  The
-   interface names are different on the AlixCab.  There should be an
-   option to select which one device you are targeting.
-
-4) If the local wired networks are split, there should be an option to
+3) If the local wired networks are split, there should be an option to
    administratively prevent access from the public network to the
    private one.
 
-5) For cases where our router sits on the node hosts private network,
+4) For cases where our router sits on the node hosts private network,
    there should be an option to administratively prevent public users
    from addressing any devices on the private network.
 
-6) Should consider whether to routinely apply my bittorrent auto-nuker
+5) Should consider whether to routinely apply my bittorrent auto-nuker
    iptables rules.  Should test layer7 tools in a live node
    environment as a possible alternative to prevent abuse.

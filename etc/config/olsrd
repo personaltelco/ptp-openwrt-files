@@ -16,14 +16,14 @@ config 'LoadPlugin'
 	option 'accept' '127.0.0.1'
 
 config 'Interface'
-	option 'interface' 'ath0'
+	option 'interface' 'PTP_LOCALIFACE_PTP'
 	
 config 'Interface'
 	option 'interface' 'tap0'
 
 	
 config 'Hna4'
-	option 'netaddr' 'PTP_LOCALNET_PTP'
-	option 'netmask' 'PTP_LOCALNETMASK_PTP'	
+	option 'netaddr' 'PTP_PUBNET_PTP'
+	option 'netmask' 'PTP_PUBNETMASK_PTP'	
 	
 
