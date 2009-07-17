@@ -4,9 +4,9 @@
 START=45
 
 start() {
-	iptables -t nat -I POSTROUTING -o eth0.1 -j MASQUERADE
+	iptables -t nat -I POSTROUTING -o PTP_WANIFACE_PTP -j MASQUERADE
 }
 
 stop() {
-	iptables -t nat -D POSTROUTING -o eth0.1 -j MASQUERADE
+	iptables -t nat -D POSTROUTING -o PTP_WANIFACE_PTP -j MASQUERADE
 }
