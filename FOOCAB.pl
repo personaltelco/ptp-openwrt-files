@@ -37,6 +37,11 @@ for ($i = 0 ; $i < @vars ; $i++)
 my $logo = undef;
 my $bridge = undef;
 my $device = undef;
+my $filter = undef;
+my $localiface = undef;
+my $pubiface = undef;
+my $priviface = undef;
+my $waniface = undef;
 
 while(<NODEDB>) {
     chomp;
@@ -79,15 +84,22 @@ while(<NODEDB>) {
 	    if ($vars[$i] eq "PRIVMASKLEN") {
 		$privmasklen = $vals[$i];
 	    }
+	    if ($vars[$i] eq "FILTER") {
+		$filter = $vals[$i];
+	    }
 	    
 	}
 
 	print "DEVICE=$device\n";
 
 	if($device eq "WGT") {
+	    $waniface = "eth0.1";
+	    $priviface = "eth0.0";
 	    print SED "s/PTP_WANIFACE_PTP/eth0.1/g\n";
 	    print SED "s/PTP_PRIVIFACE_PTP/eth0.0/g\n";
 	} elsif ($device eq "ALIX") {
+	    $waniface = "eth0";
+	    $priviface = "eth2";
 	    print SED "s/PTP_WANIFACE_PTP/eth0/g\n";
 	    print SED "s/PTP_PRIVIFACE_PTP/eth2/g\n";
 	}   
@@ -102,12 +114,15 @@ while(<NODEDB>) {
 	print SED "s/PTP_PUBNET_PTP/$netaddr/g\n";
 	print SED "s/PTP_PUBNETMASK_PTP/$mask/g\n";
 	if ($device eq "WGT") {
+	    $pubiface = "ath0";
 	    print SED "s/PTP_PUBIFACE_PTP/ath0/g\n";
 	} elsif ($device eq "ALIX") {
+	    $pubiface = "eth1";
 	    print SED "s/PTP_PUBIFACE_PTP/eth1/g\n";
 	}
 
 	if ($bridge) {
+	    $localiface = "br-lan";
 	    print SED "s/PTP_LOCALIFACE_PTP/br-lan/g\n";
 	} else {
 	    $ip = NetAddr::IP::Lite->new("$privaddr/$privmasklen");
@@ -116,8 +131,10 @@ while(<NODEDB>) {
 	    $mask = $ip->mask();
 
 	    if ($device eq "WGT") {
+		$localiface = "ath0";
 		print SED "s/PTP_LOCALIFACE_PTP/ath0/g\n";
 	    } elsif ($device eq "ALIX") {
+		$localiface = "eth1";
 		print SED "s/PTP_LOCALIFACE_PTP/eth1/g\n";
 	    }
 	    print SED "s/PTP_PRIVNET_PTP/$netaddr/g\n";
@@ -186,7 +203,6 @@ if ($device eq "WGT") {
     system("mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n '#### Loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig output/etc/config/wireless");
 }
     
-
 open(LINKS,"find etc usr root -type l |");
 
 while(<LINKS>) {
@@ -203,6 +219,48 @@ while(<LINKS>) {
     print "cp -d $src $dest\n";
 
     system("cp -d $src $dest");
+}
+
+if ($filter ne "NONE") {
+    # create filter script and /etc/rc.d link
+    open(FILTER,">output/etc/init.d/filter");
+
+    print FILTER 
+	"#!/bin/sh /etc/rc.common
+# Copyright (C) 2006 OpenWrt.org
+
+START=96
+STOP=96
+
+start() {\n";
+
+    if ($filter eq "WAN" || $filter eq "BOTH") {
+	print FILTER
+	    "        iptables -I FORWARD -i $localiface -d \$(ip addr show dev $waniface | grep inet | awk '{ print \$2 }') -j DROP\n";
+    }
+    if ($filter eq "PRIV" || $filter eq "BOTH") {
+	print FILTER
+	    "        iptables -I FORWARD -o $priviface -i $localiface -j DROP\n";
+    }
+
+    print FILTER 
+	"}
+
+stop() {\n";
+
+    if ($filter eq "WAN" || $filter eq "BOTH") {
+	print FILTER
+	    "        iptables -D FORWARD -i $localiface -d \$(ip addr show dev $waniface | grep inet | awk '{ print \$2 }') -j DROP\n";
+    }
+    if ($filter eq "PRIV" || $filter eq "BOTH") {
+	print FILTER
+	    "        iptables -D FORWARD -o $priviface -i $localiface -j DROP\n";
+    }
+
+    print FILTER "}\n";
+
+    close(FILTER);
+    symlink "../init.d/filter","output/etc/rc.d/S96filter";
 }
 
 open(WWW,"find www -type f | grep -v nodes |");

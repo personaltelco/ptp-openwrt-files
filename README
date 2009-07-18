@@ -21,6 +21,17 @@ directory tree.  The node database contains the following fields:
   BRIDGE : indicates whether or not the LAN ports and wireless should
          be bridged together or on separate networks. (1 = yes, 0 = no).
 
+  FILTER : indicates if any special filtering should be applied to
+         protect the node hosts local private network:
+
+           NONE = no special filtering required;
+           WAN = indicates the device is hanging off of the node hosts
+                 private network, so disallow any destinations ipaddrs
+                 on the immediately upstream network;
+           PRIV = prevents sources from the public network from
+                 accessing hosts on the private network (doesn't make
+                 sense if BRIDGE above is "yes");
+           BOTH = adds rules for both WAN and PRIV.
 
   PUBADDR : an ipv4 address in the 10.11.x.y range for the gateway
          device, typically the first valid host ipaddr in the local
@@ -93,14 +104,6 @@ OTHER ISSUES:
    should be retained in practice, whether by integrating them by
    hand, or by some automated means.
 
-3) If the local wired networks are split, there should be an option to
-   administratively prevent access from the public network to the
-   private one.
-
-4) For cases where our router sits on the node hosts private network,
-   there should be an option to administratively prevent public users
-   from addressing any devices on the private network.
-
-5) Should consider whether to routinely apply my bittorrent auto-nuker
+3) Should consider whether to routinely apply my bittorrent auto-nuker
    iptables rules.  Should test layer7 tools in a live node
    environment as a possible alternative to prevent abuse.
