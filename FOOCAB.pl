@@ -260,6 +260,7 @@ stop() {\n";
     print FILTER "}\n";
 
     close(FILTER);
+    chmod 0755,"output/etc/init.d/filter";
     symlink "../init.d/filter","output/etc/rc.d/S96filter";
 }
 
