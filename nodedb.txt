@@ -1,9 +1,9 @@
 NODE	NODENAME	HOSTNAME	BRIDGE	FILTER	DEVICE	PUBADDR	PUBMASKLEN	LOGOFILE	DHCPSTART	PRIVADDR	PRIVMASKLEN
-Rerun	Rerun	rerun	1	NONE	WGT	10.11.0.65	26	RERUN-Logo.png
-Slabtown	Slabtown	slabtown	0	NONE	WGT	10.11.0.129	26			192.168.1.1	24
+Rerun	Rerun	rerun	0	PRIV	WGT	10.11.0.65	26	RERUN-Logo.png		192.168.1.1	24
+Slabtown	Slabtown	slabtown	0	PRIV	WGT	10.11.0.129	26			192.168.1.1	24
 CedarHillsCrossing	Cedar Hills Crossing	filth	1	NONE	WGT	10.11.1.1	24	
 BasementPub	Basement Pub	zeus	1	NONE	WGT	10.11.2.1	26	local1028.png
-CrowBar	Crow Bar	loki	1	NONE	WGT	10.11.2.65	26	
+CrowBar	Crow Bar	loki	1	WAN	WGT	10.11.2.65	26	
 Soapbox	Soapbox Design and Screw Loose Studios	soapbox	1	NONE	WGT	10.11.2.129	26	
 StaccatoGelato	Staccato Gelato	strongmad	1	NONE	WGT	10.11.2.193	26	Staccato_Logo.png
 RedAndBlack	Red and Black Cafe	hugh	1	NONE	WGT	10.11.3.1	26	workspace_10.jpg
@@ -16,7 +16,7 @@ PeteForsyth	Pete Forsyth	lapin	0	PRIV	WGT	10.11.5.193	26	pete.jpg		192.168.1.1	2
 AnnaBannanas	Anna Bannanas Coffee House	frick	1	NONE	WGT	10.11.6.1	26	anna_bannanas.gif
 PowellsBooks	Powell's City of Books	vinge	1	NONE	WGT	10.11.6.65	26	powellsbooks_logo.gif
 Goldrush	Goldrush Coffee Bar	nugget	1	NONE	WGT	10.11.6.129	26
-Beaterville	Beaterville Cafe	wreck	1	NONE	WGT	10.11.6.193	26	
+Beaterville	Beaterville Cafe	wreck	0	NONE	WGT	10.11.6.193	26			192.168.2.1	24
 UrbanGrind	Urban Grind Coffeehouse and Roasters	grunker	1	WGT	10.11.7.1	26	urbangrind.jpg
 OldTownPizza	Old Town Pizza	thehut	1	NONE	WGT	10.11.7.65	26
 Cascadia	New Cascadia Traditional	muffin	0	NONE	WGT	10.11.7.129	26	newcascadia.png		192.168.1.1	24

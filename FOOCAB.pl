@@ -196,7 +196,7 @@ if ($bridge) {
 
 if ($device eq "WGT") {
     # remove redundant interface, in cases of bridging
-    system("mv output/etc/config/network output/etc/config/network.orig ; sed 's/eth0.0 ath0/eth0.0/' output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
+    system("mv output/etc/config/network output/etc/config/network.orig ; sed 's/ath0 eth0.0/eth0.0/' output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
 } elsif ($device eq "ALIX") {
     # if alix, remove the vlan configuration from etc/config/network
     # and delete the etc/config/wireless

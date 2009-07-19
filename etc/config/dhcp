@@ -23,7 +23,7 @@ config dhcp lan
 	option leasetime	12h
 
 config dhcp wireless
-	option interface	wireless
+	option interface	public
 	option start	PTP_DHCPSTART_PTP
 	option limit	1024
 	option leasetime	1h
