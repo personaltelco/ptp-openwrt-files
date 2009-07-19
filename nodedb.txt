@@ -45,5 +45,5 @@ FirstUnitarian	First Unitarian Church	servetus	1	NONE	WGT	10.11.61.1	24
 Hollywood	Hollywood Neighborhood	ramona	1	NONE	WGT	10.11.62.1	25	
 Communitecture	Communitecture Architecture and Planning	dryrot	1	NONE	WGT	10.11.62.129	25	
 FirstUnitarian	First Unitarian Church	clara	1	NONE	WGT	10.11.63.1	24	
-Hawthorne	H.I. Portland Hawthorne Hostel	ballista	1	NONE	WGT	10.11.100.1	22	portlandhostel.gif
+Hawthorne	H.I. Portland Hawthorne Hostel	foe	1	NONE	ALIX	10.11.100.1	22	portlandhostel.gif
 Mississippi	Historic Mississippi Community Network	naya	1	NONE	WGT	10.11.104.1	22		256
