@@ -18,8 +18,8 @@ directory tree.  The node database contains the following fields:
   HOSTNAME : a hostname for the gateway device, hopefully already in
          PTP's DNS system.
 
-  BRIDGE : indicates whether or not the LAN ports and wireless should
-         be bridged together or on separate networks. (1 = yes, 0 = no).
+  BRIDGE : indicates whether LAN ports and wireless should
+         be bridged together or on separate networks. (1 = bridged, 0 = not bridged).
 
   FILTER : indicates if any special filtering should be applied to
          protect the node hosts local private network:
@@ -32,6 +32,8 @@ directory tree.  The node database contains the following fields:
                  accessing hosts on the private network (doesn't make
                  sense if BRIDGE above is "yes");
            BOTH = adds rules for both WAN and PRIV.
+  
+  DEVICE : Indicates what device the configuration is for:  WGT or ALIX
 
   PUBADDR : an ipv4 address in the 10.11.x.y range for the gateway
          device, typically the first valid host ipaddr in the local
