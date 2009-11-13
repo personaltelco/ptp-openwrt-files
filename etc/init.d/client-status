@@ -1,0 +1,11 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2008  Alina Friedrichsen <x-alina@gmx.net>
+START=98
+
+start() {
+	while true; do /usr/bin/client-status.sh -t > /tmp/client.html; sleep 60; done &
+}
+
+stop() {
+	echo not stopped
+}
