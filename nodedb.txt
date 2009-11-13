@@ -6,7 +6,7 @@ PowellsTech	Powell's Technical Bookstore	cantos	0	NONE	WGT	10.11.0.193	26	powell
 CedarHillsCrossing	Cedar Hills Crossing	filth	1	NONE	ALIX	10.11.1.1	24	cedarhillscrossing-logo.gif
 BasementPub	Basement Pub	zeus	1	NONE	WGT	10.11.2.1	26	local1028.png
 CrowBar	Crow Bar	loki	1	WAN	WGT	10.11.2.65	26	
-Soapbox	Soapbox Design and Screw Loose Studios	soapbox	0	PRIV	WGT	10.11.2.129	26			192.168.1.1	24
+Soapbox	Soapbox Theory and Screw Loose Studios	soapbox	0	PRIV	WGT	10.11.2.129	26			192.168.1.1	24
 StaccatoGelato	Staccato Gelato	glace	1	WAN	WGT	10.11.2.193	26	Staccato_Logo.png
 RedAndBlack	Red and Black Cafe	hugh	1	NONE	WGT	10.11.3.1	26	workspace_10.jpg
 UglyMug	Ugly Mug Coffeehouse	cycle	1	NONE	WGT	10.11.3.65	26	ugly-mug.png
