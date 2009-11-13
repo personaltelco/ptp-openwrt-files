@@ -1,14 +1,17 @@
 NODE	NODENAME	HOSTNAME	BRIDGE	FILTER	DEVICE	PUBADDR	PUBMASKLEN	LOGOFILE	DHCPSTART	PRIVADDR	PRIVMASKLEN
+UrbanGrindNW	Urban Grind - Pearl District	grank	1	NONE	WGT	10.11.0.1	26	urbangrind.jpg
 Rerun	Rerun	rerun	0	PRIV	WGT	10.11.0.65	26	RERUN-Logo.png		192.168.1.1	24
 Slabtown	Slabtown	slabtown	0	PRIV	WGT	10.11.0.129	26			192.168.1.1	24
-CedarHillsCrossing	Cedar Hills Crossing	filth	1	NONE	WGT	10.11.1.1	24	
+PowellsTech	Powell's Technical Bookstore	cantos	0	NONE	WGT	10.11.0.193	26	powellsbooks_logo.gif		192.168.2.1	24
+CedarHillsCrossing	Cedar Hills Crossing	filth	1	NONE	ALIX	10.11.1.1	24	cedarhillscrossing-logo.gif
 BasementPub	Basement Pub	zeus	1	NONE	WGT	10.11.2.1	26	local1028.png
 CrowBar	Crow Bar	loki	1	WAN	WGT	10.11.2.65	26	
-Soapbox	Soapbox Design and Screw Loose Studios	soapbox	1	NONE	WGT	10.11.2.129	26	
-StaccatoGelato	Staccato Gelato	strongmad	1	NONE	WGT	10.11.2.193	26	Staccato_Logo.png
+Soapbox	Soapbox Design and Screw Loose Studios	soapbox	0	PRIV	WGT	10.11.2.129	26			192.168.1.1	24
+StaccatoGelato	Staccato Gelato	glace	1	WAN	WGT	10.11.2.193	26	Staccato_Logo.png
 RedAndBlack	Red and Black Cafe	hugh	1	NONE	WGT	10.11.3.1	26	workspace_10.jpg
 UglyMug	Ugly Mug Coffeehouse	cycle	1	NONE	WGT	10.11.3.65	26	ugly-mug.png
-HotPepper	Hot Pepper Studios	lester	1	NONE	WGT	10.11.3.129	26	
+Whiffies	Whiffies Fried Pies	lard	1	NONE	WGT	10.11.3.129	26	whiffies.jpg
+DragonFly	Dragonfly Coffee House	darter	0	PRIV	WGT	10.11.3.193	26	dragonfly.png		192.168.2.1	24
 Contrary	Cafe Contrary	doctorno	1	NONE	WGT	10.11.5.1	26	
 CoffeeHouseFive	Coffeehouse-Five	vonnegut	1	NONE	WGT	10.11.5.65	26	coffee-house-five.jpg
 PixelFace	Pixelface Creative Services	acne	1	NONE	WGT	10.11.5.129	26	
@@ -26,25 +29,24 @@ AnnaBannanasStJohns	Anna Bannanas St Johns	kong	1	NONE	WGT	10.11.8.65	26	anna_ba
 Northstar	North Star Coffeehouse	star	1	NONE	WGT	10.11.8.129	26	NSLogo.gif
 YukonTavern	Yukon Tavern	yukon	1	NONE	WGT	10.11.8.193	26	
 BuffaloGap	Buffalo Gap Saloon and Eatery	buffalogap	1	NONE	WGT	10.11.9.65	26	
-RodneyAndSkidmore	Rodney and Skidmore	wicket	1	NONE	WGT	10.11.10.1	26
+RodneyAndSkidmore	Rodney and Skidmore	wicket	1	NONE	SOEKRIS	10.11.10.1	26
 LuckyLab	Lucky Labrador Brew Pub	fetch	1	WAN	ALIX	10.11.11.1	25	luckylab.png
-LuckyLabNW	Lucky Labrador Beer Hall	bowser	1	NONE	WGT	10.11.11.129	26	luckylab.png
+LuckyLabNW	Lucky Labrador Beer Hall	bowser	1	WAN	WGT	10.11.11.129	26	luckylab.png
 LuckyLabSW	Lucky Labrador Public House	spot	1	NONE	WGT	10.11.11.193	26	luckylab.png
 PioneerSquare	Pioneer Courthouse Square	frack	1	NONE	WGT	10.11.12.1	24	easystreet.gif
-Shack	Shack	shack	1	NONE	WGT	10.11.13.1	24	
+Shack	Shack	shack	1	NONE	SOEKRIS	10.11.13.1	24	
+HotPepper	Hot Pepper Studios	lester	1	NONE	ALIX	10.11.14.1	24	
 OakTree	OakTree Digital	quercus	1	NONE	WGT	10.11.15.1	24	oaktree.gif
 WorldCup	World Cup Coffee and Tea	circe	1	NONE	WGT	10.11.33.1	24	worldcup.gif
 Labarre	LaBarre Machine Works	metal	1	NONE	WGT	10.11.36.1	24	labarre.jpg
-Ecotrust	Ecotrust	number-one	1	NONE	WGT	10.11.38.1	24	ecotrust.jpg
+Ecotrust	Ecotrust	number-one	1	NONE	ALIX	10.11.38.1	24	ecotrust.jpg
 Crema	Crema Bakery and Cafe	phillie	1	NONE	WGT	10.11.45.1	24	crema.gif
-UrbanGrindNW	Urban Grind Coffeehouse	grank	1	NONE	WGT	10.11.47.1	24	urbangrind.jpg
 Westover	Westover Tower	overlook	1	NONE	WGT	10.11.51.1	24	
-PowellsTech	Powell's Technical Bookstore	cantos	1	NONE	WGT	10.11.53.1	24	powellsbooks_logo.gif
 Concordia	Concordia Neighborhood	zoe	1	NONE	WGT	10.11.60.1	24	
 FirstUnitarian	First Unitarian Church	servetus	1	NONE	WGT	10.11.61.1	24	
 Hollywood	Hollywood Neighborhood	ramona	1	NONE	WGT	10.11.62.1	25	
 Communitecture	Communitecture Architecture and Planning	dryrot	1	NONE	WGT	10.11.62.129	25	
 FirstUnitarian	First Unitarian Church	clara	1	NONE	WGT	10.11.63.1	24	
 Hawthorne	H.I. Portland Hawthorne Hostel	foe	1	NONE	ALIX	10.11.100.1	22	portlandhostel.gif
-Mississippi	Historic Mississippi Community Network	naya	1	NONE	WGT	10.11.104.1	22		256
-Mainiac		SE 13th and Main St	crazy	1	NONE	WGT	10.11.64.1	27
+Mississippi	Historic Mississippi Community Network	silt	1	NONE	ALIX	10.11.104.1	22		256	mmt-logo.png
+Tumbleweed		SE 13th and Main St	salsola	1	NONE	WGT	10.11.64.1	26
