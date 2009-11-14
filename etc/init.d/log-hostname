@@ -5,6 +5,7 @@ START=98
 
 start() {
 	logger -t HOSTNAME $(cat /proc/sys/kernel/hostname)
+	awk 'BEGIN { print int(rand() * 295) }' > /tmp/rand
 }
 
 stop() {
