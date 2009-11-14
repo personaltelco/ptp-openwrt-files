@@ -1,0 +1,2 @@
+*/5 * * * *	/usr/bin/client-status.sh -t > /tmp/users.html
+*/5 * * * *	/usr/bin/client-status.sh -f
