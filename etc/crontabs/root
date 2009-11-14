@@ -1,2 +1,3 @@
 */5 * * * *	/usr/bin/client-status.sh -t > /tmp/users.html
 */5 * * * *	/usr/bin/client-status.sh -f
+0 * * * *	logger -t HOSTNAME $(cat /proc/sys/kernel/hostname)

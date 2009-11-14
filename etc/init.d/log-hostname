@@ -1,0 +1,12 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2009 Personal Telco Project, Inc.
+
+START=98
+
+start() {
+	logger -t HOSTNAME $(cat /proc/sys/kernel/hostname)
+}
+
+stop() {
+	logger -t HOSTNAME $(cat /proc/sys/kernel/hostname)
+}
