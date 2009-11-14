@@ -203,7 +203,7 @@ if ($device eq "WGT") {
     system("mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n '#### Loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig output/etc/config/wireless");
 }
     
-open(LINKS,"find etc usr root -type l |");
+open(LINKS,"find etc usr root www -type l |");
 
 while(<LINKS>) {
     chomp;
