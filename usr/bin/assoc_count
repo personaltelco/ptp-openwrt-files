@@ -1,3 +1,2 @@
 #!/bin/sh
-wget -q -O - http://localhost:5280/status | grep ' session(s) are active at ' | 
-sed 's/^.*<p>\([0-9]*\) session.*$/\1/'
+wget -q -O - http://localhost:5280/status | grep -c "<td>10\.11"

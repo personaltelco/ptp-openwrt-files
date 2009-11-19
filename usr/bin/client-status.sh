@@ -1,5 +1,6 @@
 #!/bin/sh
 STA=/proc/net/madwifi/ath0/associated_sta
+mac=$2
 
 ncusers()
 {
@@ -17,6 +18,16 @@ ncusers | while read i; do
   grep -A1 -i $(echo $i|awk '{print $1}') $STA | tail -1| grep -o "[0-9].*" | xargs echo $i
 done
 cat $STA | egrep -A1 -o '(..:..:..:..:..:..|rssi.*)'| sed -e 's/rssi \(.*\)/\1\\\n/g' | grep -v last | xargs | sed '/^$/d' | tr 'a-f' 'A-F' | awk '{print $1,"0","0",$2}'
+}
+
+sta2()
+{
+cmb | sort -r | uniq -w17 | awk '{print $3,$1,$2,$4}' | sort -nr | awk '{print $2,$3,$1,$4}'| sed 's/\(.*\) \(.*\) \(.*\) \(.*\)/\&mac=\1\&ip=\2\&bytes=\3\&rssi=\4/;s/\(.*\) \(.*\) \(.*\)/mac=\1\&ip=\2\&bytes=\3\&total=0\&rssi=/' | while read i; do wget "https://node:g9Jlk99bs@iris.personaltelco.net/nodedb/submit.php?host=`cat /proc/sys/kernel/hostname`$i" --no-check-certificate -q -O /dev/null 2>/dev/null; done 
+}
+
+tot()
+{
+cmb | sort -r | uniq -w17 | awk '{print $3,$1,$2,$4}' | sort -nr | awk '{print $2,$3,$1,$4}'| grep -i $mac | sed 's/\(.*\) \(.*\) \(.*\) \(.*\)/\&mac=\1\&ip=\2\&bytes=\3\&total=\3\&rssi=\4/;s/\(.*\) \(.*\) \(.*\)/mac=\1\&ip=\2\&bytes=\3\&total=\3\&rssi=/' | while read i; do wget "https://node:g9Jlk99bs@iris.personaltelco.net/nodedb/submit.php?host=`cat /proc/sys/kernel/hostname`$i" --no-check-certificate -q -O /dev/null 2>/dev/null; done 
 }
 
 sta()
@@ -67,6 +78,11 @@ sta | sed '/^$/d' | while read i; do sig `echo $i|awk '{print $4}'`| xargs echo 
 echo -e "</table></div>\n</div>\n</body>\n</html>"
 }
 
+update()
+{
+sta | sed '/^$/d' | while read i; do sig `echo $i|awk '{print $4}'`| xargs echo `echo $i | awk '{print $1,$2,$3}'`; done 
+}
+
 hlp()
 {
 echo -e "<nocatstatus.sh> - usage: nocatstatus.sh -(option)"
@@ -76,8 +92,11 @@ echo -e "       Options"
 echo -e "-c     - count total users"
 echo -e "-t     - output current user table (for status page integration)"
 echo -e "-o     - last connection date string (not yet)"
+echo -e "-f     - nodedb update"
+echo -e "-e	- send client expire total usage to nodedb"
 echo -e "-h     - this"
 }
+
 
 case $1 in
 "" ) hlp ;;
@@ -85,6 +104,8 @@ case $1 in
 "-m" ) cmb ;;
 "-t" ) html ;;
 "-o" ) sta ;;
+"-e" ) tot ;;
+"-f" ) sta2 ;;
 "-h" ) hlp ;;
 "-help" ) hlp ;;
 esac
