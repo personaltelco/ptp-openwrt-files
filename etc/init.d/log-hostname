@@ -4,10 +4,10 @@
 START=98
 
 start() {
-	logger -t HOSTNAME $(cat /proc/sys/kernel/hostname)
+	logger -t $(cat /proc/sys/kernel/hostname) hostname
 	dd if=/dev/urandom bs=4 count=1 2>/dev/null | md5sum | tr -d 'a-z' | awk '{ v = substr($1,0,9) ; srand(v) ; print int(295 * rand()) }' > /tmp/rand
 }
 
 stop() {
-	logger -t HOSTNAME $(cat /proc/sys/kernel/hostname)
+	logger -t $(cat /proc/sys/kernel/hostname) hostname
 }
