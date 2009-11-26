@@ -22,12 +22,12 @@ cat $STA | egrep -A1 -o '(..:..:..:..:..:..|rssi.*)'| sed -e 's/rssi \(.*\)/\1\\
 
 sta2()
 {
-cmb | sort -r | uniq -w17 | awk '{print $3,$1,$2,$4}' | sort -nr | awk '{print $2,$3,$1,$4}'| sed 's/\(.*\) \(.*\) \(.*\) \(.*\)/\&mac=\1\&ip=\2\&bytes=\3\&rssi=\4/;s/\(.*\) \(.*\) \(.*\)/mac=\1\&ip=\2\&bytes=\3\&total=0\&rssi=/' | while read i; do wget "https://node:g9Jlk99bs@iris.personaltelco.net/nodedb/submit.php?host=`cat /proc/sys/kernel/hostname`$i" --no-check-certificate -q -O /dev/null 2>/dev/null; done 
+cmb | sort -r | uniq -w17 | awk '{print $3,$1,$2,$4}' | sort -nr | awk '{print $2,$3,$1,$4}'| sed 's/\(.*\) \(.*\) \(.*\) \(.*\)/\&mac=\1\&ip=\2\&bytes=\3\&rssi=\4/;s/\(.*\) \(.*\) \(.*\)/mac=\1\&ip=\2\&bytes=\3\&total=0\&rssi=/' | while read i; do wget -T 10 "https://node:g9Jlk99bs@iris.personaltelco.net/nodedb/submit.php?host=`cat /proc/sys/kernel/hostname`$i" --no-check-certificate -q -O /dev/null 2>/dev/null; done 
 }
 
 tot()
 {
-cmb | sort -r | uniq -w17 | awk '{print $3,$1,$2,$4}' | sort -nr | awk '{print $2,$3,$1,$4}'| grep -i $mac | sed 's/\(.*\) \(.*\) \(.*\) \(.*\)/\&mac=\1\&ip=\2\&bytes=\3\&total=\3\&rssi=\4/;s/\(.*\) \(.*\) \(.*\)/mac=\1\&ip=\2\&bytes=\3\&total=\3\&rssi=/' | while read i; do wget "https://node:g9Jlk99bs@iris.personaltelco.net/nodedb/submit.php?host=`cat /proc/sys/kernel/hostname`$i" --no-check-certificate -q -O /dev/null 2>/dev/null; done 
+cmb | sort -r | uniq -w17 | awk '{print $3,$1,$2,$4}' | sort -nr | awk '{print $2,$3,$1,$4}'| grep -i $mac | sed 's/\(.*\) \(.*\) \(.*\) \(.*\)/\&mac=\1\&ip=\2\&bytes=\3\&total=\3\&rssi=\4/;s/\(.*\) \(.*\) \(.*\)/mac=\1\&ip=\2\&bytes=\3\&total=\3\&rssi=/' | while read i; do wget -T 10 "https://node:g9Jlk99bs@iris.personaltelco.net/nodedb/submit.php?host=`cat /proc/sys/kernel/hostname`$i" --no-check-certificate -q -O /dev/null 2>/dev/null; done 
 }
 
 sta()
