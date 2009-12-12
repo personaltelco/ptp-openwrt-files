@@ -21,7 +21,8 @@ fi
 if [ "$action" = "permit" ]; then
     cmd=-A
 elif [ "$action" = "deny" ]; then
-    /usr/bin/client-status.sh -e $mac
+    /usr/bin/client-status.sh -e $mac &
+	/bin/sleep 1
     cmd=-D
 else
     echo "FATAL: Bad action: $action!"
