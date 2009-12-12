@@ -5,7 +5,7 @@ config dnsmasq
 	option localise_queries	1
 	option local	'/lan/.168.192.in-addr.arpa/.16.172.in-addr.arpa/.10.in-addr.arpa/.127.in-addr.arpa/.254.169.in-addr.arpa/'
 	option local	'/ptp/11.10.in-addr.arpa/70.102.34.162'
-	option domain	'personaltelco.net'
+	option domain	'ptp'
 	option expandhosts	1
 	option nonegcache	0
 	option authoritative	1
