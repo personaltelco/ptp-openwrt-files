@@ -1,0 +1,10 @@
+#!/bin/sh
+
+O=$(pidof openvpn)
+G=$(pidof gateway)
+S=$(pidof snmpd)
+L=$(pidof olsrd)
+
+awk '{ printf("%d",4*$2) } 
+NR < 4 { printf(" ") } 
+NR == 4 { printf("\n") }' /proc/${O:-2}/statm /proc/${G:-2}/statm /proc/${S:-2}/statm /proc/${L:-2}/statm
