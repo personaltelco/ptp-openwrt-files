@@ -4,7 +4,7 @@ Rerun	Rerun	rerun	0	PRIV	WGT	10.11.0.65	26	RERUN-Logo.png		192.168.1.1	24
 Slabtown	Slabtown	slabtown	0	PRIV	WGT	10.11.0.129	26			192.168.1.1	24
 PowellsTech	Powell's Technical Bookstore	cantos	0	NONE	WGT	10.11.0.193	26	powellsbooks_logo.gif		192.168.2.1	24
 CedarHillsCrossing	Cedar Hills Crossing	filth	1	NONE	ALIX	10.11.1.1	24	cedarhillscrossing-logo.gif
-BasementPub	Basement Pub	zeus	1	NONE	WGT	10.11.2.1	26	local1028.png
+BasementPub	Basement Pub	hades	1	NONE	WGT	10.11.2.1	26	local1028.png
 CrowBar	Crow Bar	loki	1	WAN	WGT	10.11.2.65	26	
 Soapbox	Soapbox Theory and Screw Loose Studios	soapbox	0	PRIV	WGT	10.11.2.129	26			192.168.1.1	24
 StaccatoGelato	Staccato Gelato	glace	1	WAN	WGT	10.11.2.193	26	Staccato_Logo.png
@@ -23,13 +23,13 @@ Beaterville	Beaterville Cafe	wreck	0	NONE	WGT	10.11.6.193	26			192.168.2.1	24
 UrbanGrind	Urban Grind Coffeehouse and Roasters	grunker	1	NONE	WGT	10.11.7.1	26	urbangrind.jpg
 OldTownPizza	Old Town Pizza	thehut	1	NONE	WGT	10.11.7.65	26
 Cascadia	New Cascadia Traditional	muffin	0	NONE	WGT	10.11.7.129	26	newcascadia.png		192.168.1.1	24
-FreshPot	The Fresh Pot	moose	0	NONE	ALIX	10.11.7.193	26	FPhead.jpg		10.11.104.20	22
+FreshPot	The Fresh Pot	moose	0	NONE	ALIX	10.11.7.193	26	freshpot.gif		10.11.104.20	22
 BillyRays	Billy Ray's Neighborhood Dive	billyrays	1	NONE	WGT	10.11.8.1	26
 AnnaBannanasStJohns	Anna Bannanas St Johns	kong	1	NONE	WGT	10.11.8.65	26	anna_bannanas.gif
-Northstar	North Star Coffeehouse	star	1	NONE	WGT	10.11.8.129	26	NSLogo.gif
+Northstar	North Star Coffeehouse	cold	1	WAN	WGT	10.11.8.129	26	NSLogo.gif
 YukonTavern	Yukon Tavern	yukon	1	NONE	WGT	10.11.8.193	26	
 CityClub	City Club of Portland	asa	1	NONE	WGT	10.11.9.1	26	cityclub.png
-BuffaloGap	Buffalo Gap Saloon and Eatery	buffalogap	1	NONE	WGT	10.11.9.65	26	
+BuffaloGap	Buffalo Gap Saloon and Eatery	dave	1	NONE	ALIX	10.11.9.65	26	
 Marshall	Marshall Union Manor	fir	0	PRIV	WGT	10.11.9.129	26			192.168.1.1	24
 BarXV	Bar XV	fifteen	1	NONE	WGT	10.11.9.193	26	barxv.gif
 RodneyAndSkidmore	Rodney and Skidmore	wicket	1	NONE	SOEKRIS	10.11.10.1	26
@@ -43,16 +43,16 @@ PioneerSquare	Pioneer Courthouse Square	frack	1	NONE	WGT	10.11.12.1	24	easystree
 Shack	Shack	shack	1	NONE	SOEKRIS	10.11.13.1	24	
 HotPepper	Hot Pepper Studios	lester	1	NONE	ALIX	10.11.14.1	24	
 OakTree	OakTree Digital	quercus	1	NONE	WGT	10.11.15.1	24	oaktree.gif
-WorldCup	World Cup Coffee and Tea	circe	1	NONE	WGT	10.11.33.1	24	worldcup.gif
+WorldCup	World Cup Coffee and Tea	fut	1	NONE	ALIX	10.11.33.1	24	worldcup.gif
 Labarre	LaBarre Machine Works	metal	1	NONE	WGT	10.11.36.1	24	labarre.jpg
-Ecotrust	Ecotrust	number-one	1	NONE	ALIX	10.11.38.1	24	ecotrust.jpg
+Ecotrust	Ecotrust	orb	1	NONE	ALIX	10.11.38.1	24	ecotrust.jpg
 Crema	Crema Bakery and Cafe	phillie	1	NONE	WGT	10.11.45.1	24	crema.gif
-Westover	Westover Tower	overlook	1	NONE	WGT	10.11.51.1	24	
+Westover	Westover Tower	pie	1	NONE	ALIX	10.11.51.1	24	
 Concordia	Concordia Neighborhood	zoe	1	NONE	WGT	10.11.60.1	24	
-FirstUnitarian	First Unitarian Church	servetus	1	NONE	WGT	10.11.61.1	24	
+FirstUnitarian	First Unitarian Church	jodie	1	NONE	ALIX	10.11.61.1	24	
 Hollywood	Hollywood Neighborhood	ramona	1	NONE	WGT	10.11.62.1	25	
-Communitecture	Communitecture Architecture and Planning	dryrot	1	NONE	WGT	10.11.62.129	25	
+Communitecture	Communitecture Architecture and Planning	rip	1	NONE	ALIX	10.11.62.129	25	
 FirstUnitarian	First Unitarian Church	clara	1	NONE	WGT	10.11.63.1	24	
-Hawthorne	H.I. Portland Hawthorne Hostel	foe	1	NONE	ALIX	10.11.100.1	22	portlandhostel.gif
+Hawthorne	H.I. Portland Hawthorne Hostel	bow	1	NONE	ALIX	10.11.100.1	22	portlandhostel.gif
 Mississippi	Historic Mississippi Community Network	silt	1	NONE	ALIX	10.11.104.1	22		256	mmt-logo.png
 Tumbleweed		SE 13th and Main St	salsola	1	NONE	WGT	10.11.64.1	26
