@@ -29,7 +29,7 @@ AnnaBannanasStJohns	Anna Bannanas St Johns	kong	1	NONE	WGT	10.11.8.65	26	anna_ba
 Northstar	North Star Coffeehouse	cold	1	WAN	WGT	10.11.8.129	26	NSLogo.gif
 YukonTavern	Yukon Tavern	yukon	1	NONE	WGT	10.11.8.193	26	
 CityClub	City Club of Portland	asa	1	NONE	WGT	10.11.9.1	26	cityclub.png
-BuffaloGap	Buffalo Gap Saloon and Eatery	dave	1	NONE	ALIX	10.11.9.65	26	
+BuffaloGap	Buffalo Gap Saloon and Eatery	dave	1	NONE	ALIX	10.11.9.65	26	buffalo_gap_logo.jpg
 Marshall	Marshall Union Manor	fir	0	PRIV	WGT	10.11.9.129	26			192.168.1.1	24
 BarXV	Bar XV	fifteen	1	NONE	WGT	10.11.9.193	26	barxv.gif
 RodneyAndSkidmore	Rodney and Skidmore	wicket	1	NONE	SOEKRIS	10.11.10.1	26
@@ -51,7 +51,7 @@ Westover	Westover Tower	pie	1	NONE	ALIX	10.11.51.1	24
 Concordia	Concordia Neighborhood	zoe	1	NONE	WGT	10.11.60.1	24	
 FirstUnitarian	First Unitarian Church	jodie	1	NONE	ALIX	10.11.61.1	24	
 Hollywood	Hollywood Neighborhood	ramona	1	NONE	WGT	10.11.62.1	25	
-Communitecture	Communitecture Architecture and Planning	rip	1	NONE	ALIX	10.11.62.129	25	
+Communitecture	Communitecture Architecture and Planning	rip	1	WAN	ALIX	10.11.62.129	25	
 FirstUnitarian	First Unitarian Church	clara	1	NONE	WGT	10.11.63.1	24	
 Hawthorne	H.I. Portland Hawthorne Hostel	bow	1	NONE	ALIX	10.11.100.1	22	portlandhostel.gif
 Mississippi	Historic Mississippi Community Network	silt	1	NONE	ALIX	10.11.104.1	22		256	mmt-logo.png
