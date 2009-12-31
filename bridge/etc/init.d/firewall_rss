@@ -1,0 +1,17 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2008 OpenWrt.org
+
+START=45
+
+start() {
+	iptables -t nat -I POSTROUTING -o PTP_WANIFACE_PTP -j MASQUERADE
+	iptables -A INPUT -i PTP_WANIFACE_PTP -p tcp -m tcp --dport 22 -m state --state NEW -m recent --set --name BRUTE-SSH --rsource
+	iptables -A INPUT -i PTP_WANIFACE_PTP -p tcp -m tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 4 --name BRUTE-SSH --rsource -j DROP
+	iptables -I FORWARD -i PTP_LOCALIFACE_PTP -p tcp -m multiport --dports 6881:6889 -m recent --set --name TORRENTS  -j DROP
+	iptables -I FORWARD -i PTP_LOCALIFACE_PTP -m recent --name TORRENTS --update --seconds 3600 -j DROP
+}
+
+stop() {
+	iptables -t nat -D POSTROUTING -o PTP_WANIFACE_PTP -j MASQUERADE
+
+}
