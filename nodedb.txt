@@ -22,7 +22,7 @@ Goldrush	Goldrush Coffee Bar	nugget	1	NONE	WGT	10.11.6.129	26
 Beaterville	Beaterville Cafe	wreck	0	NONE	WGT	10.11.6.193	26			192.168.2.1	24
 UrbanGrind	Urban Grind Coffeehouse and Roasters	grunker	1	NONE	WGT	10.11.7.1	26	urbangrind.jpg
 OldTownPizza	Old Town Pizza	thehut	1	NONE	WGT	10.11.7.65	26
-Cascadia	New Cascadia Traditional	muffin	0	NONE	WGT	10.11.7.129	26	newcascadia.png		192.168.1.1	24
+Cascadia	New Cascadia Traditional	muffin	0	PRIV	WGT	10.11.7.129	26	newcascadia.png		192.168.2.1	24
 FreshPot	The Fresh Pot	moose	0	NONE	ALIX	10.11.7.193	26	freshpot.gif		10.11.104.20	22
 BillyRays	Billy Ray's Neighborhood Dive	billyrays	1	NONE	WGT	10.11.8.1	26
 AnnaBannanasStJohns	Anna Bannanas St Johns	kong	1	NONE	WGT	10.11.8.65	26	anna_bannanas.gif
