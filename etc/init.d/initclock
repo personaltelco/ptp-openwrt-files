@@ -6,6 +6,6 @@ START=11
 start() {
 	# set date to a time when the openvpn tunnel keys are valid
 	# in case ntpclient fails ... will allow vpn tunnel to come up
-	date -s "2010-02-01 00:00"
+	date -s "2010-03-01 00:00"
 }
 
