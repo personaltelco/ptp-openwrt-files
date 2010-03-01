@@ -42,7 +42,7 @@ LuckyLabSW	Lucky Labrador Public House	spot	1	NONE	WGT	10.11.11.193	26	luckylab.
 PioneerSquare	Pioneer Courthouse Square	frack	1	NONE	WGT	10.11.12.1	24	easystreet.gif
 Shack	Shack	shack	1	NONE	SOEKRIS	10.11.13.1	24	
 HotPepper	Hot Pepper Studios	lester	1	NONE	ALIX	10.11.14.1	24	
-OakTree	OakTree Digital	quercus	1	NONE	WGT	10.11.15.1	24	oaktree.gif
+LuckyLabNorth	Lucky Labrador North	woof	0	PRIV	WGT	10.11.15.1	26			192.168.2.1	24
 Wistaria	Wistaria	vine	0	PRIV	WGT	10.11.16.1	26			192.168.1.1	24
 WorldCup	World Cup Coffee and Tea	fut	1	NONE	ALIX	10.11.33.1	24	worldcup.gif
 Labarre	LaBarre Machine Works	metal	1	NONE	WGT	10.11.36.1	24	labarre.jpg
