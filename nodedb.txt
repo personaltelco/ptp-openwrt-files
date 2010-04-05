@@ -1,7 +1,7 @@
 NODE	NODENAME	HOSTNAME	BRIDGE	FILTER	DEVICE	PUBADDR	PUBMASKLEN	LOGOFILE	DHCPSTART	PRIVADDR	PRIVMASKLEN
 UrbanGrindNW	Urban Grind - Pearl District	grank	1	NONE	WGT	10.11.0.1	26	urbangrind.jpg
 Rerun	Rerun	rerun	0	PRIV	WGT	10.11.0.65	26	RERUN-Logo.png		192.168.1.1	24
-Slabtown	Slabtown	slabtown	0	PRIV	WGT	10.11.0.129	26			192.168.1.1	24
+Slabtown	Slabtown	slabtown	0	PRIV	WGT	10.11.0.129	26	slabtown.jpg		192.168.1.1	24
 PowellsTech	Powell's Technical Bookstore	cantos	0	NONE	WGT	10.11.0.193	26	powellsbooks_logo.gif		192.168.2.1	24
 CedarHillsCrossing	Cedar Hills Crossing	filth	1	NONE	ALIX	10.11.1.1	24	cedarhillscrossing-logo.gif
 BasementPub	Basement Pub	hades	1	NONE	ALIX	10.11.2.1	26	local1028.png
