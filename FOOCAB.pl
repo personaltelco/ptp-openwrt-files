@@ -97,11 +97,13 @@ while(<NODEDB>) {
 	    $priviface = "eth0.0";
 	    print SED "s/PTP_WANIFACE_PTP/eth0.1/g\n";
 	    print SED "s/PTP_PRIVIFACE_PTP/eth0.0/g\n";
+	    print SED "s/PTP_ARCH_PTP/wgt634u/g\n";
 	} elsif ($device eq "ALIX") {
 	    $waniface = "eth0";
 	    $priviface = "eth2";
 	    print SED "s/PTP_WANIFACE_PTP/eth0/g\n";
 	    print SED "s/PTP_PRIVIFACE_PTP/eth2/g\n";
+	    print SED "s/PTP_ARCH_PTP/x86-alix/g\n";
 	}   
 
 	(defined $masklen && defined $localaddr) || die "Not enough information to compute network!";
