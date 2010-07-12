@@ -32,7 +32,7 @@ CityClub	City Club of Portland	asa	1	NONE	WGT	10.11.9.1	26	cityclub.png
 BuffaloGap	Buffalo Gap Saloon and Eatery	dave	1	NONE	ALIX	10.11.9.65	26	buffalo_gap_logo.jpg
 Marshall	Marshall Union Manor	fir	0	PRIV	WGT	10.11.9.129	26			192.168.1.1	24
 BarXV	Bar XV	fifteen	1	NONE	WGT	10.11.9.193	26	barxv.gif
-RodneyAndSkidmore	Rodney and Skidmore	wicket	1	NONE	SOEKRIS	10.11.10.1	26
+Industry	Palace of Industry	belch	1	NONE	WGT	10.11.10.1	26
 Butner	Butner Road	maw	0	PRIV	WGT	10.11.10.65	26			192.168.2.1	24
 MacleayPark	Christopher Chen	bird	0	PRIV	WGT	10.11.10.129	26			192.168.16.1	24
 KentonStation	Kenton Station	clark	1	NONE	WGT	10.11.10.193	26
