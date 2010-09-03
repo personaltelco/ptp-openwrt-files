@@ -17,7 +17,7 @@ CoffeeHouseFive	Coffeehouse-Five	vonnegut	1	NONE	WGT	10.11.5.65	26	coffee-house-
 Matt	MattIsMyName	pad	1	WAN	WGT	10.11.5.129	26	
 PeteForsyth	Pete Forsyth	lapin	0	PRIV	WGT	10.11.5.193	26	pete.jpg		192.168.1.1	24
 AnnaBannanas	Anna Bannanas Coffee House	frick	1	NONE	WGT	10.11.6.1	26	anna_bannanas.gif
-PowellsBooks	Powell's City of Books	vinge	1	NONE	WGT	10.11.6.65	26	powellsbooks_logo.gif
+HallOfRecords	Hall of Records	vital	0	PRIV	WGT	10.11.6.65	26	hall-of-records.jpg		192.168.1.1	24
 Goldrush	Goldrush Coffee Bar	nugget	1	NONE	WGT	10.11.6.129	26
 Beaterville	Beaterville Cafe	wreck	0	NONE	WGT	10.11.6.193	26			192.168.2.1	24
 UrbanGrind	Urban Grind Coffeehouse and Roasters	grunker	1	NONE	WGT	10.11.7.1	26	urbangrind.jpg
