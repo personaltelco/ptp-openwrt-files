@@ -104,7 +104,12 @@ while(<NODEDB>) {
 	    print SED "s/PTP_WANIFACE_PTP/eth0/g\n";
 	    print SED "s/PTP_PRIVIFACE_PTP/eth2/g\n";
 	    print SED "s/PTP_ARCH_PTP/x86-alix/g\n";
-	}   
+	} elsif ($device eq "MR3201A") {
+	    $waniface = "eth0";
+	    $pubiface = "ath0";
+	    print SED "s/PTP_WANIFACE_PTP/eth0/g\n";
+    	    print SED "s/PTP_ARCH_PTP/atheros/g\n";
+	}
 
 	(defined $masklen && defined $localaddr) || die "Not enough information to compute network!";
 
@@ -115,7 +120,7 @@ while(<NODEDB>) {
 
 	print SED "s/PTP_PUBNET_PTP/$netaddr/g\n";
 	print SED "s/PTP_PUBNETMASK_PTP/$mask/g\n";
-	if ($device eq "WGT") {
+	if ($device eq "WGT" || $device eq "MR3201A") {
 	    $pubiface = "ath0";
 	    print SED "s/PTP_PUBIFACE_PTP/ath0/g\n";
 	} elsif ($device eq "ALIX") {
@@ -127,20 +132,23 @@ while(<NODEDB>) {
 	    $localiface = "br-lan";
 	    print SED "s/PTP_LOCALIFACE_PTP/br-lan/g\n";
 	} else {
-	    $ip = NetAddr::IP::Lite->new("$privaddr/$privmasklen");
-	    $network = $ip->network();
-	    $netaddr = $network->addr();
-	    $mask = $ip->mask();
-
-	    if ($device eq "WGT") {
+	    if ($device eq "WGT" || $device eq "MR3201A") {
 		$localiface = "ath0";
 		print SED "s/PTP_LOCALIFACE_PTP/ath0/g\n";
 	    } elsif ($device eq "ALIX") {
 		$localiface = "eth1";
 		print SED "s/PTP_LOCALIFACE_PTP/eth1/g\n";
 	    }
-	    print SED "s/PTP_PRIVNET_PTP/$netaddr/g\n";
-	    print SED "s/PTP_PRIVNETMASK_PTP/$mask/g\n";
+
+	    if ($device ne "MR3201A") {
+		$ip = NetAddr::IP::Lite->new("$privaddr/$privmasklen");
+		$network = $ip->network();
+		$netaddr = $network->addr();
+		$mask = $ip->mask();
+		
+		print SED "s/PTP_PRIVNET_PTP/$netaddr/g\n";
+		print SED "s/PTP_PRIVNETMASK_PTP/$mask/g\n";
+	    }
 	}
     }
 }
@@ -196,6 +204,34 @@ if ($bridge) {
     }
 }
 
+if ($device eq "MR3201A") {
+    open(MR3201A,"find mr3201a -type f |");
+
+    while(<MR3201A>) {
+	chomp;
+	my $src = $_;
+	my @path = split('/',$src);
+	my $fname = pop @path;
+	shift @path; # scrape off "mr3201a" from path
+	my $outdir = join('/',"output",@path);
+	my $dest = join('/',"output",@path,$fname);
+	
+	# print "source = $src ; outdir = $outdir ; dest = $dest\n";
+	
+	($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($src);
+	
+	unless (-d $outdir) { system("mkdir -p $outdir"); }
+	
+	print "sed -f foocab.sed < $src > $dest\n";
+
+	system("sed -f foocab.sed < $src > $dest");
+	
+	chmod($mode,$dest);
+	chown($uid,$gid,$dest);
+    }
+}
+
+
 if ($device eq "WGT") {
     # remove redundant interface, in cases of bridging
     system("mv output/etc/config/network output/etc/config/network.orig ; sed 's/ath0 eth0.0/eth0.0/' output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
@@ -240,7 +276,7 @@ start() {\n";
 	print FILTER
 	    "        iptables -I FORWARD -i $localiface -d \$(ip addr show dev $waniface | grep inet | awk '{ print \$2 }') -j DROP\n";
     }
-    if ($filter eq "PRIV" || $filter eq "BOTH") {
+    if ($priviface && ($filter eq "PRIV" || $filter eq "BOTH")) {
 	print FILTER
 	    "        iptables -I FORWARD -o $priviface -i $localiface -j DROP\n";
     }
@@ -254,7 +290,7 @@ stop() {\n";
 	print FILTER
 	    "        iptables -D FORWARD -i $localiface -d \$(ip addr show dev $waniface | grep inet | awk '{ print \$2 }') -j DROP\n";
     }
-    if ($filter eq "PRIV" || $filter eq "BOTH") {
+    if ($priviface && ($filter eq "PRIV" || $filter eq "BOTH")) {
 	print FILTER
 	    "        iptables -D FORWARD -o $priviface -i $localiface -j DROP\n";
     }
