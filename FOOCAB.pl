@@ -106,7 +106,7 @@ while(<NODEDB>) {
 	    print SED "s/PTP_ARCH_PTP/x86-alix/g\n";
 	} elsif ($device eq "MR3201A") {
 	    $waniface = "eth0";
-	    $pubiface = "ath0";
+	    $pubiface = "wlan0";
 	    print SED "s/PTP_WANIFACE_PTP/eth0/g\n";
     	    print SED "s/PTP_ARCH_PTP/atheros/g\n";
 	}
@@ -121,8 +121,8 @@ while(<NODEDB>) {
 	print SED "s/PTP_PUBNET_PTP/$netaddr/g\n";
 	print SED "s/PTP_PUBNETMASK_PTP/$mask/g\n";
 	if ($device eq "WGT" || $device eq "MR3201A") {
-	    $pubiface = "ath0";
-	    print SED "s/PTP_PUBIFACE_PTP/ath0/g\n";
+	    $pubiface = "wlan0";
+	    print SED "s/PTP_PUBIFACE_PTP/wlan0/g\n";
 	} elsif ($device eq "ALIX") {
 	    $pubiface = "eth1";
 	    print SED "s/PTP_PUBIFACE_PTP/eth1/g\n";
@@ -133,8 +133,8 @@ while(<NODEDB>) {
 	    print SED "s/PTP_LOCALIFACE_PTP/br-lan/g\n";
 	} else {
 	    if ($device eq "WGT" || $device eq "MR3201A") {
-		$localiface = "ath0";
-		print SED "s/PTP_LOCALIFACE_PTP/ath0/g\n";
+		$localiface = "wlan0";
+		print SED "s/PTP_LOCALIFACE_PTP/wlan0/g\n";
 	    } elsif ($device eq "ALIX") {
 		$localiface = "eth1";
 		print SED "s/PTP_LOCALIFACE_PTP/eth1/g\n";
@@ -234,7 +234,7 @@ if ($device eq "MR3201A") {
 
 if ($device eq "WGT") {
     # remove redundant interface, in cases of bridging
-    system("mv output/etc/config/network output/etc/config/network.orig ; sed 's/ath0 eth0.0/eth0.0/' output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
+    system("mv output/etc/config/network output/etc/config/network.orig ; sed 's/wlan0 eth0.0/eth0.0/' output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
 } elsif ($device eq "ALIX") {
     # if alix, remove the vlan configuration from etc/config/network
     # and delete the etc/config/wireless
