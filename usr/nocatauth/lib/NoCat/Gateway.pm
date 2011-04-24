@@ -165,7 +165,7 @@ sub poll_socket {
 		$self->accept_client( $client );
 		
 		# Exit iff we actually succeeded in forking.
-		exit 0 if defined $is_parent;
+		return 0 if defined $is_parent; 
 	    }
 	} else {
 	    # Otherwise, this is a child reporting back via a pipe.
@@ -195,7 +195,7 @@ sub notify_parent {
 	# Notify the parent any special action we're taking about this peer.
 	$args{Action} = $action if defined $action;	
 
-	$self->log( 5, "Notifying parent of $action on peer", $peer->id );
+	$self->log( 10, "Notifying parent of $action on peer", $peer->id );
 
 	# Reformat the peer's basic info and send it to the parent process.
 	print $parent $self->deparse( %args )
@@ -290,7 +290,7 @@ sub check_expired {
     my $self = shift;
     while ( my ($token, $peer) = each %{$self->{Peer}} ) {
 	if ( $peer->expired ) {
-	    $self->log( 8, "Expiring connection from ", $peer->ip, "." );
+	    $self->log( 8, "Expiring connection from", $peer->ip, $peer->mac, "." );
 	    $self->deny( $peer );
 	}
     }
@@ -315,7 +315,7 @@ sub check_inactive {
         } else {
 	    # How many missed ARPs should it take?
 	    if ( ++$peer->{MissedARP} >= $self->{MaxMissedARP} ) { 
-	        $self->log( 8, "Expiring inactive connection from ", $peer->ip, "." );
+	        $self->log( 8, "Expiring inactive connection from", $peer->ip, "." );
 	        $self->deny( $peer );
             }
 	}
@@ -336,15 +336,18 @@ sub read_http_request {
 
     # Read the HTTP header fields.
     while (defined( $line = <$socket> )) {
-	$line =~ s/^\s+|\s+$//gos;
+	$line =~ s/^\s+|\s+$|User-//gos;
 	last unless length $line;
+	#my ( $key, $val ) = split /:\s+/, $line, 2;
 	my ( $key, $val ) = split /:\s+/, $line, 2;
-	$head{ ucfirst lc $key } = $val;
+        #$val =~ split /User-/, $val;
+        $head{ ucfirst lc $key } = $val;
     }
 
-    $head{Method}   = $method || "GET";
-    $head{URI}	    = $uri || "/";
-    $head{URL}	    = ($head{Host} ? "http://$head{Host}$head{URI}" : $self->{HomePage}) || "";
+    $head{Method}     = $method || "GET";
+    $head{URI}	      = $uri || "/";
+    $head{URL}	      = ($head{Host} ? "http://$head{Host}$head{URI}" : $self->{HomePage}) || "";
+    #$head{UserAgent}  = ($head{UserAgent}) || "null";
 
     return \%head;
 }
@@ -398,13 +401,13 @@ sub permit {
 	    $fw->deny( $prior_class, $peer->mac, $peer->ip );
 	    $action = "Upgrade";
 	} else {
-	    $self->log( 5, "User ", $peer->user, " permitted in class $class" );
+	    $self->log( 5, "User", ( $peer->user || $peer->ip ), $peer->mac, "permitted in class $class" );
 	    $action = PERMIT;
 	}
 
 	$peer->status( $class );
     } else {
-	$self->log( 5, "User ", $peer->user, " renewed in class $class" );
+	$self->log( 5, "User", $peer->user, " renewed in class $class" );
 	$action = "Renew";
     }
 
@@ -428,8 +431,8 @@ sub deny {
     return $self->log( 7, "Denying peer $mac without prior permit." )
 	if not $class or $class eq DENY;
 
-    $self->log( 5, "User ", ( $peer->user || $peer->ip ),
-	" denied service. Connected since " ,
+    $self->log( 5, "User", ( $peer->user || $peer->ip ),
+	$peer->mac, "denied service. Connected since" ,
 	scalar localtime $peer->connect_time, "." ); 
 
     my $fw = $self->firewall( GatewayAddr => $peer->gateway_ip );
