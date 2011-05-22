@@ -64,6 +64,7 @@ FirstUnitarian	First Unitarian Church	jodie	1	NONE	ALIX	10.11.61.1	24
 Hollywood	Hollywood Neighborhood	ramona	1	NONE	WGT	10.11.62.1	25	
 Communitecture	Communitecture Architecture and Planning	rip	1	WAN	ALIX	10.11.62.129	25	
 FirstUnitarian	First Unitarian Church	clara	1	NONE	WGT	10.11.63.1	24	
+Soekris	net4501 testing	tide	0	NONE	ALIX	10.11.64.1	23
 Klickitat	Russell Senior	hoop	0	NONE	ALIX	10.11.80.1	22		50	192.168.0.1	24
 Hawthorne	H.I. Portland Hawthorne Hostel	bow	1	NONE	ALIX	10.11.100.1	22	portlandhostel.gif
 Mississippi	Historic Mississippi Community Network	silt	1	NONE	ALIX	10.11.104.1	22		256	mmt-logo.png
