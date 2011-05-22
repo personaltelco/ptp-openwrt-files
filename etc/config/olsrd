@@ -20,7 +20,6 @@ config 'Interface'
 	
 config 'Interface'
 	option 'interface' 'tap0'
-
 	
 config 'Hna4'
 	option 'netaddr' 'PTP_PUBNET_PTP'

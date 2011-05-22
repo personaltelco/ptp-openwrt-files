@@ -19,10 +19,10 @@ config dnsmasq
 
 config dhcp public
 	option interface	public
-	option start	PTP_DHCPSTART_PTP
-	option limit	1024
+	option start		PTP_DHCPSTART_PTP
+	option limit		1024
 	option leasetime	1h
 
 config dhcp wan
 	option interface	wan
-	option ignore	1
+	option ignore		1

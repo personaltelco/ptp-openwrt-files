@@ -32,7 +32,7 @@ config interface	wan
 	#option dns	10.1.10.1
 	
 config interface        public
-        option ifname   "PTP_PUBIFACE_PTP"
-        option proto    static
-        option ipaddr   PTP_PUBADDR_PTP
-        option netmask  PTP_PUBNETMASK_PTP
+	option ifname   "PTP_PUBIFACE_PTP"
+	option proto    static
+	option ipaddr   PTP_PUBADDR_PTP
+	option netmask  PTP_PUBNETMASK_PTP
