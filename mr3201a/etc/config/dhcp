@@ -17,7 +17,7 @@ config dnsmasq
 	#option nonwildcard	0
 	#list interface		br-lan
 
-config dhcp wireless
+config dhcp public
 	option interface	public
 	option start	PTP_DHCPSTART_PTP
 	option limit	1024

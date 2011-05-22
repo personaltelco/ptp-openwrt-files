@@ -3,6 +3,7 @@ config dnsmasq
 	option boguspriv	0
 	option filterwin2k	'0'  #enable for dial on demand
 	option localise_queries	1
+	option rebind_protection 0
 	option local	'/lan/.168.192.in-addr.arpa/.16.172.in-addr.arpa/.10.in-addr.arpa/.127.in-addr.arpa/.254.169.in-addr.arpa/'
 	option local	'/ptp/11.10.in-addr.arpa/70.102.34.162'
 	option domain	'ptp'
