@@ -140,12 +140,12 @@ sub splash {
     my $browser = new NoCat::BrowserDetect($request->{Agent});
     
     if ($browser->mobile) {
-	$self->log( 8, "Client: $request->{Agent}");
-	$self->log( 8, "Displaying mobile splash page to peer", $peer->ip );
+	$self->log( 5, "Client: " . $peer->ip . " " . $peer->mac . " $request->{Agent}");
+	$self->log( 5, "Displaying mobile splash page to peer", $peer->ip );
         $self->respond( $peer, MobileForm => $self->splash_vars($peer, $request) )
     } else {
-	$self->log( 8, "Client: $request->{Agent}");
-	$self->log( 8, "Displaying splash page to peer", $peer->ip );
+	$self->log( 5, "Client: " . $peer->ip . " " . $peer->mac . " $request->{Agent}");
+	$self->log( 5, "Displaying splash page to peer", $peer->ip );
 	$self->respond( $peer, SplashForm => $self->splash_vars($peer, $request) )
     }
 }
