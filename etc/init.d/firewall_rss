@@ -10,6 +10,9 @@ start() {
 	iptables -I FORWARD -i PTP_PUBIFACE_PTP -p tcp --syn -m multiport --dports 6881:6889 -m recent --set --name TORRENTS  -j DROP
 	iptables -I FORWARD -i PTP_PUBIFACE_PTP -m recent --name TORRENTS --update --seconds 300 -j DROP
 	iptables -I FORWARD -i PTP_PUBIFACE_PTP -m recent --name TORRENTS --update --reap --seconds 300 -j DROP
+	# approves private net traffic
+	iptables -t filter -I FORWARD -s PTP_PRIVNET_PTP/PTP_PRIVMASKLEN_PTP -j ACCEPT
+	iptables -t filter -I FORWARD -d PTP_PRIVNET_PTP/PTP_PRIVMASKLEN_PTP -m state  --state RELATED,ESTABLISHED -j ACCEPT
 }
 
 stop() {
