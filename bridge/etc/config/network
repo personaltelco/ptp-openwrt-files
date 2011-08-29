@@ -1,32 +1,33 @@
-#### VLAN configuration 
-config switch eth0
-	option vlan0	"0 1 2 3 5*"
-	option vlan1	"4 5"
+config 'switch' 'eth0'
 
+config 'interface' 'loopback'
+	option 'ifname' 'lo'
+	option 'proto' 'static'
+	option 'ipaddr' '127.0.0.1'
+	option 'netmask' '255.0.0.0'
 
-#### Loopback configuration
-config interface loopback
-	option ifname	"lo"
-	option proto	static
-	option ipaddr	127.0.0.1
-	option netmask	255.0.0.0
+config 'interface' 'lan'
+	option 'type' 'bridge'
+	option 'ifname' 'PTP_PUBIFACE_PTP PTP_PRIVIFACE_PTP'
+	option 'proto' 'static'
+	option 'ipaddr' 'PTP_PUBADDR_PTP'
+	option 'netmask' 'PTP_PUBNETMASK_PTP'
 
+config 'interface' 'wan'
+	option 'ifname' 'PTP_WANIFACE_PTP'
+	option 'proto' 'dhcp'
+	#option 'proto' 'static'
+	#option 'ipaddr' '10.1.10.2'
+	#option 'netmask' '255.255.255.0'
+	#option 'gateway' '10.1.10.1'
+	#option 'dns' '10.1.10.1'
 
-#### LAN configuration
-config interface lan
-	option type 	bridge
-	option ifname	"PTP_PUBIFACE_PTP PTP_PRIVIFACE_PTP"
-	option proto	static
-	option ipaddr	PTP_PUBADDR_PTP
-	option netmask	PTP_PUBNETMASK_PTP
+config 'switch_vlan' 'eth0_0'
+	option 'device' 'eth0'
+	option 'vlan' '0'
+	option 'ports' '0 1 2 3 5'
 
-
-#### WAN configuration
-config interface	wan
-	option ifname	"PTP_WANIFACE_PTP"
-	option proto	dhcp
-	#option proto	static
-	#option ipaddr	10.1.10.2
-	#option netmask	255.255.255.0
-	#option gateway	10.1.10.1
-	#option dns	10.1.10.1
+config 'switch_vlan' 'eth0_1'
+	option 'device' 'eth0'
+	option 'vlan' '1'
+	option 'ports' '4 5'
