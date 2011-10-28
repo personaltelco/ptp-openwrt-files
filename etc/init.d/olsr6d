@@ -1,0 +1,12 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2008  Alina Friedrichsen <x-alina@gmx.net>
+# Special thanks to bittorf wireless ))
+START=65
+
+start() {
+	olsrd -f /etc/olsr6d.conf -nofork < /dev/null > /dev/null &
+}
+
+stop() {
+	killall olsrd
+}
