@@ -90,6 +90,13 @@ while(<NODEDB>) {
 	    
 	}
 
+	# IPv6 prefix - this one belongs to PTP
+	my $ipv6slash48 = "2001:470:e962";
+
+	my @octets = split(/\./, $localaddr);
+	printf(SED "s/PTP_PUB6PREFIX_PTP/%s:%02x%02x::/g\n", $ipv6slash48, @octets[2], @octets[3]);
+	printf(SED "s/PTP_VPN6ADDRESS_PTP/%s::%02x%02x/g\n", $ipv6slash48, @octets[2], @octets[3]);
+
 	print "DEVICE=$device\n";
 
 	if($device eq "WGT") {
