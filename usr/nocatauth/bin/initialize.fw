@@ -94,7 +94,7 @@ for iface in $InternalDevice; do
 	#
 	if [ "$AuthServiceAddr" -o "$AllowedWebHosts" ]; then 
 	    for host in $AuthServiceAddr $AllowedWebHosts; do
-		for port in 80 443; do
+		for port in 80; do
 		    $nat      -s $net -d $host -p tcp --dport $port -j MASQUERADE
     		    $redirect -s $net -d $host -p tcp --dport $port -j RETURN
 		    $fwd -s $net -d $host -p tcp --dport $port -j ACCEPT
@@ -141,9 +141,8 @@ if [ "$MembersOnly" ]; then
 else
     nonauth="4"
 fi
-for port in 80 443; do
+for port in 80; do
     for mark in $nonauth; do
-	$redirect -m mark --mark $mark -d windowsupdate.microsoft.com -j DROP
 	$redirect -m mark --mark $mark -p tcp --dport $port  -j REDIRECT \
 	    --to-port $GatewayPort
     done
@@ -206,7 +205,7 @@ if [ "$AuthServiceAddr" ]; then
 fi
 
 # Filter policy.
-$fwd -j DROP
+#$fwd -j DROP
 
 #
 # Call the bandwidth throttle rules.

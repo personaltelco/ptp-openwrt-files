@@ -308,7 +308,8 @@ sub check_inactive {
 
     # Only fetch the table once to save some ticks
     my $arp = $self->firewall->arp_table( $self->firewall->BY_MAC );
-
+    $self->log( 8, "DEBUG arp: ", $arp, "." );
+    
     while ( my ($token, $peer) = each %{$self->{Peer}} ) {
         if ( defined $arp->{$peer->mac} ) {
             $peer->{MissedARP} = 0;
