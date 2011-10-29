@@ -1,0 +1,12 @@
+config interface
+	option interface	'public'
+	option AdvSendAdvert	1
+	option AdvManagedFlag	0
+	option AdvOtherConfigFlag 0
+
+config prefix
+	option interface	'public'
+	option AdvOnLink	1
+	option AdvAutonomous	1
+	option AdvRouterAddr	0
+

@@ -1,5 +1,15 @@
 config 'switch' 'eth0'
 
+config 'switch_vlan' 'eth0_0'
+	option 'device' 'eth0'
+	option 'vlan' '0'
+	option 'ports' '0 1 2 3 5'
+
+config 'switch_vlan' 'eth0_1'
+	option 'device' 'eth0'
+	option 'vlan' '1'
+	option 'ports' '4 5'
+
 config 'interface' 'loopback'
 	option 'ifname' 'lo'
 	option 'proto' 'static'
@@ -17,6 +27,7 @@ config 'interface' 'public'
 	option 'proto' 'static'
 	option 'ipaddr' 'PTP_PUBADDR_PTP'
 	option 'netmask' 'PTP_PUBNETMASK_PTP'
+	option 'ip6addr' 'PTP_PUB6PREFIX_PTP1/64'
 
 config 'interface' 'wan'
 	option 'ifname' 'PTP_WANIFACE_PTP'
@@ -26,13 +37,3 @@ config 'interface' 'wan'
 	#option 'netmask' '255.255.255.0'
 	#option 'gateway' '10.1.10.1'
 	#option 'dns' '10.1.10.1'
-
-config 'switch_vlan' 'eth0_0'
-	option 'device' 'eth0'
-	option 'vlan' '0'
-	option 'ports' '0 1 2 3 5'
-
-config 'switch_vlan' 'eth0_1'
-	option 'device' 'eth0'
-	option 'vlan' '1'
-	option 'ports' '4 5'

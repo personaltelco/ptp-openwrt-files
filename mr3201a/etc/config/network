@@ -9,6 +9,7 @@ config 'interface' 'public'
 	option 'proto' 'static'
 	option 'ipaddr' 'PTP_PUBADDR_PTP'
 	option 'netmask' 'PTP_PUBNETMASK_PTP'
+        option 'ip6addr' 'PTP_PUB6PREFIX_PTP1/64'
 
 config 'interface' 'wan'
 	option 'ifname' 'PTP_WANIFACE_PTP'
