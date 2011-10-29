@@ -1,33 +1,43 @@
 #!/bin/sh
-STA=/proc/net/madwifi/ath0/associated_sta
 mac=$2
+phy=phy0
+iface=wlan0
+noise=$(iw ${iface} survey dump | awk '$1 ~ /noise/ { print $2 }')
 
+# print rows of (macaddr,ipaddr,bytes)
 ncusers()
 {
 iptables -t mangle -nxvL NoCat | grep MAC | awk '{print $11,$8,$2}'
 }
 
+# prints number of clients auth'd
 usercount()
 {
 ncusers | wc -l
 }
 
+# prints rows of people connected (macaddr,ipaddr,bytes,rssi)
 cmb() 
 {
 ncusers | while read i; do
-  grep -A1 -i $(echo $i|awk '{print $1}') $STA | tail -1| grep -o "[0-9].*" | xargs echo $i
+macaddr=$(echo $i | cut -d' ' -f1 | tr 'A-Z' 'a-z')
+if [ -d /sys/kernel/debug/ieee80211/${phy}/netdev\:${iface}/stations/${macaddr} ]; then
+echo $i $(expr $(cat /sys/kernel/debug/ieee80211/${phy}/netdev\:${iface}/stations/${macaddr}/last_signal) - $noise)
+else
+echo $i
+fi
 done
-cat $STA | egrep -A1 -o '(..:..:..:..:..:..|rssi.*)'| sed -e 's/rssi \(.*\)/\1\\\n/g' | grep -v last | xargs | sed '/^$/d' | tr 'a-f' 'A-F' | awk '{print $1,"0","0",$2}'
+for i in /sys/kernel/debug/ieee80211/${phy}/netdev\:${iface}/stations/* ; do if [ -f $i/last_signal ]; then echo $(basename $i | tr 'a-f' 'A-F') 0 0 $(expr $(cat $i/last_signal) - $noise) ; fi ; done 
 }
 
 sta2()
 {
-cmb | sort -r | uniq -w17 | awk '{print $3,$1,$2,$4}' | sort -nr | awk '{print $2,$3,$1,$4}'| sed 's/\(.*\) \(.*\) \(.*\) \(.*\)/\&mac=\1\&ip=\2\&bytes=\3\&rssi=\4/;s/\(.*\) \(.*\) \(.*\)/mac=\1\&ip=\2\&bytes=\3\&total=0\&rssi=/' | while read i; do wget -T 10 "https://node:g9Jlk99bs@iris.personaltelco.net/nodedb/submit.php?host=`cat /proc/sys/kernel/hostname`$i" --no-check-certificate -q -O /dev/null 2>/dev/null; done 
+cmb | sort -r | uniq -w17 | awk '{print $3,$1,$2,$4}' | sort -nr | awk '{print $2,$3,$1,$4}'| sed 's/\(.*\) \(.*\) \(.*\) \(.*\)/\&mac=\1\&ip=\2\&bytes=\3\&rssi=\4/;s/\(.*\) \(.*\) \(.*\)/mac=\1\&ip=\2\&bytes=\3\&total=0\&rssi=/' | while read i; do wget -T10 -t2 --connect-timeout=10 --read-timeout=10 "https://iris.personaltelco.net/nodedb/submit.php?host=`cat /proc/sys/kernel/hostname`$i" --no-check-certificate -q -O /dev/null 2>/dev/null; done 
 }
 
 tot()
 {
-cmb | sort -r | uniq -w17 | awk '{print $3,$1,$2,$4}' | sort -nr | awk '{print $2,$3,$1,$4}'| grep -i $mac | sed 's/\(.*\) \(.*\) \(.*\) \(.*\)/\&mac=\1\&ip=\2\&bytes=\3\&total=\3\&rssi=\4/;s/\(.*\) \(.*\) \(.*\)/mac=\1\&ip=\2\&bytes=\3\&total=\3\&rssi=/' | while read i; do wget -T 10 "https://node:g9Jlk99bs@iris.personaltelco.net/nodedb/submit.php?host=`cat /proc/sys/kernel/hostname`$i" --no-check-certificate -q -O /dev/null 2>/dev/null; done 
+cmb | sort -r | uniq -w17 | awk '{print $3,$1,$2,$4}' | sort -nr | awk '{print $2,$3,$1,$4}'| grep -i $mac | sed 's/\(.*\) \(.*\) \(.*\) \(.*\)/\&mac=\1\&ip=\2\&bytes=\3\&total=\3\&rssi=\4/;s/\(.*\) \(.*\) \(.*\)/mac=\1\&ip=\2\&bytes=\3\&total=\3\&rssi=/' | while read i; do wget -T10 -t2 --connect-timeout=10 --read-timeout=10 "https://iris.personaltelco.net/nodedb/submit.php?host=`cat /proc/sys/kernel/hostname`$i" --no-check-certificate -q -O /dev/null 2>/dev/null; done 
 }
 
 sta()

@@ -1,12 +1,13 @@
-config wifi-device  wifi0
-	option type     atheros
+config wifi-device  radio0
+	option type     mac80211
+	option phy		phy0
 	option channel  1
 
 	# REMOVE THIS LINE TO ENABLE WIFI:
 	# option disabled 1
 
 config wifi-iface
-	option device	wifi0
+	option device	radio0
 	option network	public
 	option mode	ap
 	option ssid	www.personaltelco.net/notyet
