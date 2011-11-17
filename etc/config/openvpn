@@ -1,4 +1,4 @@
 config 'openvpn' 'ptp'
-	option 'enable' '1'
+	option 'enabled' '1'
 	option 'config' '/etc/openvpn/client.conf'
 
