@@ -19,6 +19,7 @@ AnnaBannanas	Anna Bannanas Coffee House	frick	1	NONE	WGT	10.11.6.1	26	anna_banna
 HallOfRecords	Hall of Records	vital	0	PRIV	WGT	10.11.6.65	26	hall-of-records.jpg		192.168.1.1	24
 Goldrush	Goldrush Coffee Bar	nugget	1	NONE	WGT	10.11.6.129	26
 Beaterville	Beaterville Cafe	wreck	0	NONE	WGT	10.11.6.193	26			192.168.2.1	24
+GooseHollow	Goose Hollow Inn	bunny	0	WAN	WGT	10.11.7.1	26	goosehollow.jpg		192.168.2.1	24
 Nostro	Nostro Caffe 	fuzz	1	WAN	WGT	10.11.7.65	26	nostro_caffe.jpg
 Cascadia	New Cascadia Traditional	muffin	0	PRIV	WGT	10.11.7.129	26	newcascadia.png		192.168.2.1	24
 FreshPot	The Fresh Pot	moose	0	NONE	ALIX	10.11.7.193	26	freshpot.gif		10.11.104.20	22
