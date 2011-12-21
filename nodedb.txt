@@ -19,7 +19,6 @@ AnnaBannanas	Anna Bannanas Coffee House	frick	1	NONE	WGT	10.11.6.1	26	anna_banna
 HallOfRecords	Hall of Records	vital	0	PRIV	WGT	10.11.6.65	26	hall-of-records.jpg		192.168.1.1	24
 Goldrush	Goldrush Coffee Bar	nugget	1	NONE	WGT	10.11.6.129	26
 Beaterville	Beaterville Cafe	wreck	0	NONE	WGT	10.11.6.193	26			192.168.2.1	24
-GooseHollow	Goose Hollow Inn	bunny	0	WAN	WGT	10.11.7.1	26	goosehollow.jpg		192.168.2.1	24
 Nostro	Nostro Caffe 	fuzz	1	WAN	WGT	10.11.7.65	26	nostro_caffe.jpg
 Cascadia	New Cascadia Traditional	muffin	0	PRIV	WGT	10.11.7.129	26	newcascadia.png		192.168.2.1	24
 FreshPot	The Fresh Pot	moose	0	NONE	ALIX	10.11.7.193	26	freshpot.gif		10.11.104.20	22
@@ -56,6 +55,7 @@ NewDeal	New Deal Cafe	dime	0	WAN	MR3201A	10.11.17.193	26
 Test2	Testing	poop	0	PRIV	WGT	10.11.18.1	26			192.168.2.1	24
 LionsEye	Lion's Eye Tavern	leo	1	WAN	WGT	10.11.18.65	26	lionseye.jpg
 Coalition	Coalition Brewing	lump	1	WAN	WGT	10.11.19.1	26	coalition.png
+GooseHollow	Goose Hollow Inn	ruby	1	WAN	ALIX	10.11.20.1	24	goosehollow.jpg
 Ash	Humble Apartment	k	1	NONE	WGT	10.11.22.1	24
 TB	Quinn Residence	widget	1	NONE	WGT	10.11.23.1	24
 WorldCup	World Cup Coffee and Tea	fut	1	NONE	ALIX	10.11.33.1	24	worldcup.gif
