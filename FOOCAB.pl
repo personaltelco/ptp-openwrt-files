@@ -43,6 +43,8 @@ my $pubiface = undef;
 my $priviface = undef;
 my $waniface = undef;
 
+my $hwclock = false;
+
 while(<NODEDB>) {
     chomp;
     @vals = split /\t/;
@@ -111,6 +113,7 @@ while(<NODEDB>) {
 	    print SED "s/PTP_WANIFACE_PTP/eth0/g\n";
 	    print SED "s/PTP_PRIVIFACE_PTP/eth2/g\n";
 	    print SED "s/PTP_ARCH_PTP/x86-alix/g\n";
+	    $hwclock = true;
 	} elsif ($device eq "MR3201A") {
 	    $waniface = "eth0";
 	    $pubiface = "wlan0";
@@ -245,7 +248,7 @@ if ($device eq "WGT") {
 } elsif ($device eq "ALIX") {
     # if alix, remove the vlan configuration from etc/config/network
     # and delete the etc/config/wireless
-    system("mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n '#### Loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig output/etc/config/wireless");
+    system("mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n 'loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig output/etc/config/wireless");
 }
     
 open(LINKS,"find etc usr root www -type l |");
@@ -307,6 +310,28 @@ stop() {\n";
     close(FILTER);
     chmod 0755,"output/etc/init.d/filter";
     symlink "../init.d/filter","output/etc/rc.d/S96filter";
+}
+
+if($hwclock) {
+	open(INITCLOCK,">output/etc/init.d/initclock");
+
+	print INITCLOCK
+		"#!/bin/sh /etc/rc.common
+# Copyright (C) 2008 OpenWrt.org
+
+START=11
+
+start() {
+	# set clock to hardware clock value
+	/sbin/hwclock -s -u
+}\n";
+
+	close(INITCLOCK);
+	chmod 0755,"output/etc/init.d/initclock";
+
+	open(CRONTAB,">>output/etc/crontabs/root");
+	print CRONTAB "0 0 * * *	/sbin/hwclock -w -u\n";
+	close(CRONTAB);
 }
 
 open(WWW,"find www -type f | grep -v nodes |");
