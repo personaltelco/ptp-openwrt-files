@@ -7,7 +7,7 @@ config dnsmasq
 	option expandhosts	0
 	option nonegcache	0
 	option authoritative	1
-	option readethers	0
+	option readethers	1
 	option nohosts		1
 	option rebind_protection	0
 	option leasefile	'/tmp/dhcp.leases'
