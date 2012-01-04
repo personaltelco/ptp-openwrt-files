@@ -15,8 +15,8 @@ config dnsmasq
 	list server		'/ptp/70.102.34.162'
 	list server		'/11.10.in-addr.arpa/70.102.34.162'
 
-config dhcp lan
-	option interface	lan
+config dhcp private
+	option interface	private
 	option start		100
 	option limit		150
 	option leasetime	12h
