@@ -43,7 +43,7 @@ my $pubiface = undef;
 my $priviface = undef;
 my $waniface = undef;
 
-my $hwclock = false;
+my $hwclock = undef;
 
 while(<NODEDB>) {
     chomp;
