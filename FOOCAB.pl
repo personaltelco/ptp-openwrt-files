@@ -42,6 +42,7 @@ my $localiface = undef;
 my $pubiface = undef;
 my $priviface = undef;
 my $waniface = undef;
+my $vpniface = "ptp";
 
 my $hwclock = undef;
 
@@ -284,13 +285,15 @@ start() {\n";
 
     if ($filter eq "WAN" || $filter eq "BOTH") {
 	print FILTER
-	    "        for i in \$(ip addr show dev $waniface | grep 'inet ' | awk '{ print \$2 }') ; do iptables -I FORWARD -i $localiface -d \$i -j DROP ; done\n";
+	    "        for i in \$(ip addr show dev $waniface | grep 'inet ' | awk '{ print \$2 }') ; do iptables -I FORWARD -i $localiface -d \$i -j DROP ; iptables -I -i $vpniface -d \$i -j DROP ; done\n";
 	print FILTER
-	    "        for i in \$(ip addr show dev $waniface | grep inet6 | grep -v 'scope local' | awk '{ print \$2 }') ; do ip6tables -I FORWARD -i $localiface -d \$i -j DROP ; done\n";
+	    "        for i in \$(ip addr show dev $waniface | grep inet6 | grep -v 'scope local' | awk '{ print \$2 }') ; do ip6tables -I FORWARD -i $localiface -d \$i -j DROP ; ip6tables -I FORWARD -i $vpniface -d \$i -j DROP ; done\n";
     }
     if ($priviface && ($filter eq "PRIV" || $filter eq "BOTH")) {
 	print FILTER
 	    "        iptables -I FORWARD -o $priviface -i $localiface -j DROP\n";
+	print FILTER
+	    "        iptables -I FORWARD -o $priviface -i $vpniface -j DROP\n";
     }
 
     print FILTER 
@@ -300,13 +303,15 @@ stop() {\n";
 
     if ($filter eq "WAN" || $filter eq "BOTH") {
 	print FILTER
-	    "        for i in \$(ip addr show dev $waniface | grep 'inet ' | awk '{ print \$2 }') ; do iptables -D FORWARD -i $localiface -d \$i -j DROP ; done\n";
+	    "        for i in \$(ip addr show dev $waniface | grep 'inet ' | awk '{ print \$2 }') ; do iptables -D FORWARD -i $localiface -d \$i -j DROP ; iptables -D -i $vpniface -d \$i -j DROP ; done\n";
 	print FILTER
-	    "        for i in \$(ip addr show dev $waniface | grep inet6 | grep -v 'scope local' | awk '{ print \$2 }') ; do ip6tables -D FORWARD -i $localiface -d \$i -j DROP ; done\n";
+	    "        for i in \$(ip addr show dev $waniface | grep inet6 | grep -v 'scope local' | awk '{ print \$2 }') ; do ip6tables -D FORWARD -i $localiface -d \$i -j DROP ; ip6tables -D FORWARD -i $vpniface -d \$i -j DROP ; done\n";
     }
     if ($priviface && ($filter eq "PRIV" || $filter eq "BOTH")) {
 	print FILTER
 	    "        iptables -D FORWARD -o $priviface -i $localiface -j DROP\n";
+	print FILTER
+	    "        iptables -D FORWARD -o $priviface -i $vpniface -j DROP\n";
     }
 
     print FILTER "}\n";
