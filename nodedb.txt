@@ -69,7 +69,7 @@ Concordia	Concordia Neighborhood	zoe	1	NONE	WGT	10.11.60.1	24
 FirstUnitarian	First Unitarian Church	jodie	1	NONE	ALIX	10.11.61.1	24	
 Hollywood	Hollywood Neighborhood	ramona	1	NONE	WGT	10.11.62.1	25	
 Communitecture	Communitecture Architecture and Planning	rip	1	WAN	ALIX	10.11.62.129	25	
-Tumbleweed	3806 SE 34th Ave	salsola	1	NONE	WGT	10.11.64.1	26
+Tumbleweed	3806 SE 34th Ave	salsola	1	WAN	MR3201A	10.11.64.1	26
 Testing	Testing MR3201A	test	0	WAN	MR3201A	10.11.64.65	26					
 FirstUnitarian	First Unitarian Church	clara	1	NONE	ALIX	10.11.66.1	23	
 Klickitat	Russell Senior	hoop	0	NONE	ALIX	10.11.80.1	22		50	192.168.0.1	24
