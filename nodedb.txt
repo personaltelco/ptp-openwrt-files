@@ -55,6 +55,7 @@ Test	Testing	pewp	1	NONE	WGT	10.11.17.129	26
 NewDeal	New Deal Cafe	dime	0	WAN	MR3201A	10.11.17.193	26
 Test2	Testing	poop	0	PRIV	WGT	10.11.18.1	26			192.168.2.1	24
 LionsEye	Lion's Eye Tavern	leo	1	WAN	WGT	10.11.18.65	26	lionseye.jpg
+Crema	Crema Bakery and Cafe	zane	0	WAN	MR3201A	10.11.18.129	26	crema.gif
 Coalition	Coalition Brewing	lump	1	WAN	WGT	10.11.19.1	26	coalition.png
 GooseHollow	Goose Hollow Inn	ruby	1	WAN	ALIX	10.11.20.1	24	goosehollow.jpg
 Ash	Humble Apartment	k	1	NONE	WGT	10.11.22.1	24
@@ -63,7 +64,6 @@ WorldCup	World Cup Coffee and Tea	fut	1	NONE	ALIX	10.11.33.1	24	worldcup.gif
 Labarre	LaBarre Machine Works	metal	1	WAN	ALIX	10.11.36.1	24	labarre.jpg
 ArborLodge	Arbor Lodge Park Community Network	suds	1	NONE	ALIX	10.11.37.1	24	
 Ecotrust	Ecotrust	orb	1	NONE	ALIX	10.11.38.1	24	ecotrust.png
-Crema	Crema Bakery and Cafe	phillie	1	NONE	WGT	10.11.45.1	24	crema.gif
 Westover	Westover Tower	pie	1	NONE	ALIX	10.11.51.1	24	
 Concordia	Concordia Neighborhood	zoe	1	NONE	WGT	10.11.60.1	24	
 FirstUnitarian	First Unitarian Church	jodie	1	NONE	ALIX	10.11.61.1	24	
