@@ -113,7 +113,14 @@ while(<NODEDB>) {
 	    $priviface = "eth2";
 	    print SED "s/PTP_WANIFACE_PTP/eth0/g\n";
 	    print SED "s/PTP_PRIVIFACE_PTP/eth2/g\n";
-	    print SED "s/PTP_ARCH_PTP/x86-alix/g\n";
+	    print SED "s/PTP_ARCH_PTP/alix/g\n";
+	    $hwclock = true;
+	} elsif ($device eq "NET4521") {
+	    $waniface = "eth0";
+	    $priviface = "eth1";
+	    print SED "s/PTP_WANIFACE_PTP/eth0/g\n";
+	    print SED "s/PTP_PRIVIFACE_PTP/eth1/g\n";
+	    print SED "s/PTP_ARCH_PTP/net4521/g\n";
 	    $hwclock = true;
 	} elsif ($device eq "MR3201A") {
 	    $waniface = "eth0";
@@ -131,7 +138,7 @@ while(<NODEDB>) {
 
 	print SED "s/PTP_PUBNET_PTP/$netaddr/g\n";
 	print SED "s/PTP_PUBNETMASK_PTP/$mask/g\n";
-	if ($device eq "WGT" || $device eq "MR3201A") {
+	if ($device eq "WGT" || $device eq "MR3201A" || $device eq "NET4521") {
 	    $pubiface = "wlan0";
 	    print SED "s/PTP_PUBIFACE_PTP/wlan0/g\n";
 	} elsif ($device eq "ALIX") {
@@ -143,7 +150,7 @@ while(<NODEDB>) {
 	    $localiface = "br-lan";
 	    print SED "s/PTP_LOCALIFACE_PTP/br-lan/g\n";
 	} else {
-	    if ($device eq "WGT" || $device eq "MR3201A") {
+	    if ($device eq "WGT" || $device eq "MR3201A" || $device eq "NET4521") {
 		$localiface = "wlan0";
 		print SED "s/PTP_LOCALIFACE_PTP/wlan0/g\n";
 	    } elsif ($device eq "ALIX") {
@@ -243,13 +250,17 @@ if ($device eq "MR3201A") {
 }
 
 
-if ($device eq "WGT") {
+if ($device eq "WGT" || $device eq "NET4521") {
     # remove redundant interface, in cases of bridging
-    system("mv output/etc/config/network output/etc/config/network.orig ; sed 's/wlan0 eth0.0/eth0.0/' output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
-} elsif ($device eq "ALIX") {
-    # if alix, remove the vlan configuration from etc/config/network
-    # and delete the etc/config/wireless
-    system("mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n 'loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig output/etc/config/wireless");
+    system("mv output/etc/config/network output/etc/config/network.orig ; sed 's/wlan0 eth/eth/' output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
+} 
+if ($device eq "ALIX" || $device eq "NET4521") {
+    # if alix or net4521, remove the vlan configuration from etc/config/network
+    system("mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n 'loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
+}
+if ($device eq "ALIX") {
+    # delete the etc/config/wireless
+    system("rm output/etc/config/wireless");
 }
     
 open(LINKS,"find etc usr root www -type l |");
