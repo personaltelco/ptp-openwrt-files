@@ -2,7 +2,7 @@ NODE	NODENAME	HOSTNAME	BRIDGE	FILTER	DEVICE	PUBADDR	PUBMASKLEN	LOGOFILE	DHCPSTAR
 UrbanGrindNW	Urban Grind - Pearl District	grank	1	NONE	NET4521	10.11.0.1	26	urbangrind.jpg
 Rerun	Rerun	rerun	0	PRIV	WGT	10.11.0.65	26	RERUN-Logo.png		192.168.1.1	24
 Slabtown	Slabtown	slabtown	0	PRIV	WGT	10.11.0.129	26	slabtown.jpg		192.168.1.1	24
-PowellsTech	Powell's Technical Bookstore	cantos	0	WAN	WGT	10.11.0.193	26	powellsbooks_logo.gif		192.168.2.1	24
+BeulahLand	Beulah Land Coffee and Alehouse	hurt	1	WAN	NET4521	10.11.0.193	26	beulahland.png
 CedarHillsCrossing	Cedar Hills Crossing	filth	1	NONE	ALIX	10.11.1.1	24	cedarhillscrossing-logo.gif
 BasementPub	Basement Pub	hades	1	NONE	ALIX	10.11.2.1	26	local1028.png
 CrowBar	Crow Bar	loki	1	WAN	WGT	10.11.2.65	26	
@@ -56,10 +56,7 @@ NewDeal	New Deal Cafe	dime	0	WAN	MR3201A	10.11.17.193	26
 Test2	Testing	poop	0	PRIV	WGT	10.11.18.1	26			192.168.2.1	24
 LionsEye	Lion's Eye Tavern	leo	1	WAN	WGT	10.11.18.65	26	lionseye.jpg
 Crema	Crema Bakery and Cafe	zane	0	WAN	MR3201A	10.11.18.129	26	crema.gif
-SoekrisA	SoekrisCab A	net4521a	1	NONE	NET4521	10.11.18.193	26
 Coalition	Coalition Brewing	lump	1	WAN	WGT	10.11.19.1	26	coalition.png
-SoekrisB	SoekrisCab B	net4521b	1	NONE	NET4521	10.11.19.65	26
-SoekrisC	SoekrisCab C	net4521c	1	NONE	NET4521	10.11.19.129	26
 SoekrisD	SoekrisCab D	net4521d	1	NONE	NET4521	10.11.19.193	26
 GooseHollow	Goose Hollow Inn	ruby	1	WAN	ALIX	10.11.20.1	24	goosehollow.jpg
 Ash	Humble Apartment	k	1	NONE	WGT	10.11.22.1	24
