@@ -8,7 +8,7 @@ config dnsmasq
 	option nonegcache	0
 	option authoritative	1
 	option readethers	1
-	option nohosts		1
+	option nohosts		0
 	option rebind_protection	0
 	option leasefile	'/tmp/dhcp.leases'
 	option resolvfile	'/tmp/resolv.conf.auto'
