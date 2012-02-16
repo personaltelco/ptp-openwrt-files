@@ -3,6 +3,8 @@ config interface
 	option AdvSendAdvert	1
 	option AdvManagedFlag	0
 	option AdvOtherConfigFlag 0
+	option MinRtrAdvInterval 10
+	option MaxRtrAdvInterval 30
 
 config prefix
 	option interface	'public'
@@ -10,3 +12,6 @@ config prefix
 	option AdvAutonomous	1
 	option AdvRouterAddr	0
 
+config rdnss
+	option interface	'public'
+	option addr		'PTP_PUB6PREFIX_PTP1'
