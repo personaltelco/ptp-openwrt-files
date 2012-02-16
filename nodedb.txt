@@ -62,7 +62,7 @@ SoekrisB	SoekrisCab B	net4521b	1	NONE	NET4521	10.11.19.65	26
 SoekrisC	SoekrisCab C	net4521c	1	NONE	NET4521	10.11.19.129	26
 SoekrisD	SoekrisCab D	net4521d	1	NONE	NET4521	10.11.19.193	26
 GooseHollow	Goose Hollow Inn	ruby	1	WAN	ALIX	10.11.20.1	24	goosehollow.jpg
-Ash	Humble Apartment	k	1	NONE	WGT	10.11.22.1	24
+Ash	Ash Street Listening Lounge	k	1	NONE	NET4521	10.11.22.1	24
 TB	Quinn Residence	widget	1	NONE	WGT	10.11.23.1	24
 SoekrisE	SoekrisCab E	net4521e	1	NONE	NET4521	10.11.24.1	26
 SoekrisF	SoekrisCab F	net4501a	0	NONE	ALIX	10.11.24.65	26			192.168.2.1	24
