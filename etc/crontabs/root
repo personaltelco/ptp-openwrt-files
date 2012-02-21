@@ -1,3 +1,4 @@
 */5 * * * *	/usr/bin/client-status.sh -t > /tmp/users.html
 */5 * * * *	sleep $(cat /tmp/rand); /usr/bin/client-status.sh -f
 0 * * * *	logger -t $(cat /proc/sys/kernel/hostname) hostname
+*/7 * * * *	if ! pidof openvpn ; then echo openvpn not running ; /etc/init.d/openvpn restart ; fi
