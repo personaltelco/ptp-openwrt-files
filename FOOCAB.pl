@@ -171,7 +171,7 @@ while(<NODEDB>) {
     }
 }
 
-open(FILES,"find etc usr root -type f |");
+open(FILES,"find etc lib usr root -type f |");
 
 while(<FILES>) {
     chomp;
