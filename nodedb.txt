@@ -15,7 +15,7 @@ DragonFly	Dragonfly Coffee House	darter	0	PRIV	WGT	10.11.3.193	26	dragonfly.png	
 Contrary	Cafe Contrary	doctorno	1	NONE	WGT	10.11.5.1	26	
 OpenSpace	Open Space Cafe	airy	1	WAN	MR3201A	10.11.5.65	26	openspace.jpg
 Matt	MattIsMyName	pad	1	WAN	WGT	10.11.5.129	26	
-Dilley	Mark Dilley	bus	0	WAN	MR3201A	10.11.5.193	26
+Jeff	Jefferson Smith	bus	0	WAN	MR3201A	10.11.5.193	26
 AnnaBannanas	Anna Bannanas Coffee House	frick	1	NONE	WGT	10.11.6.1	26	anna_bannanas.gif
 Suzette	Suzette Creperie	vital	0	PRIV	WGT	10.11.6.65	26	suzette.png		192.168.1.1	24
 Goldrush	Goldrush Coffee Bar	nugget	1	NONE	WGT	10.11.6.129	26
