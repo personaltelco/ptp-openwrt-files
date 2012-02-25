@@ -25,7 +25,7 @@ Nostro	Nostro Caffe 	fuzz	1	WAN	WGT	10.11.7.65	26	nostro_caffe.jpg
 Cascadia	New Cascadia Traditional	muffin	0	PRIV	WGT	10.11.7.129	26	newcascadia.png		192.168.2.1	24
 FreshPot	The Fresh Pot	moose	0	NONE	ALIX	10.11.7.193	26	freshpot.gif		10.11.104.20	22
 BillyRays	Billy Ray's Neighborhood Dive	billyrays	1	NONE	WGT	10.11.8.1	26
-OMalleys	O'Malley's	aina	0	WAN	MR3201A	10.11.8.65	26	omalleys.gif	
+Pour	Pour	pour	0	WAN	MR3201A	10.11.8.65	26	pour.png	
 Northstar	North Star Coffeehouse	stella	1	WAN	WGT	10.11.8.129	26	NSLogo.gif
 YukonTavern	Yukon Tavern	yukon	1	NONE	WGT	10.11.8.193	26	
 CityClub	City Club of Portland	asa	1	NONE	WGT	10.11.9.1	26	cityclub.png
