@@ -15,14 +15,14 @@ config dnsmasq
 	list server		'/ptp/70.102.34.162'
 	list server		'/11.10.in-addr.arpa/70.102.34.162'
 
-config dhcp private
-	option interface	private
+config dhcp priv
+	option interface	priv
 	option start		100
 	option limit		150
 	option leasetime	12h
 
-config dhcp public
-	option interface	public
+config dhcp pub
+	option interface	pub
 	option start		PTP_DHCPSTART_PTP
 	option limit		1024
 	option leasetime	1h

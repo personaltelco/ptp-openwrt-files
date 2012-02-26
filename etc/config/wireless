@@ -8,7 +8,7 @@ config wifi-device  radio0
 
 config wifi-iface
 	option device	radio0
-	option network	public
+	option network	pub
 	option mode	ap
 	option ssid	www.personaltelco.net/notyet
 	option encryption none

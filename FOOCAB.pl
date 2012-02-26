@@ -38,9 +38,8 @@ my $logo = undef;
 my $bridge = undef;
 my $device = undef;
 my $filter = undef;
-my $localiface = undef;
-my $pubiface = undef;
-my $priviface = undef;
+my $pubifaces = undef;
+my $privifaces = undef;
 my $waniface = undef;
 my $vpniface = "ptp";
 
@@ -54,7 +53,7 @@ while(<NODEDB>) {
 	(defined $ni && ($vals[$ni] eq $node)))
     {
 	my $masklen = undef;
-	my $localaddr = undef;
+	my $pubaddr = undef;
 	my $privaddr = undef;
 	my $privmasklen = undef;
 
@@ -70,7 +69,7 @@ while(<NODEDB>) {
 		$masklen = $vals[$i];
 	    }
 	    if ($vars[$i] eq "PUBADDR") {
-		$localaddr = $vals[$i];
+		$pubaddr = $vals[$i];
 	    }
 	    if ($vars[$i] eq "LOGOFILE") {
 		$logo = $vals[$i];
@@ -96,7 +95,7 @@ while(<NODEDB>) {
 	# IPv6 prefix - this one belongs to PTP
 	my $ipv6slash48 = "2001:470:e962";
 
-	my @octets = split(/\./, $localaddr);
+	my @octets = split(/\./, $pubaddr);
 	printf(SED "s/PTP_PUB6PREFIX_PTP/%s:%02x%02x::/g\n", $ipv6slash48, @octets[2], @octets[3]);
 	printf(SED "s/PTP_VPN6ADDRESS_PTP/%s::%02x%02x/g\n", $ipv6slash48, @octets[2], @octets[3]);
 
@@ -104,69 +103,65 @@ while(<NODEDB>) {
 
 	if($device eq "WGT") {
 	    $waniface = "eth0.1";
-	    $priviface = "eth0.0";
-	    print SED "s/PTP_WANIFACE_PTP/eth0.1/g\n";
-	    print SED "s/PTP_PRIVIFACE_PTP/eth0.0/g\n";
+	    if ($bridge) {
+		$pubifaces = "eth0.0";
+		$privifaces = "";
+	    } else {
+	        $pubifaces = "";
+	        $privifaces = "eth0.0";
+	    }
 	    print SED "s/PTP_ARCH_PTP/wgt634u/g\n";
 	} elsif ($device eq "ALIX") {
 	    $waniface = "eth0";
-	    $priviface = "eth2";
-	    print SED "s/PTP_WANIFACE_PTP/eth0/g\n";
-	    print SED "s/PTP_PRIVIFACE_PTP/eth2/g\n";
-	    print SED "s/PTP_ARCH_PTP/alix/g\n";
+	    if ($bridge) {
+	        $pubifaces = "eth1 eth2";
+	        $privifaces = "";
+	    } else {
+		$pubifaces = "eth1";
+		$privifaces = "eth2";
+	    }
+	    print SED "s/PTP_ARCH_PTP/alix2/g\n";
 	    $hwclock = true;
 	} elsif ($device eq "NET4521") {
 	    $waniface = "eth0";
-	    $priviface = "eth1";
-	    print SED "s/PTP_WANIFACE_PTP/eth0/g\n";
-	    print SED "s/PTP_PRIVIFACE_PTP/eth1/g\n";
+	    if ($bridge) {
+		$pubifaces = "eth1";
+		$privifaces = "";
+	    } else {
+	        $pubifaces = "";
+	        $privifaces = "eth1";
+	    }
 	    print SED "s/PTP_ARCH_PTP/net4521/g\n";
 	    $hwclock = true;
 	} elsif ($device eq "MR3201A") {
 	    $waniface = "eth0";
-	    $pubiface = "wlan0";
-	    print SED "s/PTP_WANIFACE_PTP/eth0/g\n";
+	    $pubifaces = "";
+	    $privifaces = "";
     	    print SED "s/PTP_ARCH_PTP/atheros/g\n";
 	}
-
-	(defined $masklen && defined $localaddr) || die "Not enough information to compute network!";
-
-	my $ip = NetAddr::IP::Lite->new("$localaddr/$masklen");
+	
+	print SED "s/PTP_WANIFACE_PTP/$waniface/g\n";
+	print SED "s/PTP_PRIVIFACES_PTP/$privifaces/g\n";
+	print SED "s/PTP_PUBIFACES_PTP/$pubifaces/g\n";
+	
+	(defined $masklen && defined $pubaddr) || die "Not enough information to compute network!";
+	
+	my $ip = NetAddr::IP::Lite->new("$pubaddr/$masklen");
 	my $network = $ip->network();
 	my $netaddr = $network->addr();
 	my $mask = $ip->mask();
-
+	
 	print SED "s/PTP_PUBNET_PTP/$netaddr/g\n";
 	print SED "s/PTP_PUBNETMASK_PTP/$mask/g\n";
-	if ($device eq "WGT" || $device eq "MR3201A" || $device eq "NET4521") {
-	    $pubiface = "wlan0";
-	    print SED "s/PTP_PUBIFACE_PTP/wlan0/g\n";
-	} elsif ($device eq "ALIX") {
-	    $pubiface = "eth1";
-	    print SED "s/PTP_PUBIFACE_PTP/eth1/g\n";
-	}
-
-	if ($bridge) {
-	    $localiface = "br-lan";
-	    print SED "s/PTP_LOCALIFACE_PTP/br-lan/g\n";
-	} else {
-	    if ($device eq "WGT" || $device eq "MR3201A" || $device eq "NET4521") {
-		$localiface = "wlan0";
-		print SED "s/PTP_LOCALIFACE_PTP/wlan0/g\n";
-	    } elsif ($device eq "ALIX") {
-		$localiface = "eth1";
-		print SED "s/PTP_LOCALIFACE_PTP/eth1/g\n";
-	    }
-
-	    if ($device ne "MR3201A") {
-		$ip = NetAddr::IP::Lite->new("$privaddr/$privmasklen");
-		$network = $ip->network();
-		$netaddr = $network->addr();
-		$mask = $ip->mask();
-		
-		print SED "s/PTP_PRIVNET_PTP/$netaddr/g\n";
-		print SED "s/PTP_PRIVNETMASK_PTP/$mask/g\n";
-	    }
+	
+	if ($privifaces ne "") {
+	    $ip = NetAddr::IP::Lite->new("$privaddr/$privmasklen");
+	    $network = $ip->network();
+	    $netaddr = $network->addr();
+	    $mask = $ip->mask();
+	    
+	    print SED "s/PTP_PRIVNET_PTP/$netaddr/g\n";
+	    print SED "s/PTP_PRIVNETMASK_PTP/$mask/g\n";
 	}
     }
 }
@@ -195,65 +190,6 @@ while(<FILES>) {
     chown($uid,$gid,$dest);
 }
 
-if ($bridge) {
-    open(BRIDGE,"find bridge -type f |");
-
-    while(<BRIDGE>) {
-	chomp;
-	my $src = $_;
-	my @path = split('/',$src);
-	my $fname = pop @path;
-	shift @path; # scrape off "bridge" from path
-	my $outdir = join('/',"output",@path);
-	my $dest = join('/',"output",@path,$fname);
-	
-	# print "source = $src ; outdir = $outdir ; dest = $dest\n";
-	
-	($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($src);
-	
-	unless (-d $outdir) { system("mkdir -p $outdir"); }
-	
-	print "sed -f foocab.sed < $src > $dest\n";
-
-	system("sed -f foocab.sed < $src > $dest");
-	
-	chmod($mode,$dest);
-	chown($uid,$gid,$dest);
-    }
-}
-
-if ($device eq "MR3201A") {
-    open(MR3201A,"find mr3201a -type f |");
-
-    while(<MR3201A>) {
-	chomp;
-	my $src = $_;
-	my @path = split('/',$src);
-	my $fname = pop @path;
-	shift @path; # scrape off "mr3201a" from path
-	my $outdir = join('/',"output",@path);
-	my $dest = join('/',"output",@path,$fname);
-	
-	# print "source = $src ; outdir = $outdir ; dest = $dest\n";
-	
-	($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($src);
-	
-	unless (-d $outdir) { system("mkdir -p $outdir"); }
-	
-	print "sed -f foocab.sed < $src > $dest\n";
-
-	system("sed -f foocab.sed < $src > $dest");
-	
-	chmod($mode,$dest);
-	chown($uid,$gid,$dest);
-    }
-}
-
-
-if ($device eq "WGT" || $device eq "NET4521") {
-    # remove redundant interface, in cases of bridging
-    system("mv output/etc/config/network output/etc/config/network.orig ; sed 's/wlan0 eth/eth/' output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
-} 
 if ($device eq "ALIX" || $device eq "NET4521") {
     # if alix or net4521, remove the vlan configuration from etc/config/network
     system("mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n 'loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
@@ -261,6 +197,28 @@ if ($device eq "ALIX" || $device eq "NET4521") {
 if ($device eq "ALIX") {
     # delete the etc/config/wireless
     system("rm output/etc/config/wireless");
+}
+if ($privifaces eq "") {
+    # delete the priv network configuration from etc/config/network
+    open(NETWORKIN,"output/etc/config/network");
+    open(NETWORKOUT,">output/etc/config/network.out");
+    my $output = 1;
+    while(<NETWORKIN>) {
+	chomp;
+
+	if($_ =~ /priv/) {
+	  $output = 0;
+	  print "output off\n";
+	}
+        if($_ =~ /pub/) {
+	  $output = 1;
+	}
+
+	if ($output) {
+	  print NETWORKOUT "$_\n";
+	}
+    }
+    system("mv output/etc/config/network.out output/etc/config/network");
 }
     
 open(LINKS,"find etc usr root www -type l |");
@@ -296,15 +254,15 @@ start() {\n";
 
     if ($filter eq "WAN" || $filter eq "BOTH") {
 	print FILTER
-	    "        for i in \$(ip addr show dev $waniface | grep 'inet ' | awk '{ print \$2 }') ; do iptables -I FORWARD -i $localiface -d \$i -j DROP ; iptables -I -i $vpniface -d \$i -j DROP ; done\n";
+	    "        for i in \$(ip addr show dev $waniface | grep 'inet ' | awk '{ print \$2 }') ; do iptables -I FORWARD -i br-pub -d \$i -j DROP ; iptables -I -i $vpniface -d \$i -j DROP ; done\n";
 	print FILTER
-	    "        for i in \$(ip addr show dev $waniface | grep inet6 | grep -v 'scope local' | awk '{ print \$2 }') ; do ip6tables -I FORWARD -i $localiface -d \$i -j DROP ; ip6tables -I FORWARD -i $vpniface -d \$i -j DROP ; done\n";
+	    "        for i in \$(ip addr show dev $waniface | grep inet6 | grep -v 'scope local' | awk '{ print \$2 }') ; do ip6tables -I FORWARD -i br-pub -d \$i -j DROP ; ip6tables -I FORWARD -i $vpniface -d \$i -j DROP ; done\n";
     }
-    if ($priviface && ($filter eq "PRIV" || $filter eq "BOTH")) {
+    if (($privifaces ne "") && ($filter eq "PRIV" || $filter eq "BOTH")) {
 	print FILTER
-	    "        iptables -I FORWARD -o $priviface -i $localiface -j DROP\n";
+	    "        iptables -I FORWARD -o br-priv -i br-pub -j DROP\n";
 	print FILTER
-	    "        iptables -I FORWARD -o $priviface -i $vpniface -j DROP\n";
+	    "        iptables -I FORWARD -o br-priv -i $vpniface -j DROP\n";
     }
 
     print FILTER 
@@ -314,15 +272,15 @@ stop() {\n";
 
     if ($filter eq "WAN" || $filter eq "BOTH") {
 	print FILTER
-	    "        for i in \$(ip addr show dev $waniface | grep 'inet ' | awk '{ print \$2 }') ; do iptables -D FORWARD -i $localiface -d \$i -j DROP ; iptables -D -i $vpniface -d \$i -j DROP ; done\n";
+	    "        for i in \$(ip addr show dev $waniface | grep 'inet ' | awk '{ print \$2 }') ; do iptables -D FORWARD -i br-pub -d \$i -j DROP ; iptables -D -i $vpniface -d \$i -j DROP ; done\n";
 	print FILTER
-	    "        for i in \$(ip addr show dev $waniface | grep inet6 | grep -v 'scope local' | awk '{ print \$2 }') ; do ip6tables -D FORWARD -i $localiface -d \$i -j DROP ; ip6tables -D FORWARD -i $vpniface -d \$i -j DROP ; done\n";
+	    "        for i in \$(ip addr show dev $waniface | grep inet6 | grep -v 'scope local' | awk '{ print \$2 }') ; do ip6tables -D FORWARD -i br-pub -d \$i -j DROP ; ip6tables -D FORWARD -i $vpniface -d \$i -j DROP ; done\n";
     }
-    if ($priviface && ($filter eq "PRIV" || $filter eq "BOTH")) {
+    if (($privifaces ne "") && ($filter eq "PRIV" || $filter eq "BOTH")) {
 	print FILTER
-	    "        iptables -D FORWARD -o $priviface -i $localiface -j DROP\n";
+	    "        iptables -D FORWARD -o br-priv -i br-pub -j DROP\n";
 	print FILTER
-	    "        iptables -D FORWARD -o $priviface -i $vpniface -j DROP\n";
+	    "        iptables -D FORWARD -o br-priv -i $vpniface -j DROP\n";
     }
 
     print FILTER "}\n";
