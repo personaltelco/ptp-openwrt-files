@@ -43,7 +43,7 @@ PioneerSquare	Pioneer Courthouse Square	frack	1	NONE	WGT	10.11.12.1	24	easystree
 Shack	Shack	shack	1	NONE	SOEKRIS	10.11.13.1	24	
 HotPepper	Hot Pepper Studios	lester	1	NONE	ALIX	10.11.14.1	24	
 LuckyLabNorth	Lucky Labrador Overlook Tap Room	woof	0	PRIV	WGT	10.11.15.1	26	taproom.jpg		192.168.2.1	24
-Clinton	17th and Taggart	trip	0	PRIV	WGT	10.11.15.65	26			192.168.1.1	24
+FunHouse	Funhouse Lounge	trip	0	WAN	WGT	10.11.15.65	26	funhouse.jpg		192.168.1.1	24
 GeorgeShaver	Selena Deckelmann	bic	0	PRIV	WGT	10.11.15.129	26	selena.jpg		192.168.11.1	24
 Florio	Florio Bakery	scone	1	NONE	WGT	10.11.15.193	26	florio.jpg
 Wistaria	Wistaria	vine	0	PRIV	WGT	10.11.16.1	26			192.168.1.1	24
