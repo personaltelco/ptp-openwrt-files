@@ -64,7 +64,7 @@ Ash	Ash Street Listening Lounge	k	1	NONE	NET4521	10.11.22.1	24
 TB	Quinn Residence	widget	1	NONE	WGT	10.11.23.1	24
 SoekrisE	SoekrisCab E	net4521e	1	NONE	NET4521	10.11.24.1	26
 SoekrisF	SoekrisCab F	net4501a	0	NONE	ALIX	10.11.24.65	26			192.168.2.1	24
-Bobwhite	Bobwhite Theatre	quail	1	WAN	ALIX	10.11.28.1	22	bobwhite.jpg
+BobWhite	Bob White Theatre	quail	1	WAN	ALIX	10.11.28.1	22	bobwhite.jpg
 WorldCup	World Cup Coffee and Tea	fut	1	NONE	ALIX	10.11.33.1	24	worldcup.gif
 Labarre	LaBarre Machine Works	metal	1	WAN	ALIX	10.11.36.1	24	labarre.jpg
 ArborLodge	Arbor Lodge Park Community Network	suds	1	NONE	ALIX	10.11.37.1	24	
