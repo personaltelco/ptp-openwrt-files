@@ -220,6 +220,27 @@ if ($privifaces eq "") {
     }
     system("mv output/etc/config/network.out output/etc/config/network");
 
+    # delete the priv network configuration from etc/config/dhcp
+    open(DHCPIN,"output/etc/config/dhcp");
+    open(DHCPOUT,">output/etc/config/dhcp.out");
+    my $output = 1;
+    while(<DHCPIN>) {
+	chomp;
+
+	if($_ =~ /^config dhcp priv/) {
+	  $output = 0;
+	  print "output off\n";
+	}
+        if($_ =~ /^config dhcp pub/) {
+	  $output = 1;
+	}
+
+	if ($output) {
+	  print DHCPOUT "$_\n";
+	}
+    }
+    system("mv output/etc/config/dhcp.out output/etc/config/dhcp");
+
     # delete the priv network rules from etc/init.d/firewall_rss
     open(FIREWALLIN,"output/etc/init.d/firewall_rss");
     open(FIREWALLOUT,">output/etc/init.d/firewall_rss.out");
