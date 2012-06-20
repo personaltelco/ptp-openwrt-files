@@ -219,6 +219,18 @@ if ($privifaces eq "") {
 	}
     }
     system("mv output/etc/config/network.out output/etc/config/network");
+
+    # delete the priv network rules from etc/init.d/firewall_rss
+    open(FIREWALLIN,"output/etc/init.d/firewall_rss");
+    open(FIREWALLOUT,">output/etc/init.d/firewall_rss.out");
+    while(<FIREWALLIN>) {
+	chomp;
+
+	if($_ !~ /PRIVNET/) {
+	  print FIREWALLOUT "$_\n";
+	}
+    }
+    system("mv output/etc/init.d/firewall_rss.out output/etc/init.d/firewall_rss");
 }
     
 open(LINKS,"find etc usr root www -type l |");
