@@ -252,6 +252,7 @@ if ($privifaces eq "") {
 	}
     }
     system("mv output/etc/init.d/firewall_rss.out output/etc/init.d/firewall_rss");
+    chmod(0755,"output/etc/init.d/firewall_rss");
 }
     
 open(LINKS,"find etc usr root www -type l |");
