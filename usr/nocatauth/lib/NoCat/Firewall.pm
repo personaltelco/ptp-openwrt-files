@@ -125,7 +125,7 @@ sub arp_table {
 
     while ( <ARP> ) {
 	next unless 
-	    /^$IP_Match\s.*\s.*\s.*\s$MAC_Match\s(REACHABLE|DELAY)/io;
+	    /^$IP_Match\s.*\s.*\s.*\s$MAC_Match\s(REACHABLE|DELAY|STALE)/io;
 	
 	if ( $mode eq BY_IP ) {
 	    $table{$1} = $2
