@@ -234,9 +234,9 @@ while(<LINKS>) {
 
     unless (-d $outdir) { system("mkdir -p $outdir"); }
 
-    print "cp -d $src $dest\n";
+    print "cp -a $src $dest\n";
 
-    system("cp -d $src $dest");
+    system("cp -a $src $dest");
 }
 
 if ($filter ne "NONE") {
