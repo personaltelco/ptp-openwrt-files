@@ -2,13 +2,12 @@ NODE	NODENAME	HOSTNAME	BRIDGE	FILTER	DEVICE	PUBADDR	PUBMASKLEN	LOGOFILE	DHCPSTAR
 UrbanGrindNW	Urban Grind - Pearl District	grank	1	NONE	NET4521	10.11.0.1	26	urbangrind.jpg
 Rerun	Rerun	rerun	0	PRIV	WGT	10.11.0.65	26	RERUN-Logo.png		192.168.1.1	24
 Slabtown	Slabtown	slabtown	1	WAN	WGT	10.11.0.129	26	slabtown.jpg	
-BeulahLand	Beulah Land Coffee and Alehouse	hurt	1	WAN	NET4521	10.11.0.193	26	beulahland.png
 CedarHillsCrossing	Cedar Hills Crossing	filth	1	NONE	ALIX	10.11.1.1	24	cedarhillscrossing-logo.gif
 BasementPub	Basement Pub	hades	1	NONE	ALIX	10.11.2.1	26	local1028.png
 CrowBar	Crow Bar	loki	1	WAN	WGT	10.11.2.65	26	
 Soapbox	Soapbox Theory and Screw Loose Studios	soapbox	0	PRIV	WGT	10.11.2.129	26			192.168.1.1	24
 StaccatoGelato	Staccato Gelato	glace	1	WAN	WGT	10.11.2.193	26	Staccato_Logo.png
-Smart	Matthew Klug	smart	1	NONE	MR3201A	10.11.3.1	26
+Smart	Smart	smart	1	NONE	MR3201A	10.11.3.1	26
 UglyMug	Ugly Mug Coffeehouse	cycle	0	PRIV	WGT	10.11.3.65	26	ugly-mug.png		192.168.1.1	24
 Whiffies	Whiffies Fried Pies	lard	0	NONE	MR3201A	10.11.3.129	26	whiffies.jpg
 Noi	Pok Pok Noi	taxi	0	PRIV	WGT	10.11.3.193	26	noi.jpg		192.168.2.1	24
@@ -69,6 +68,7 @@ WorldCup	World Cup Coffee and Tea	fut	1	NONE	ALIX	10.11.33.1	24	worldcup.gif
 Labarre	LaBarre Machine Works	metal	1	WAN	ALIX	10.11.36.1	24	labarre.jpg
 ArborLodge	Arbor Lodge Park Community Network	suds	1	NONE	ALIX	10.11.37.1	24	
 Ecotrust	Ecotrust	orb	1	NONE	ALIX	10.11.38.1	24	ecotrust.png
+BeulahLand	Beulahland Coffee and Alehouse	ouch	1	WAN	ALIX	10.11.40.1	22	beulahland.png
 Westover	Westover Tower	pie	1	NONE	ALIX	10.11.51.1	24	
 Concordia	Concordia Neighborhood	zoe	1	NONE	WGT	10.11.60.1	24	
 FirstUnitarian	First Unitarian Church	jodie	1	NONE	ALIX	10.11.61.1	24	
@@ -76,7 +76,7 @@ Hollywood	Hollywood Neighborhood	ramona	1	NONE	WGT	10.11.62.1	25
 Communitecture	Communitecture Architecture and Planning	rip	1	WAN	ALIX	10.11.62.129	25	
 Tumbleweed	3806 SE 34th Ave	salsola	0	WAN	MR3201A	10.11.64.1	26
 Testing	Testing MR3201A	test	0	WAN	MR3201A	10.11.64.65	26					
-FirstUnitarian	First Unitarian Church	clara	1	NONE	ALIX	10.11.66.1	23	
+FirstUnitarian	First Unitarian Church	clara	1	NONE	NET4521	10.11.66.1	23	
 Klickitat	Russell Senior	hoop	0	NONE	ALIX	10.11.80.1	22		50	192.168.0.1	24
 Hawthorne	H.I. Portland Hawthorne Hostel	bow	1	NONE	ALIX	10.11.100.1	22	portlandhostel.gif
 Mississippi	Historic Mississippi Community Network	silt	1	NONE	ALIX	10.11.104.1	22		256	mmt-logo.png
