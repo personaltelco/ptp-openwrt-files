@@ -5,9 +5,13 @@ use NetAddr::IP::Lite;
 
 my $host;
 my $node;
+my $wimax = 0;
 
 $result = GetOptions ("host=s" => \$host,
-		      "node=s" => \$node);
+		      "node=s" => \$node,
+		      "wimax" => \$wimax);
+
+print "wimax = $wimax\n";
 
 open(NODEDB,"nodedb.txt");
 open(SED,">foocab.sed");
@@ -345,6 +349,15 @@ start() {
 	print CRONTAB "0 0 * * *	/sbin/hwclock -w -u\n";
 	close(CRONTAB);
 }
+
+if($wimax) {
+	open(CRONTAB,">>output/etc/crontabs/root");
+	print CRONTAB "*/5 * * * *     /usr/bin/motorola.sh > /dev/null 2>&1\n";
+	close(CRONTAB);
+
+	system("cp -a wimax/usr output/");
+}
+
 
 open(WWW,"find www -type f | grep -v nodes |");
 
