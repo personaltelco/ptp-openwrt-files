@@ -355,7 +355,7 @@ if($wimax) {
 	print CRONTAB "*/5 * * * *     /usr/bin/motorola.sh > /dev/null 2>&1\n";
 	close(CRONTAB);
 
-	system("cp -a wimax/usr output/");
+	system("cp -a wimax/* output/");
 }
 
 
