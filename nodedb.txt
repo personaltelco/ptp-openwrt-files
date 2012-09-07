@@ -10,7 +10,7 @@ StaccatoGelato	Staccato Gelato	glace	1	WAN	WGT	10.11.2.193	26	Staccato_Logo.png
 Smart	Smart	smart	1	NONE	MR3201A	10.11.3.1	26
 UglyMug	Ugly Mug Coffeehouse	cycle	0	PRIV	WGT	10.11.3.65	26	ugly-mug.png		192.168.1.1	24
 Whiffies	Whiffies Fried Pies	lard	0	NONE	MR3201A	10.11.3.129	26	whiffies.jpg
-Noi	Pok Pok Noi	taxi	0	PRIV	WGT	10.11.3.193	26	noi.jpg		192.168.2.1	24
+DillPickle	the Dill Pickle Club	herb	0	PRIV	WGT	10.11.3.193	26	dpc.png		192.168.2.1	24
 Contrary	Cafe Contrary	doctorno	1	NONE	WGT	10.11.5.1	26	
 OpenSpace	Open Space Cafe	airy	0	PRIV	WGT	10.11.5.65	26	openspace.jpg		192.168.2.1	24
 Matt	MattIsMyName	pad	1	WAN	WGT	10.11.5.129	26	
