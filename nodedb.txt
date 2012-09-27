@@ -56,6 +56,7 @@ NewDeal	New Deal Cafe	dime	0	WAN	MR3201A	10.11.17.193	26
 Test2	Testing	poop	0	PRIV	WGT	10.11.18.1	26			192.168.2.1	24
 LionsEye	Lion's Eye Tavern	leo	1	WAN	WGT	10.11.18.65	26	lionseye.jpg
 Crema	Crema Bakery and Cafe	zane	0	WAN	MR3201A	10.11.18.129	26	crema.gif
+Westover	Westover Tower	mote	0	NONE	MR3201A	10.11.18.193	26
 Coalition	Coalition Brewing	lump	1	WAN	WGT	10.11.19.1	26	coalition.png
 SoekrisD	SoekrisCab D	net4521d	1	NONE	NET4521	10.11.19.193	26
 GooseHollow	Goose Hollow Inn	ruby	1	WAN	ALIX	10.11.20.1	24	goosehollow.jpg

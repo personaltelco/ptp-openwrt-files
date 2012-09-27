@@ -194,8 +194,8 @@ while(<FILES>) {
     chown($uid,$gid,$dest);
 }
 
-if ($device eq "ALIX" || $device eq "NET4521") {
-    # if alix or net4521, remove the vlan configuration from etc/config/network
+if ($device eq "ALIX" || $device eq "NET4521" || $device eq "MR3201A") {
+    # if alix or net4521 or mr3201a, remove the vlan configuration from etc/config/network
     system("mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n 'loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
 }
 if ($device eq "ALIX") {
