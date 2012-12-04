@@ -25,7 +25,7 @@ Cascadia	New Cascadia Traditional	muffin	0	PRIV	WGT	10.11.7.129	26	newcascadia.p
 FreshPot	The Fresh Pot	moose	0	NONE	ALIX	10.11.7.193	26	freshpot.gif		10.11.104.20	22
 BillyRays	Billy Ray's Neighborhood Dive	billyrays	1	NONE	WGT	10.11.8.1	26
 Hayduke	Sarah Beecroft's	meow	0	WAN	MR3201A	10.11.8.65	26		
-AnnaBannanasAlberta	Anna Bannanas Alberta	fat	1	WAN	WGT	10.11.8.129	26	anna_bannanas.gif
+StreetRoots	Street Roots	rag	0	WAN	MR3201A	10.11.8.129	26	streetroots.png
 YukonTavern	Yukon Tavern	yukon	1	NONE	WGT	10.11.8.193	26	
 CityClub	City Club of Portland	asa	1	NONE	WGT	10.11.9.1	26	cityclub.png
 BuffaloGap	Buffalo Gap Saloon and Eatery	dave	1	NONE	ALIX	10.11.9.65	26	buffalo_gap_logo.jpg
