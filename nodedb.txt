@@ -34,7 +34,7 @@ BarXV	Bar XV	fifteen	1	NONE	WGT	10.11.9.193	26	barxv.gif
 Industry	Palace of Industry	belch	1	NONE	WGT	10.11.10.1	26
 Butner	Butner Road	maw	0	PRIV	WGT	10.11.10.65	26			192.168.2.1	24
 MacleayPark	Christopher Chen	bird	0	PRIV	WGT	10.11.10.129	26			192.168.16.1	24
-KentonStation	Kenton Station	clark	1	NONE	WGT	10.11.10.193	26
+StreetRoots	Street Roots	pulp	0	WAN	MR3201A	10.11.10.193	26	streetroots.png
 LuckyLab	Lucky Labrador Brew Pub	fetch	1	WAN	ALIX	10.11.11.1	25	luckylab.png
 LuckyLabNW	Lucky Labrador Beer Hall	bowser	1	WAN	WGT	10.11.11.129	26	luckylab.png
 LuckyLabSW	Lucky Labrador Public House	spot	1	NONE	WGT	10.11.11.193	26	luckylab.png
