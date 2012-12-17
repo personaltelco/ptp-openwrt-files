@@ -58,6 +58,7 @@ LionsEye	Lion's Eye Tavern	leo	1	WAN	WGT	10.11.18.65	26	lionseye.jpg
 Crema	Crema Bakery and Cafe	zane	0	WAN	MR3201A	10.11.18.129	26	crema.gif
 Westover	Westover Tower	mote	0	NONE	MR3201A	10.11.18.193	26
 Coalition	Coalition Brewing	lump	1	WAN	WGT	10.11.19.1	26	coalition.png
+UglyMug	Ugly Mug Coffeehouse	yard	0	PRIV	WNDR3800	10.11.19.65	26	ugly-mug.png		192.168.1.1	24
 SoekrisD	SoekrisCab D	net4521d	1	NONE	NET4521	10.11.19.193	26
 GooseHollow	Goose Hollow Inn	ruby	1	WAN	ALIX	10.11.20.1	24	goosehollow.jpg
 Ash	Ash Street Listening Lounge	k	1	NONE	NET4521	10.11.22.1	24
