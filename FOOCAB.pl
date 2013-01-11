@@ -151,8 +151,16 @@ while(<NODEDB>) {
 	        $pubiface = "";
 		$privifaces = "eth0.1";
 	    }
+	} elsif ($device eq "WZR600DHP") {
+	    $waniface = "eth1";
+	    if ($bridge) {
+	    	$pubifaces = "eth0";
+		$privifaces = "";
+	    } else {
+	        $pubifaces = "";
+		$privifaces = "eth0";
+	    }
 	}
-
 	
 	print SED "s/PTP_WANIFACE_PTP/$waniface/g\n";
 	print SED "s/PTP_PRIVIFACES_PTP/$privifaces/g\n";
@@ -211,7 +219,6 @@ if ($device eq "ALIX" || $device eq "NET4521" || $device eq "MR3201A" || $device
 if ($device eq "WNDR3800") {
     # if wndr3800, append vlan/led config taken from default r34240
     open(NETWORKOUT,">>output/etc/config/network");
-    open(WIRELESSOUT,">output/etc/config/wireless");
     open(SYSTEMOUT,">>output/etc/config/system");
     print NETWORKOUT <<EOF;
 
@@ -268,6 +275,65 @@ config switch_port
 	option port		5
 	option led		2
 EOF
+    print SYSTEMOUT <<EOF;
+
+config led 'led_wan'
+	option name 'WAN LED (green)'
+	option sysfs 'wndr3700:green:wan'
+	option default '0'
+
+config led 'led_usb'
+	option name 'USB'
+	option sysfs 'wndr3700:green:usb'
+	option trigger 'usbdev'
+	option dev '1-1'
+	option interval '50'
+EOF
+}
+if ($device eq "WZR600DHP") {
+    # if wzr600dhp, append vlan/led config taken from default r35052
+    open(NETWORKOUT,">>output/etc/config/network");
+    open(SYSTEMOUT,">>output/etc/config/system");
+    print NETWORKOUT <<EOF;
+
+config switch
+        option name 'eth0'
+        option reset '1'
+        option enable_vlan '1'
+
+config switch_vlan
+        option device 'eth0'
+        option vlan '1'
+        option ports '0 1 2 3 4'
+EOF
+
+    print SYSTEMOUT <<EOF;
+
+config led 'led_diag'
+        option name 'DIAG'
+        option sysfs 'buffalo:red:diag'
+        option default '0'
+
+config led 'led_router'
+        option name 'ROUTER'
+        option sysfs 'buffalo:green:router'
+        option trigger 'netdev'
+        option dev 'eth1'
+        option mode 'link tx rx'
+
+config led 'led_usb'
+        option name 'USB'
+        option sysfs 'buffalo:green:usb'
+        option trigger 'usbdev'
+        option dev '1-1'
+        option interval '50'
+EOF
+
+    close(NETWORKOUT);
+    close(SYSTEMOUT);
+}
+if ($device eq "WNDR3800" || $device eq "WZR600DHP") {
+    open(WIRELESSOUT,">output/etc/config/wireless");
     print WIRELESSOUT <<EOF;
 config wifi-device  radio0
 	option type     mac80211
@@ -309,20 +375,7 @@ config wifi-iface
 	option ssid	www.personaltelco.net/notyet
 	option encryption none
 EOF
-    print SYSTEMOUT <<EOF;
-
-config led 'led_wan'
-	option name 'WAN LED (green)'
-	option sysfs 'wndr3700:green:wan'
-	option default '0'
-
-config led 'led_usb'
-	option name 'USB'
-	option sysfs 'wndr3700:green:usb'
-	option trigger 'usbdev'
-	option dev '1-1'
-	option interval '50'
-EOF
+    close(WIRELESSOUT);
 }
 if ($device eq "ALIX") {
     # delete the etc/config/wireless
