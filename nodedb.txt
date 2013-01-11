@@ -52,7 +52,7 @@ Brunner	Ted Brunner	glow	1	WAN	WGT	10.11.16.129	26
 Tron	Tony Atkins	bug	1	WAN	WGT	10.11.16.193	26
 Tibbetts	Janet Senior	rock	0	PRIV	WGT	10.11.17.1	26			192.168.2.1	24
 Shifter	Shafer Stockton	sink	1	WAN	WGT	10.11.17.65	26
-Test	Testing	pewp	1	NONE	WGT	10.11.17.129	26
+Test	Testing	pewp	1	NONE	ALIX	10.11.17.129	26
 NewDeal	New Deal Cafe	dime	0	WAN	MR3201A	10.11.17.193	26
 Test2	Testing	poop	0	PRIV	WGT	10.11.18.1	26			192.168.2.1	24
 LionsEye	Lion's Eye Tavern	leo	0	WAN	WGT	10.11.18.65	26	lionseye.jpg		192.168.2.1	24
