@@ -4,7 +4,7 @@ Rerun	Rerun	rerun	0	PRIV	WGT	10.11.0.65	26	RERUN-Logo.png		192.168.1.1	24
 Slabtown	Slabtown	slabtown	1	WAN	WGT	10.11.0.129	26	slabtown.jpg	
 CedarHillsCrossing	Cedar Hills Crossing	filth	1	NONE	ALIX	10.11.1.1	24	cedarhillscrossing-logo.gif
 BasementPub	Basement Pub	hades	1	NONE	ALIX	10.11.2.1	26	local1028.png
-CrowBar	Crow Bar	loki	1	WAN	WGT	10.11.2.65	26	
+CrowBar	Crow Bar	loki	1	WAN	WGT	10.11.2.65	26	crowbar.png
 Soapbox	Soapbox Theory and Screw Loose Studios	soapbox	0	PRIV	WGT	10.11.2.129	26			192.168.1.1	24
 StaccatoGelato	Staccato Gelato	glace	1	WAN	WGT	10.11.2.193	26	Staccato_Logo.png
 Smart	Smart	smart	1	NONE	MR3201A	10.11.3.1	26
@@ -40,7 +40,7 @@ LuckyLabNW	Lucky Labrador Beer Hall	bowser	1	WAN	WGT	10.11.11.129	26	luckylab.pn
 LuckyLabSW	Lucky Labrador Public House	spot	1	NONE	WGT	10.11.11.193	26	luckylab.png
 PioneerSquare	Pioneer Courthouse Square	frack	1	NONE	WGT	10.11.12.1	24	easystreet.gif
 Shack	Shack	shack	1	NONE	SOEKRIS	10.11.13.1	24	
-Testing	Testing	crank	1	PRIV	WNDR3800	10.11.14.1	26	
+CrowBar	Crow Bar	crank	1	WAN	WZR600DHP	10.11.14.1	26	crowbar.png	
 Testing	Testing	drank	1	NONE	WNDR3800	10.11.14.65	26	
 LuckyLabNorth	Lucky Labrador Overlook Tap Room	woof	1	WAN	WNDR3800	10.11.15.1	26	taproom.jpg
 FunHouse	Funhouse Lounge	trip	0	WAN	WGT	10.11.15.65	26	funhouse.jpg		192.168.1.1	24
