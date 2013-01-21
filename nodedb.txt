@@ -4,7 +4,7 @@ Rerun	Rerun	rerun	0	PRIV	WGT	10.11.0.65	26	RERUN-Logo.png		192.168.1.1	24
 Slabtown	Slabtown	slabtown	1	WAN	WGT	10.11.0.129	26	slabtown.jpg	
 CedarHillsCrossing	Cedar Hills Crossing	filth	1	NONE	ALIX	10.11.1.1	24	cedarhillscrossing-logo.gif
 BasementPub	Basement Pub	hades	1	NONE	ALIX	10.11.2.1	26	local1028.png
-CrowBar	Crow Bar	loki	1	WAN	WGT	10.11.2.65	26	crowbar.png
+CrowBar	Crow Bar	loki	1	WAN	WZR600DHP	10.11.2.65	26	crowbar.png
 Soapbox	Soapbox Theory and Screw Loose Studios	soapbox	0	PRIV	WGT	10.11.2.129	26			192.168.1.1	24
 StaccatoGelato	Staccato Gelato	glace	1	WAN	WGT	10.11.2.193	26	Staccato_Logo.png
 Smart	Smart	smart	1	NONE	MR3201A	10.11.3.1	26
