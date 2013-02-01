@@ -69,7 +69,7 @@ SoekrisF	SoekrisCab F	net4501a	0	NONE	ALIX	10.11.24.65	26			192.168.2.1	24
 BobWhite	Bob White Theatre	quail	1	WAN	ALIX	10.11.28.1	22	bobwhite.jpg
 WorldCup	World Cup Coffee and Tea	fut	1	NONE	ALIX	10.11.33.1	24	worldcup.gif
 Labarre	LaBarre Machine Works	metal	1	WAN	ALIX	10.11.36.1	24	labarre.jpg
-ArborLodge	Arbor Lodge Park Community Network	suds	1	NONE	ALIX	10.11.37.1	24	
+ArborLodge	Arbor Lodge Park Community Network	suds	1	NONE	ALIX	10.11.37.1	24	integra-logo.png	
 Ecotrust	Ecotrust	orb	1	NONE	ALIX	10.11.38.1	24	ecotrust.png
 BeulahLand	Beulahland Coffee and Alehouse	ouch	1	WAN	ALIX	10.11.40.1	22	beulahland.png
 Westover	Westover Tower	pie	1	NONE	ALIX	10.11.51.1	24	
@@ -82,4 +82,4 @@ Testing	Testing MR3201A	test	0	WAN	MR3201A	10.11.64.65	26
 FirstUnitarian	First Unitarian Church	clara	1	NONE	NET4521	10.11.66.1	23	
 Klickitat	Russell Senior	hoop	0	NONE	ALIX	10.11.80.1	22		50	192.168.0.1	24
 Hawthorne	H.I. Portland Hawthorne Hostel	bow	1	NONE	ALIX	10.11.100.1	22	portlandhostel.gif
-Mississippi	Historic Mississippi Community Network	silt	1	NONE	ALIX	10.11.104.1	22		256	mmt-logo.png
+Mississippi	Historic Mississippi Community Network	silt	1	NONE	ALIX	10.11.104.1	22	mmt-logo.png	256
