@@ -34,7 +34,6 @@ BarXV	Bar XV	fifteen	1	NONE	WGT	10.11.9.193	26	barxv.gif
 Industry	Palace of Industry	belch	1	NONE	WGT	10.11.10.1	26
 Butner	Butner Road	maw	0	PRIV	WGT	10.11.10.65	26			192.168.2.1	24
 MacleayPark	Christopher Chen	bird	0	PRIV	WGT	10.11.10.129	26			192.168.16.1	24
-StreetRoots	Street Roots	pulp	0	WAN	MR3201A	10.11.10.193	26	streetroots.png
 LuckyLab	Lucky Labrador Brew Pub	fetch	1	WAN	ALIX	10.11.11.1	25	luckylab.png
 LuckyLabNW	Lucky Labrador Beer Hall	bowser	1	WAN	WZR600DHP	10.11.11.129	26	luckylab.png
 LuckyLabSW	Lucky Labrador Public House	spot	1	NONE	WZR600DHP	10.11.11.193	26	luckylab.png
@@ -67,6 +66,7 @@ TB	Quinn Residence	widget	1	NONE	WGT	10.11.23.1	24
 SoekrisE	SoekrisCab E	net4521e	1	NONE	NET4521	10.11.24.1	26
 SoekrisF	SoekrisCab F	net4501a	0	NONE	ALIX	10.11.24.65	26			192.168.2.1	24
 PlayDay	Mesh Play Day 2013-02-09	yeast	0	NONE	WZR600DHP	10.11.25.1	24			192.168.10.1	24
+MicroHAMS	Ward Cunningham's Federated Wiki Demo	pulp	0	NONE	MR3201A	10.11.26.1	24	fedwiki.png
 BobWhite	Bob White Theatre	quail	1	WAN	ALIX	10.11.28.1	22	bobwhite.jpg
 WorldCup	World Cup Coffee and Tea	fut	1	NONE	ALIX	10.11.33.1	24	worldcup.gif
 Labarre	LaBarre Machine Works	metal	1	WAN	ALIX	10.11.36.1	24	labarre.jpg
