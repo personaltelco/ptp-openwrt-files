@@ -3,10 +3,15 @@
 # Special thanks to bittorf wireless ))
 START=65
 
+PIDFILE=/var/run/olsr6d.pid
+LOCKFILE=/var/run/olsrd-ipv6.lock
+
 start() {
-	olsrd -f /etc/olsr6d.conf -nofork < /dev/null > /dev/null &
+	olsrd -f /etc/olsr6d.conf -pidfile $PIDFILE -nofork < /dev/null > /dev/null &
 }
 
 stop() {
-	killall olsrd
+	kill $(cat $PIDFILE)
+	rm -f $PIDFILE
+	rm -f $LOCKFILE
 }
