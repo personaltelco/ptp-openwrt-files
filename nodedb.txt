@@ -61,6 +61,7 @@ Coalition	Coalition Brewing	lump	1	WAN	WGT	10.11.19.1	26	coalition.png
 UglyMug	Ugly Mug Coffeehouse	yard	0	PRIV	WNDR3800	10.11.19.65	26	ugly-mug.png		192.168.1.1	24
 SoekrisD	SoekrisCab D	net4521d	1	NONE	NET4521	10.11.19.193	26
 GooseHollow	Goose Hollow Inn	ruby	1	WAN	ALIX	10.11.20.1	24	goosehollow.jpg
+RowFood	The Row Food Cart Pod	boat	0	PRIV	WZR600DHP	10.11.21.1	24	therow.png		192.168.2.1	24
 Quinn	Quinn Listening Lounge	k	0	PRIV	WZR600DHP	10.11.22.1	24			192.168.2.1	24
 TB	Quinn Residence	widget	1	NONE	WGT	10.11.23.1	24
 SoekrisE	SoekrisCab E	net4521e	1	NONE	NET4521	10.11.24.1	26
