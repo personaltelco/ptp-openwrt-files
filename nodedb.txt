@@ -13,11 +13,11 @@ Whiffies	Whiffies Fried Pies	lard	0	NONE	MR3201A	10.11.3.129	26	whiffies.jpg
 DillPickle	the Dill Pickle Club	herb	0	PRIV	WGT	10.11.3.193	26	dpc.png		192.168.2.1	24
 Contrary	Cafe Contrary	doctorno	1	NONE	WGT	10.11.5.1	26	
 OpenSpace	Open Space Cafe	airy	0	PRIV	WGT	10.11.5.65	26	openspace.jpg		192.168.2.1	24
-Matt	MattIsMyName	pad	1	WAN	WGT	10.11.5.129	26	
-Jeff	Jefferson Smith	bus	0	WAN	MR3201A	10.11.5.193	26
+Matt	MattIsMyName	pad	1	WAN	WZR600DHP	10.11.5.129	26	
+Lutz	Lutz Tavern	jump	1	WAN	WZR600DHP	10.11.5.193	26	lutz.png
 AnnaBannanas	Anna Bannanas Coffee House	frick	1	NONE	WGT	10.11.6.1	26	anna_bannanas.gif
 Suzette	Suzette Creperie	vital	0	PRIV	WGT	10.11.6.65	26	suzette.png		192.168.1.1	24
-Goldrush	Goldrush Coffee Bar	nugget	1	NONE	WGT	10.11.6.129	26
+SunnysidePark	Sunnyside Park	keep	0	PRIV	WZR600DHP	10.11.6.129	26
 Beaterville	Beaterville Cafe	wreck	0	NONE	WGT	10.11.6.193	26			192.168.2.1	24
 GreenNoise	Green Noise Records	verde	0	WAN	WGT	10.11.7.1	26	green-noise.jpg		192.168.2.1	24
 Nostro	Nostro Caffe 	fuzz	1	WAN	WGT	10.11.7.65	26	nostro_caffe.jpg
@@ -61,7 +61,7 @@ Coalition	Coalition Brewing	lump	1	WAN	WGT	10.11.19.1	26	coalition.png
 UglyMug	Ugly Mug Coffeehouse	yard	0	PRIV	WNDR3800	10.11.19.65	26	ugly-mug.png		192.168.1.1	24
 SoekrisD	SoekrisCab D	net4521d	1	NONE	NET4521	10.11.19.193	26
 GooseHollow	Goose Hollow Inn	ruby	1	WAN	ALIX	10.11.20.1	24	goosehollow.jpg
-RowFood	The Row Food Cart Pod	boat	0	PRIV	WZR600DHP	10.11.21.1	24	therow.png		192.168.2.1	24
+CartRow	The Cart Row Food Pod	boat	0	BOTH	WZR600DHP	10.11.21.1	24	therow.png		192.168.2.1	24
 Quinn	Quinn Listening Lounge	k	0	PRIV	WZR600DHP	10.11.22.1	24			192.168.2.1	24
 TB	Quinn Residence	widget	1	NONE	WGT	10.11.23.1	24
 SoekrisE	SoekrisCab E	net4521e	1	NONE	NET4521	10.11.24.1	26
