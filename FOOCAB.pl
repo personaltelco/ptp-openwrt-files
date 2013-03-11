@@ -297,14 +297,14 @@ if ($device eq "WZR600DHP") {
     print NETWORKOUT <<EOF;
 
 config switch
-        option name 'eth0'
-        option reset '1'
-        option enable_vlan '1'
-
+	option reset '1'
+	option enable_vlan '1'
+	option name 'switch0'   
+ 
 config switch_vlan
-        option device 'eth0'
-        option vlan '1'
-        option ports '0 1 2 3 4'
+	option vlan '1'
+	option ports '0 1 2 3 4'
+	option device 'switch0' 
 EOF
 
     print SYSTEMOUT <<EOF;
