@@ -18,7 +18,7 @@ Lutz	Lutz Tavern	jump	1	WAN	WZR600DHP	10.11.5.193	26	lutz.png
 AnnaBannanas	Anna Bannanas Coffee House	frick	1	NONE	WGT	10.11.6.1	26	anna_bannanas.gif
 Suzette	Suzette Creperie	vital	0	PRIV	WGT	10.11.6.65	26	suzette.png		192.168.1.1	24
 SunnysidePark	Sunnyside Park	keep	0	PRIV	WZR600DHP	10.11.6.129	26			192.168.2.1	24
-Beaterville	Beaterville Cafe	wreck	0	NONE	WGT	10.11.6.193	26			192.168.2.1	24
+Beaterville	Beaterville Cafe	wreck	0	NONE	WZR600DHP	10.11.6.193	26			192.168.2.1	24
 GreenNoise	Green Noise Records	verde	0	WAN	WGT	10.11.7.1	26	green-noise.jpg		192.168.2.1	24
 Nostro	Nostro Caffe 	fuzz	1	WAN	WGT	10.11.7.65	26	nostro_caffe.jpg
 Cascadia	New Cascadia Traditional	muffin	0	PRIV	WGT	10.11.7.129	26	newcascadia.png		192.168.2.1	24
