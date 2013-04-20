@@ -3,10 +3,15 @@
 # Special thanks to bittorf wireless ))
 START=65
 
+PIDFILE=/var/run/olsrd.pid
+LOCKFILE=/var/run/olsrd-ipv4.lock
+
 start() {
-	olsrd -f /etc/olsrd.conf -nofork < /dev/null > /dev/null &
+	olsrd -f /etc/olsrd.conf -pidfile $PIDFILE -nofork < /dev/null > /dev/null &
 }
 
 stop() {
-	killall olsrd
+	kill $(cat $PIDFILE)
+	rm -f $PIDFILE
+	rm -f $LOCKFILE
 }

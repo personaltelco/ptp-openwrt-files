@@ -5,9 +5,13 @@ use NetAddr::IP::Lite;
 
 my $host;
 my $node;
+my $wimax = 0;
 
 $result = GetOptions ("host=s" => \$host,
-		      "node=s" => \$node);
+		      "node=s" => \$node,
+		      "wimax" => \$wimax);
+
+print "wimax = $wimax\n";
 
 open(NODEDB,"nodedb.txt");
 open(SED,">foocab.sed");
@@ -138,6 +142,24 @@ while(<NODEDB>) {
 	    $pubifaces = "";
 	    $privifaces = "";
     	    print SED "s/PTP_ARCH_PTP/atheros/g\n";
+	} elsif ($device eq "WNDR3800") {
+	    $waniface = "eth1";
+	    if ($bridge) {
+	        $pubifaces = "eth0.1";
+		$privifaces = "";
+	    } else {
+	        $pubiface = "";
+		$privifaces = "eth0.1";
+	    }
+	} elsif ($device eq "WZR600DHP") {
+	    $waniface = "eth1";
+	    if ($bridge) {
+	    	$pubifaces = "eth0";
+		$privifaces = "";
+	    } else {
+	        $pubifaces = "";
+		$privifaces = "eth0";
+	    }
 	}
 	
 	print SED "s/PTP_WANIFACE_PTP/$waniface/g\n";
@@ -190,9 +212,170 @@ while(<FILES>) {
     chown($uid,$gid,$dest);
 }
 
-if ($device eq "ALIX" || $device eq "NET4521") {
-    # if alix or net4521, remove the vlan configuration from etc/config/network
+if ($device eq "ALIX" || $device eq "NET4521" || $device eq "MR3201A" || $device eq "WNDR3800" || $device eq "WZR600DHP") {
+    # if alix or net4521 or mr3201a, remove the vlan configuration from etc/config/network
     system("mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n 'loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
+}
+if ($device eq "WNDR3800") {
+    # if wndr3800, append vlan/led config taken from default r34240
+    open(NETWORKOUT,">>output/etc/config/network");
+    open(SYSTEMOUT,">>output/etc/config/system");
+    print NETWORKOUT <<EOF;
+
+config switch
+	option name	rtl8366s
+	option reset	1
+	option enable_vlan 1
+	# Blinkrate: 0=43ms; 1=84ms; 2=120ms; 3=170ms; 4=340ms; 5=670ms
+	option blinkrate	2
+
+config switch_vlan
+	option device	rtl8366s
+	option vlan 	1
+	option ports	"0 1 2 3 5t"
+
+config switch_port
+	# Port 1 controls the GREEN configuration of LEDs for
+	# the switch and the section does not correspond to a real
+	# switch port.
+	#
+	# 0=LED off; 1=Collision/FDX; 2=Link/activity; 3=1000 Mb/s;
+	# 4=100 Mb/s; 5=10 Mb/s; 6=1000 Mb/s+activity; 7=100 Mb/s+activity;
+	# 8=10 Mb/s+activity; 9=10/100 Mb/s+activity; 10: Fiber;
+	# 11: Fault; 12: Link/activity(tx); 13: Link/activity(rx);
+	# 14: Link (master); 15: separate register
+
+	option device		rtl8366s
+	option port		1
+	option led		6
+
+config switch_port
+	# Port 2 controls the ORANGE configuration of LEDs for
+	# the switch and the section does not correspond to a real
+	# switch port.
+	#
+	# See the key above for switch port 1 for the meaning of the
+	# 'led' setting below.
+	
+	option device		rtl8366s
+	option port		2
+	option led		9
+
+config switch_port
+	# Port 5 controls the configuration of the WAN LED and the
+	# section does not correspond to a real switch port.
+	#
+	# To toggle the use of green or orange LEDs for the WAN port,
+	# see the LED setting for wndr3700:green:wan in /etc/config/system.
+	#
+	# See the key above for switch port 1 for the meaning of the
+	# 'led' setting below.
+
+	option device		rtl8366s
+	option port		5
+	option led		2
+EOF
+    print SYSTEMOUT <<EOF;
+
+config led 'led_wan'
+	option name 'WAN LED (green)'
+	option sysfs 'wndr3700:green:wan'
+	option default '0'
+
+config led 'led_usb'
+	option name 'USB'
+	option sysfs 'wndr3700:green:usb'
+	option trigger 'usbdev'
+	option dev '1-1'
+	option interval '50'
+EOF
+}
+if ($device eq "WZR600DHP") {
+    # if wzr600dhp, append vlan/led config taken from default r35052
+    open(NETWORKOUT,">>output/etc/config/network");
+    open(SYSTEMOUT,">>output/etc/config/system");
+    print NETWORKOUT <<EOF;
+
+config switch
+	option reset '1'
+	option enable_vlan '1'
+	option name 'switch0'   
+ 
+config switch_vlan
+	option vlan '1'
+	option ports '0 1 2 3 4'
+	option device 'switch0' 
+EOF
+
+    print SYSTEMOUT <<EOF;
+
+config led 'led_diag'
+        option name 'DIAG'
+        option sysfs 'buffalo:red:diag'
+        option default '0'
+
+config led 'led_router'
+        option name 'ROUTER'
+        option sysfs 'buffalo:green:router'
+        option trigger 'netdev'
+        option dev 'eth1'
+        option mode 'link tx rx'
+
+config led 'led_usb'
+        option name 'USB'
+        option sysfs 'buffalo:green:usb'
+        option trigger 'usbdev'
+        option dev '1-1'
+        option interval '50'
+EOF
+
+    close(NETWORKOUT);
+    close(SYSTEMOUT);
+}
+if ($device eq "WNDR3800" || $device eq "WZR600DHP") {
+    open(WIRELESSOUT,">output/etc/config/wireless");
+    print WIRELESSOUT <<EOF;
+config wifi-device  radio0
+	option type     mac80211
+	option channel  11
+	option hwmode	11ng
+	option path	'pci0000:00/0000:00:11.0'
+	option htmode	HT20
+	list ht_capab	SHORT-GI-40
+	list ht_capab	TX-STBC
+	list ht_capab	RX-STBC1
+	list ht_capab	DSSS_CCK-40
+	# REMOVE THIS LINE TO ENABLE WIFI:
+	#option disabled 1
+
+config wifi-iface
+	option device   radio0
+	option network	pub  
+	option mode     ap
+	option ssid     www.personaltelco.net/notyet
+	option encryption none
+
+config wifi-device  radio1
+	option type     mac80211
+	option channel  36
+	option hwmode	11na
+	option path	'pci0000:00/0000:00:12.0'
+	option htmode	HT20
+	list ht_capab	SHORT-GI-40
+	list ht_capab	TX-STBC
+	list ht_capab	RX-STBC1
+	list ht_capab	DSSS_CCK-40
+	# REMOVE THIS LINE TO ENABLE WIFI:
+	#option disabled 1
+
+config wifi-iface
+	option device   radio1
+	option network  pub
+	option mode     ap
+	option ssid	www.personaltelco.net/notyet
+	option encryption none
+EOF
+    close(WIRELESSOUT);
 }
 if ($device eq "ALIX") {
     # delete the etc/config/wireless
@@ -345,6 +528,15 @@ start() {
 	print CRONTAB "0 0 * * *	/sbin/hwclock -w -u\n";
 	close(CRONTAB);
 }
+
+if($wimax) {
+	open(CRONTAB,">>output/etc/crontabs/root");
+	print CRONTAB "*/5 * * * *     /usr/bin/motorola.sh > /dev/null 2>&1\n";
+	close(CRONTAB);
+
+	system("cp -a wimax/* output/");
+}
+
 
 open(WWW,"find www -type f | grep -v nodes |");
 
