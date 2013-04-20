@@ -23,7 +23,7 @@ GreenNoise	Green Noise Records	verde	0	WAN	WGT	10.11.7.1	26	green-noise.jpg		192
 Nostro	Nostro Caffe 	fuzz	1	WAN	WGT	10.11.7.65	26	nostro_caffe.jpg
 Cascadia	New Cascadia Traditional	muffin	0	PRIV	WGT	10.11.7.129	26	newcascadia.png		192.168.2.1	24
 FreshPot	The Fresh Pot	moose	1	NONE	ALIX	10.11.7.193	26	freshpot.gif
-BillyRays	Billy Ray's Neighborhood Dive	billyrays	1	NONE	WGT	10.11.8.1	26
+BillyRays	Billy Ray's Neighborhood Dive	billyrays	1	NONE	WZR600DHP	10.11.8.1	26
 Hayduke	Sarah Beecroft's	meow	0	WAN	MR3201A	10.11.8.65	26		
 StreetRoots	Street Roots	rag	0	PRIV	WZR600DHP	10.11.8.129	26	streetroots.png		192.168.2.1	24
 YukonTavern	Yukon Tavern	yukon	1	NONE	WGT	10.11.8.193	26	
