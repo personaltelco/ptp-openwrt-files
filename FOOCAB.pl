@@ -151,7 +151,7 @@ while(<NODEDB>) {
 	        $pubiface = "";
 		$privifaces = "eth0.1";
 	    }
-	} elsif ($device eq "WZR600DHP") {
+	} elsif ($device eq "WZR600DHP" || $device eq "AIRROUTER") {
 	    $waniface = "eth1";
 	    if ($bridge) {
 	    	$pubifaces = "eth0";
@@ -212,7 +212,7 @@ while(<FILES>) {
     chown($uid,$gid,$dest);
 }
 
-if ($device eq "ALIX" || $device eq "NET4521" || $device eq "MR3201A" || $device eq "WNDR3800" || $device eq "WZR600DHP") {
+if ($device eq "ALIX" || $device eq "NET4521" || $device eq "MR3201A" || $device eq "WNDR3800" || $device eq "WZR600DHP" || $device eq "AIRROUTER") {
     # if alix or net4521 or mr3201a, remove the vlan configuration from etc/config/network
     system("mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n 'loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
 }
@@ -332,6 +332,51 @@ EOF
     close(NETWORKOUT);
     close(SYSTEMOUT);
 }
+
+if ($device eq "AIRROUTER") {
+    # if airrouter, append vlan config taken from r37493
+    open(NETWORKOUT,">>output/etc/config/network");
+    open(WIRELESSOUT,">output/etc/config/wireless");
+
+    print NETWORKOUT <<EOF;
+
+config switch
+	option name 'switch0'
+	option reset '1'
+	option enable_vlan '1'
+			
+config switch_vlan
+	option device 'switch0'
+	option vlan '1'
+	option ports '0 1 2 3 4'
+EOF
+
+    print WIRELESSOUT <<EOF;
+config wifi-device  radio0
+	option type     mac80211
+	option channel  1
+	option hwmode   11ng
+	option path     'pci0000:00/0000:00:00.0'
+	option htmode   HT20
+	list ht_capab   SHORT-GI-40
+	list ht_capab   TX-STBC
+	list ht_capab   RX-STBC1
+	list ht_capab   DSSS_CCK-40
+	# REMOVE THIS LINE TO ENABLE WIFI:
+	# option disabled 1
+       
+config wifi-iface
+	option device   radio0
+	option network  pub  
+	option mode     ap
+	option ssid     www.personaltelco.net/notyet
+	option encryption none
+EOF
+
+    close(NETWORKOUT);
+    close(WIRELESSOUT);
+}
+
 if ($device eq "WNDR3800" || $device eq "WZR600DHP") {
     open(WIRELESSOUT,">output/etc/config/wireless");
     print WIRELESSOUT <<EOF;
