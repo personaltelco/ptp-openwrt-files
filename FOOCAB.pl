@@ -151,6 +151,15 @@ while(<NODEDB>) {
 	        $pubiface = "";
 		$privifaces = "eth0.1";
 	    }
+	} elsif ($device eq "WDR3600") {
+	    $waniface = "eth0.2";
+	    if ($bridge) {
+	        $pubifaces = "eth0.1";
+		$privifaces = "";
+	    } else {
+	        $pubiface = "";
+		$privifaces = "eth0.1";
+	    }
 	} elsif ($device eq "WZR600DHP" || $device eq "AIRROUTER") {
 	    $waniface = "eth1";
 	    if ($bridge) {
@@ -333,6 +342,102 @@ EOF
     close(SYSTEMOUT);
 }
 
+if ($device eq "WDR3600") {
+    open(NETWORKOUT,">>output/etc/config/network");
+    open(WIRELESSOUT,">output/etc/config/wireless");
+    open(SYSTEMOUT,">>output/etc/config/system");
+
+    print NETWORKOUT <<EOF;
+
+config switch
+        option name 'switch0'
+        option reset '1'
+        option enable_vlan '1'
+
+config switch_vlan
+        option device 'switch0'
+        option vlan '1'
+        option ports '0t 2 3 4 5'
+
+config switch_vlan
+        option device 'switch0'
+        option vlan '2'
+        option ports '0t 1'
+EOF
+
+    print WIRELESSOUT <<EOF;
+config wifi-device  radio0
+        option type     mac80211
+        option channel  11
+        option hwmode   11ng
+        option path     'platform/ar934x_wmac'
+        option htmode   HT20
+        list ht_capab   LDPC
+        list ht_capab   SHORT-GI-20
+        list ht_capab   SHORT-GI-40
+        list ht_capab   TX-STBC
+        list ht_capab   RX-STBC1
+        list ht_capab   DSSS_CCK-40
+        # REMOVE THIS LINE TO ENABLE WIFI:
+        option disabled 1
+
+config wifi-iface
+        option device   radio0
+        option network  pub
+        option mode     ap
+        option ssid     www.personaltelco.net/notyet
+        option encryption none
+
+config wifi-device  radio1
+        option type     mac80211
+        option channel  36
+        option hwmode   11na
+        option path     'pci0000:00/0000:00:00.0'
+        option htmode   HT20
+        list ht_capab   LDPC
+        list ht_capab   SHORT-GI-20
+        list ht_capab   SHORT-GI-40
+        list ht_capab   TX-STBC
+        list ht_capab   RX-STBC1
+        list ht_capab   DSSS_CCK-40
+        # REMOVE THIS LINE TO ENABLE WIFI:
+        option disabled 1
+
+config wifi-iface
+        option device   radio1
+        option network  pub
+        option mode     ap
+        option ssid	www.personaltelco.net/notyet
+        option encryption none
+EOF
+
+    print SYSTEMOUT <<EOF;
+config led 'led_usb1'
+        option name 'USB1'
+        option sysfs 'tp-link:green:usb1'
+        option trigger 'usbdev'
+        option dev '1-1.1'
+        option interval '50'
+
+config led 'led_usb2'
+        option name 'USB2'
+        option sysfs 'tp-link:green:usb2'
+        option trigger 'usbdev'
+        option dev '1-1.2'
+        option interval '50'
+
+config led 'led_wlan2g'
+        option name 'WLAN2G'
+        option sysfs 'tp-link:blue:wlan2g'
+        option trigger 'phy0tpt'
+
+EOF
+
+    close(SYSTEMOUT);
+    close(WIRELESSOUT);
+    close(NETWORKOUT);
+}
+
 if ($device eq "AIRROUTER") {
     # if airrouter, append vlan config taken from r37493
     open(NETWORKOUT,">>output/etc/config/network");
@@ -422,6 +527,7 @@ config wifi-iface
 EOF
     close(WIRELESSOUT);
 }
+
 if ($device eq "ALIX") {
     # delete the etc/config/wireless
     system("rm output/etc/config/wireless");
