@@ -582,6 +582,26 @@ if($wimax) {
 	system("cp -a wimax/* output/");
 }
 
+# fetch_image.sh script
+
+if($device eq "ALIX") { $imagename = "x86/openwrt-x86-alix2-combined-squashfs.img"; }
+elsif($device eq "NET4521" || $device eq "NET4826") { $imagename = "x86/openwrt-x86-generic-combined-squashfs.img"; }
+elsif($device eq "MR3201A") { $imagename = "atheros/openwrt-atheros-combined.squashfs.img"; }
+elsif($device eq "WNDR3800") { $imagename = "ar71xx/openwrt-ar71xx-generic-wndr3800-squashfs-sysupgrade.bin"; }
+elsif($device eq "WZR600DHP") { $imagename = "ar71xx/openwrt-ar71xx-generic-wzr-600dhp-squashfs-sysupgrade.bin"; }
+elsif($device eq "WDR3600") { $imagename = "ar71xx/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin"; }
+elsif($device eq "WGT") { $imagename = "brcm47xx/openwrt-brcm47xx-squashfs.trx"; }
+elsif($device eq "AIRROUTER") { $imagename = "ar71xx/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin"; }
+else { $imagename = ""; }
+
+open(FIS,">output/usr/bin/fetch_image.sh");
+print FIS <<EOF;
+#!/bin/sh
+cd /tmp
+scp russell\@iris.personaltelco.net:src/openwrt/bin/$imagename /tmp/
+EOF
+system("chmod 755 output/usr/bin/fetch_image.sh");
+
 
 open(WWW,"find www -type f | grep -v nodes |");
 
