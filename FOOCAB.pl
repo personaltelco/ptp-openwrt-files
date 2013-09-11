@@ -221,7 +221,7 @@ while(<FILES>) {
     chown($uid,$gid,$dest);
 }
 
-if ($device eq "ALIX" || $device eq "NET4521" || $device eq "MR3201A" || $device eq "WNDR3800" || $device eq "WZR600DHP" || $device eq "AIRROUTER") {
+if ($device eq "ALIX" || $device eq "NET4521" || $device eq "MR3201A" || $device eq "WNDR3800" || $device eq "WZR600DHP" || $device eq "AIRROUTER" || $device eq "WDR3600") {
     # if alix or net4521 or mr3201a, remove the vlan configuration from etc/config/network
     system("mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n 'loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig");
 }
@@ -379,7 +379,7 @@ config wifi-device  radio0
         list ht_capab   RX-STBC1
         list ht_capab   DSSS_CCK-40
         # REMOVE THIS LINE TO ENABLE WIFI:
-        option disabled 1
+        # option disabled 1
 
 config wifi-iface
         option device   radio0
@@ -401,7 +401,7 @@ config wifi-device  radio1
         list ht_capab   RX-STBC1
         list ht_capab   DSSS_CCK-40
         # REMOVE THIS LINE TO ENABLE WIFI:
-        option disabled 1
+        # option disabled 1
 
 config wifi-iface
         option device   radio1
@@ -412,6 +412,7 @@ config wifi-iface
 EOF
 
     print SYSTEMOUT <<EOF;
+
 config led 'led_usb1'
         option name 'USB1'
         option sysfs 'tp-link:green:usb1'
