@@ -11,7 +11,7 @@ Dumb	Dumb	dolt	0	BOTH	AIRROUTER	10.11.2.193	26			192.168.2.1	24
 Smart	Smart	smart	0	BOTH	WZR600DHP	10.11.3.1	26	kluglogo.png		192.168.11.1	24
 UglyMug	Ugly Mug Coffeehouse	cycle	0	BOTH	WNDR3800	10.11.3.65	26	ugly-mug.png		192.168.1.1	24
 Whiffies	Whiffies Fried Pies	lard	0	NONE	MR3201A	10.11.3.129	26	whiffies.jpg
-DillPickle	the Dill Pickle Club	herb	0	PRIV	WZR600DHP	10.11.3.193	26	dpc.png		192.168.2.1	24
+Know	Know Your City	herb	0	BOTH	WZR600DHP	10.11.3.193	26	kyc.png		192.168.2.1	24
 Contrary	Cafe Contrary	doctorno	1	NONE	WGT	10.11.5.1	26	
 GreatScott	Connor Scott	airy	0	BOTH	AIRROUTER	10.11.5.65	26			192.168.2.1	24
 Matt	MattIsMyName	pad	1	WAN	WZR600DHP	10.11.5.129	26	
