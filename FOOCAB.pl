@@ -319,23 +319,23 @@ EOF
     print SYSTEMOUT <<EOF;
 
 config led 'led_diag'
-        option name 'DIAG'
-        option sysfs 'buffalo:red:diag'
-        option default '0'
+	option name 'DIAG'
+	option sysfs 'buffalo:red:diag'
+	option default '0'
 
 config led 'led_router'
-        option name 'ROUTER'
-        option sysfs 'buffalo:green:router'
-        option trigger 'netdev'
-        option dev 'eth1'
-        option mode 'link tx rx'
+	option name 'ROUTER'
+	option sysfs 'buffalo:green:router'
+	option trigger 'netdev'
+	option dev 'eth1'
+	option mode 'link tx rx'
 
 config led 'led_usb'
-        option name 'USB'
-        option sysfs 'buffalo:green:usb'
-        option trigger 'usbdev'
-        option dev '1-1'
-        option interval '50'
+	option name 'USB'
+	option sysfs 'buffalo:green:usb'
+	option trigger 'usbdev'
+	option dev '1-1'
+	option interval '50'
 EOF
 
     close(NETWORKOUT);
