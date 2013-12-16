@@ -21,7 +21,7 @@ Suzette	Suzette Creperie	vital	0	PRIV	WGT	10.11.6.65	26	suzette.png		192.168.1.1
 SunnysidePark	Sunnyside Park	keep	0	PRIV	WZR600DHP	10.11.6.129	26			192.168.2.1	24
 Beaterville	Beaterville Cafe	wreck	0	NONE	WZR600DHP	10.11.6.193	26			192.168.2.1	24
 GreenNoise	Green Noise Records	verde	0	WAN	WGT	10.11.7.1	26	green-noise.jpg		192.168.2.1	24
-Nostro	Nostro Caffe 	fuzz	1	WAN	WGT	10.11.7.65	26	nostro_caffe.jpg
+Sunflower	SE Yamhill and 33rd 	seed	0	BOTH	WZR600DHP	10.11.7.65	26			192.168.2.1	24	
 Cascadia	New Cascadia Traditional	muffin	0	PRIV	WGT	10.11.7.129	26	newcascadia.png		192.168.2.1	24
 FreshPot	The Fresh Pot	moose	1	NONE	ALIX	10.11.7.193	26	freshpot.gif
 BillyRays	Billy Ray's Neighborhood Dive	billyrays	1	NONE	WZR600DHP	10.11.8.1	26
