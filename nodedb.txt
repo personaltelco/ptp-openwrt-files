@@ -1,5 +1,5 @@
 NODE	NODENAME	HOSTNAME	BRIDGE	FILTER	DEVICE	PUBADDR	PUBMASKLEN	LOGOFILE	DHCPSTART	PRIVADDR	PRIVMASKLEN
-UrbanGrindNW	Urban Grind - Pearl District	grank	1	NONE	WNDR3800	10.11.0.1	26	urbangrind.jpg
+Foote	NextGenSplash	grank	0	BOTH	WZR600DHP	10.11.0.1	26			192.168.11.1	24
 Rerun	Rerun	rerun	0	PRIV	WGT	10.11.0.65	26	RERUN-Logo.png		192.168.1.1	24
 Slabtown	Slabtown	slabtown	0	PRIV	WZR600DHP	10.11.0.129	26	slabtown.jpg		192.168.11.1	24
 Empowerment	Empowerment Initiatives	watt	1	NONE	WZR600DHP	10.11.0.193	26	ei-logo.png
