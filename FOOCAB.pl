@@ -609,54 +609,63 @@ while(<LINKS>) {
 }
 
 if ($filter ne "NONE") {
+    my $outdir = "output/etc/hotplug.d/iface";
+
+    unless (-d $outdir) { system("mkdir -p $outdir"); }
+
     # create filter script and /etc/rc.d link
-    open(FILTER,">output/etc/init.d/filter");
+    open(FILTER,">$outdir/60-filter");
 
-    print FILTER 
-	"#!/bin/sh /etc/rc.common
-# Copyright (C) 2006 OpenWrt.org
-
-START=96
-STOP=96
-
-start() {\n";
+    print FILTER "#!/bin/sh\n\n";
 
     if ($filter eq "WAN" || $filter eq "BOTH") {
 	print FILTER
-	    "        for i in \$(ip addr show dev $waniface | grep 'inet ' | awk '{ print \$2 }') ; do iptables -I FORWARD -i br-pub -d \$i -j DROP ; iptables -I FORWARD -i $vpniface -d \$i -j DROP ; done\n";
-	print FILTER
-	    "        for i in \$(ip addr show dev $waniface | grep inet6 | grep -v 'scope local' | awk '{ print \$2 }') ; do ip6tables -I FORWARD -i br-pub -d \$i -j DROP ; ip6tables -I FORWARD -i $vpniface -d \$i -j DROP ; done\n";
+	    "WANF=/tmp/run/wanfilter.net
+
+[ \"\$INTERFACE\" = \"wan\" ] && {
+	[ \"\$ACTION\" = ifup ] && {
+		# prevent first-hop WAN destinations from being reached from the public or ptp (vpn) interfaces
+		for wannet in \$(ip addr show dev \$DEVICE | grep 'inet ' | awk '{ print \$2 }') ; do 
+			echo \$wannet >> \$WANF
+			iptables -I FORWARD -i br-pub -d \$wannet -j DROP ; 
+			iptables -I FORWARD -i $vpniface -d \$wannet -j DROP ; 
+		done
+		# not needed for ipv6 because we don't currently provision ipv6 from the upstream network
+		# all ipv6 traffic goes via our vpn tunnel, and link-local addresses aren't relevent to 
+		# FORWARDing (you don't need to drop link-local traffic at a routing boundary, it's not 
+		# forwarded by definition, since it isn't link-local anymore).
+	}
+	[ \"\$ACTION\" = ifdown ] && {
+		if [ -f \$WANF ]; then
+			for wannet in \$(cat \$WANF) ; do
+				iptables -D FORWARD -i br-pub -d \$wannet -j DROP
+				iptables -D FORWARD -i $vpniface -d \$wannet -j DROP
+			done
+			rm \$WANF
+		fi
+	}
+}\n";
     }
+
+
+
     if (($privifaces ne "") && ($filter eq "PRIV" || $filter eq "BOTH")) {
-	print FILTER
-	    "        iptables -I FORWARD -o br-priv -i br-pub -j DROP\n";
-	print FILTER
-	    "        iptables -I FORWARD -o br-priv -i $vpniface -j DROP\n";
+	print FILTER "
+    
+[ \"\$INTERFACE\" = \"priv\" ] && {
+	[ \"\$ACTION\" = ifup ] && {
+		# prevent PRIV destinations from being reached from the public or ptp (vpn) interfaces
+		iptables -I FORWARD -o br-priv -i br-pub -j DROP
+		iptables -I FORWARD -o br-priv -i $vpniface -j DROP
+	}
+	[ \"\$ACTION\" = ifdown ] && {
+		iptables -D FORWARD -o br-priv -i br-pub -j DROP
+		iptables -D FORWARD -o br-priv -i $vpniface -j DROP
+	}
+}\n";
     }
-
-    print FILTER 
-	"}
-
-stop() {\n";
-
-    if ($filter eq "WAN" || $filter eq "BOTH") {
-	print FILTER
-	    "        for i in \$(ip addr show dev $waniface | grep 'inet ' | awk '{ print \$2 }') ; do iptables -D FORWARD -i br-pub -d \$i -j DROP ; iptables -D FORWARD -i $vpniface -d \$i -j DROP ; done\n";
-	print FILTER
-	    "        for i in \$(ip addr show dev $waniface | grep inet6 | grep -v 'scope local' | awk '{ print \$2 }') ; do ip6tables -D FORWARD -i br-pub -d \$i -j DROP ; ip6tables -D FORWARD -i $vpniface -d \$i -j DROP ; done\n";
-    }
-    if (($privifaces ne "") && ($filter eq "PRIV" || $filter eq "BOTH")) {
-	print FILTER
-	    "        iptables -D FORWARD -o br-priv -i br-pub -j DROP\n";
-	print FILTER
-	    "        iptables -D FORWARD -o br-priv -i $vpniface -j DROP\n";
-    }
-
-    print FILTER "}\n";
 
     close(FILTER);
-    chmod 0755,"output/etc/init.d/filter";
-    symlink "../init.d/filter","output/etc/rc.d/S96filter";
 }
 
 if($hwclock) {
