@@ -6,6 +6,7 @@ GATEWAY=/usr/nocatauth/bin/gateway
 CONF=/etc/nocat.conf
 
 start() {
+	while [ ! -r /etc/resolv.conf ] || ! grep -q nameserver /etc/resolv.conf ; do logger -t gateway "$(date) no nameserver yet" ; sleep 1 ; done
 	$GATEWAY -F -f $CONF 2>&1 | logger -t gateway &
 }
 
