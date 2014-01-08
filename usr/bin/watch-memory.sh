@@ -1,0 +1,1 @@
+watch -d 'awk "\$1 ~ /MemTotal/ { sum = \$2 ; print \$0 } \$1 ~ /MemFree|Buffers|Cached|AnonPages|Slab|Mapped|Shmem|KernelStack|PageTables/ { sum -= \$2 ; print \$0 } END { print sum }" /proc/meminfo'
