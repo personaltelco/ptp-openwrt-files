@@ -73,6 +73,7 @@ MicroHAMS	Ward Cunningham's Federated Wiki Demo	bus	1	NONE	WZR600DHP	10.11.27.1	
 BobWhite	Bob White Theatre	quail	1	WAN	ALIX	10.11.28.1	22	bobwhite.jpg
 WorldCup	World Cup Coffee and Tea	fut	1	NONE	ALIX	10.11.33.1	24	worldcup.gif
 PotatoChampion	Potato Champion at Cartopia	spud	0	BOTH	WZR600DHP	10.11.34.1	24	potato-axe.png		192.168.11.1	24
+Wygant	North Wygant and Montana	dawn	0	PRIV	WZR600DHP	10.11.35.1	26			192.168.11.1	24
 Labarre	LaBarre Machine Works	metal	1	WAN	ALIX	10.11.36.1	24	labarre.jpg
 ArborLodge	Arbor Lodge Park Community Network	suds	1	NONE	ALIX	10.11.37.1	24	integra-logo.png	
 Ecotrust	Ecotrust	orb	1	NONE	ALIX	10.11.38.1	24	ecotrust.png
