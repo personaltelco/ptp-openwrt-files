@@ -31,7 +31,7 @@ YukonTavern	Yukon Tavern	yukon	1	NONE	WGT	10.11.8.193	26
 CityClub	City Club of Portland	asa	1	NONE	WGT	10.11.9.1	26	cityclub.png
 BuffaloGap	Buffalo Gap Saloon and Eatery	dave	1	NONE	ALIX	10.11.9.65	26	buffalo_gap_logo.jpg
 Marshall	Marshall Union Manor	fir	0	PRIV	WGT	10.11.9.129	26			192.168.1.1	24
-BarXV	Bar XV	fifteen	1	NONE	WGT	10.11.9.193	26	barxv.gif
+BarXV	Bar XV	fifteen	0	PRIV	WZR600DHP	10.11.9.193	26	barxv.gif		192.168.11.1	24
 Lost	Lost and Found Lounge	belch	1	NONE	WGT	10.11.10.1	26	lostandfound.png
 Butner	Butner Road	maw	0	PRIV	WGT	10.11.10.65	26			192.168.2.1	24
 MacleayPark	Christopher Chen	bird	0	PRIV	WGT	10.11.10.129	26			192.168.16.1	24
