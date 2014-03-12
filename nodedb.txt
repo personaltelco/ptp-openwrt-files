@@ -47,7 +47,7 @@ FunHouse	Funhouse Lounge	trip	0	WAN	WGT	10.11.15.65	26	funhouse.jpg		192.168.1.1
 GeorgeShaver	Selena Deckelmann	bic	0	PRIV	WGT	10.11.15.129	26	selena.jpg		192.168.11.1	24
 Florio	Florio Bakery	scone	1	NONE	WZR600DHP	10.11.15.193	26	florio.jpg
 Wistaria	Wistaria	vine	0	PRIV	WGT	10.11.16.1	26			192.168.1.1	24
-Bluebird	Bluebird 58 Ecoliving	chirp	1	WAN	MR3201A	10.11.16.65	26
+Bluebird	Bluebird 58 Ecoliving	chirp	1	WAN	WZR600DHP	10.11.16.65	26
 Brunner	Ted Brunner	glow	1	WAN	WGT	10.11.16.129	26
 Tron	Tony Atkins	bug	1	WAN	WGT	10.11.16.193	26
 Tibbetts	Janet Senior	rock	0	PRIV	WGT	10.11.17.1	26			192.168.2.1	24
