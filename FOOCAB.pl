@@ -69,6 +69,10 @@ while(<NODEDB>) {
 	    }
    
 	    print SED "s/PTP_$vars[$i]_PTP/$vals[$i]/g\n";
+
+	    if ($vars[$i] eq "NODE") {
+	    	$node = $vals[$i];
+	    }	
 	    if ($vars[$i] eq "PUBMASKLEN") {
 		$masklen = $vals[$i];
 	    }
@@ -744,10 +748,4 @@ while(<WWW>) {
     chown($uid,$gid,$dest);
 }
 
-if (defined($logo) && $logo ne "") {
-    my $src = "www/images/nodes/$logo";
-
-    print "cp -p $src output/www/images/$logo\n";
-
-    system("cp -p $src output/www/images/$logo");
-}
+system("wget --no-check -O output/www/images/$node.png https://personaltelco.net/splash/images/nodes/$node.png");
