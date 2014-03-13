@@ -17,7 +17,12 @@ my %MIME = (
     html    => "text/html",
     htm	    => "text/html",
     txt	    => "text/plain",
-    css	    => "text/css"
+    css	    => "text/css",
+    js	    => "text/javascript",
+    woff    => "font/ttf",
+    ttf	    => "font/ttf",
+    svg     => "image/svg+xml"
+
 );
 
 sub handle {
