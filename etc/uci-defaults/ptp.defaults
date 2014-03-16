@@ -1,7 +1,5 @@
 #!/bin/sh
 
-touch /etc/config/httpd
-
 uci batch <<EOF
 set dhcp.@dnsmasq[0].domainneeded=0
 set dhcp.@dnsmasq[0].boguspriv=0
@@ -20,10 +18,12 @@ set dhcp.pub.limit=1024
 set dhcp.pub.leasetime=1h
 commit dhcp
 
-add httpd httpd
-set httpd.@httpd[0].port=80
-set httpd.@httpd[0].home=/www
-commit httpd
+delete uhttpd.px5g
+delete uhttpd.main.listen_https
+delete uhttpd.main.cert
+delete uhttpd.main.key
+delete uhttpd.main.cgi_prefix
+commit uhttpd
 
 rename network.lan=pub
 set network.pub.ipaddr=PTP_PUBADDR_PTP
