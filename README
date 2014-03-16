@@ -2,11 +2,10 @@ This tree is intended as a configurator, for generating OpenWrt
 $(TOPDIR)/files trees for individual nodes (or suitable for rsync'ing
 over a generic FooCab image.
 
-A tab-delimited node database (nodedb.txt) contains the basic
-configuration information needed for filling in the template files.
-The basic idea is to substitute for PTP_<string>_PTP instances in the
-template files, dumping the result into a nearby node-specific
-directory tree.  The node database contains the following fields:
+Data is pulled from the personaltelco api server.  The basic idea is to 
+substitute for PTP_<string>_PTP instances in the template files, dumping 
+the result into a nearby node-specific directory tree.  The node database 
+contains the following fields:
 
   NODE : the node name in wiki name format, prepending "Node" to the
          string value of this variable should generate a valid node

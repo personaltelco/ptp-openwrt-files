@@ -1,0 +1,10 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2008 OpenWrt.org
+
+START=46
+
+start() {
+	iptables -t filter -I FORWARD -s PTP_PRIVNET_PTP/PTP_PRIVMASKLEN_PTP -j ACCEPT
+	iptables -t filter -I FORWARD -d PTP_PRIVNET_PTP/PTP_PRIVMASKLEN_PTP -m state  --state RELATED,ESTABLISHED -j ACCEPT
+}
+
