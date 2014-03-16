@@ -19,7 +19,7 @@ my %MIME = (
     txt	    => "text/plain",
     css	    => "text/css",
     js	    => "text/javascript",
-    woff    => "font/ttf",
+    woff    => "application/font-woff",
     ttf	    => "font/ttf",
     svg     => "image/svg+xml"
 
