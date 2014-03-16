@@ -7,6 +7,7 @@ set dhcp.@dnsmasq[0].localise_queries=0
 set dhcp.@dnsmasq[0].domain=ptp
 set dhcp.@dnsmasq[0].expandhosts=0
 set dhcp.@dnsmasq[0].nohosts=0
+# rebind_protection off in order to support resolution of .ptp addresses
 set dhcp.@dnsmasq[0].rebind_protection=0
 set dhcp.@dnsmasq[0].notinterface=PTP_WANIFACE_PTP
 add_list dhcp.@dnsmasq[0].server=/ptp/70.102.34.162 
@@ -18,6 +19,7 @@ set dhcp.pub.limit=1024
 set dhcp.pub.leasetime=1h
 commit dhcp
 
+# remove local https and cgi infrastructure
 delete uhttpd.px5g
 delete uhttpd.main.listen_https
 delete uhttpd.main.cert
@@ -31,6 +33,7 @@ set network.pub.netmask=PTP_PUBNETMASK_PTP
 set network.pub.ip6addr=PTP_PUB6PREFIX_PTP1/64
 
 delete network.wan6
+# prevent ip6assign from vaporising olsr6d routes
 delete network.pub.ip6assign
 commit network
 
