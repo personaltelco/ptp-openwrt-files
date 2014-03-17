@@ -20,6 +20,7 @@ my %MIME = (
     css	    => "text/css",
     js	    => "text/javascript",
     woff    => "application/font-woff",
+    eot     => "application/vnd.ms-fontobject",
     ttf	    => "font/ttf",
     svg     => "image/svg+xml"
 
