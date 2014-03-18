@@ -13,8 +13,8 @@ config dnsmasq
 	list notinterface	PTP_WANIFACE_PTP
 	option leasefile	'/tmp/dhcp.leases'
 	option resolvfile	'/tmp/resolv.conf.auto'
-	list server		'/ptp/70.102.34.162'
-	list server		'/11.10.in-addr.arpa/70.102.34.162'
+	list server		'/ptp/74.85.245.161'
+	list server		'/11.10.in-addr.arpa/74.85.245.161'
 
 config dhcp priv
 	option interface	priv
