@@ -241,7 +241,7 @@ iptables -t nat -I POSTROUTING -o $ExternalDevice -j MASQUERADE
 #  iptables -t filter -A FORWARD -s $net -j ACCEPT
 #done      
 
-AllowedNetworks="70.102.34.162/32"
+AllowedNetworks="74.85.245.161/32"
 
 for net in $AllowedNetworks; do
   iptables -t mangle -A PREROUTING -d $net -j MARK --set-mark 2

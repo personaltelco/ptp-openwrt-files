@@ -10,8 +10,8 @@ set dhcp.@dnsmasq[0].nohosts=0
 # rebind_protection off in order to support resolution of .ptp addresses
 set dhcp.@dnsmasq[0].rebind_protection=0
 set dhcp.@dnsmasq[0].notinterface=PTP_WANIFACE_PTP
-add_list dhcp.@dnsmasq[0].server=/ptp/70.102.34.162 
-add_list dhcp.@dnsmasq[0].server=/11.10.in-addr.arpa/70.102.34.162
+add_list dhcp.@dnsmasq[0].server=/ptp/74.85.245.161
+add_list dhcp.@dnsmasq[0].server=/11.10.in-addr.arpa/74.85.245.161
 rename dhcp.lan=pub
 set dhcp.pub.interface=pub
 set dhcp.pub.start=5
@@ -47,7 +47,7 @@ commit openvpn
 
 set system.@system[0].hostname=PTP_HOSTNAME_PTP
 set system.@system[0].timezone=PST8PDT
-set system.@system[0].log_ip=70.102.34.162
+set system.@system[0].log_ip=74.85.245.161
 commit system
 
 set wireless.radio0.disabled=0
