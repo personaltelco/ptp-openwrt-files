@@ -1,0 +1,24 @@
+#!/bin/sh
+
+lanif=$(uci get network.pub.ifname)
+if [ -z "$lanif" ] ; then
+	exit 0
+fi
+
+uci batch <<EOF
+set network.pub.ifname=""
+set network.priv=interface
+set network.priv.ifname=$lanif
+set network.priv.type=bridge
+set network.priv.proto=static
+set network.priv.ipaddr=PTP_PRIVADDR_PTP
+set network.priv.netmask=PTP_PRIVNETMASK_PTP
+commit network
+
+set dhcp.priv=dhcp
+set dhcp.priv.interface=priv
+set dhcp.priv.start=100
+set dhcp.priv.limit=150
+set dhcp.priv.leasetime=12h
+commit dhcp
+EOF

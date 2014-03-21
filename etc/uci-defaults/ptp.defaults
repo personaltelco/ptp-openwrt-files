@@ -1,0 +1,67 @@
+#!/bin/sh
+
+uci batch <<EOF
+set dhcp.@dnsmasq[0].domainneeded=0
+set dhcp.@dnsmasq[0].boguspriv=0
+set dhcp.@dnsmasq[0].localise_queries=0
+set dhcp.@dnsmasq[0].domain=ptp
+set dhcp.@dnsmasq[0].expandhosts=0
+set dhcp.@dnsmasq[0].nohosts=0
+# rebind_protection off in order to support resolution of .ptp addresses
+set dhcp.@dnsmasq[0].rebind_protection=0
+set dhcp.@dnsmasq[0].notinterface=PTP_WANIFACE_PTP
+add_list dhcp.@dnsmasq[0].server=/ptp/74.85.245.161
+add_list dhcp.@dnsmasq[0].server=/11.10.in-addr.arpa/74.85.245.161
+rename dhcp.lan=pub
+set dhcp.pub.interface=pub
+set dhcp.pub.start=5
+set dhcp.pub.limit=1024
+set dhcp.pub.leasetime=1h
+commit dhcp
+
+# remove local https and cgi infrastructure
+delete uhttpd.px5g
+delete uhttpd.main.listen_https
+delete uhttpd.main.cert
+delete uhttpd.main.key
+delete uhttpd.main.cgi_prefix
+commit uhttpd
+
+rename network.lan=pub
+set network.pub.ipaddr=PTP_PUBADDR_PTP
+set network.pub.netmask=PTP_PUBNETMASK_PTP
+set network.pub.ip6addr=PTP_PUB6PREFIX_PTP1/64
+
+delete network.wan6
+# prevent ip6assign from vaporising olsr6d routes
+delete network.pub.ip6assign
+commit network
+
+delete openvpn.custom_config
+delete openvpn.sample_server
+delete openvpn.sample_client
+set openvpn.ptp=openvpn
+set openvpn.ptp.enabled=1
+set openvpn.ptp.config=/etc/openvpn/client.conf
+commit openvpn
+
+set system.@system[0].hostname=PTP_HOSTNAME_PTP
+set system.@system[0].timezone=PST8PDT
+set system.@system[0].log_ip=74.85.245.161
+commit system
+
+set wireless.radio0.disabled=0
+set wireless.@wifi-iface[0].network=pub
+set wireless.@wifi-iface[0].ifname=wlan0
+set wireless.@wifi-iface[0].ssid=test.personaltelco.net/PTP_DEVICE_PTP
+
+set wireless.radio1.disabled=0
+set wireless.@wifi-iface[1].network=pub
+set wireless.@wifi-iface[1].ifname=wlan1
+set wireless.@wifi-iface[1].ssid=test.personaltelco.net/PTP_DEVICE_PTP
+
+commit wireless
+EOF
+
+
+
