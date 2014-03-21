@@ -93,6 +93,10 @@ printf( SED "s/PTP_VPN6ADDRESS_PTP/%s::%02x%02x/g\n",
 
 print "DEVICE=" . $nodeinfo->{'device'} . "\n";
 
+if ( !defined( $pubifaces )) {
+	$pubifaces = "";
+}
+
 if ( $device eq "WGT" ) {
 	$waniface = "eth0.1";
 	if ($bridge) {
