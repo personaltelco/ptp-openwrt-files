@@ -17,8 +17,7 @@ my $host;
 my $node;
 my $wimax = 0;
 
-my $APINODEBASE = "https://personaltelco.net/api/v0/nodes/";
-my $APIHOSTBASE = "https://personaltelco.net/api/v0/hosts/";
+my $APIBASE = "https://personaltelco.net/api/v0/nodes/";
 my $IMGBASE = "https://personaltelco.net/splash/images/nodes/";
 
 my $result = GetOptions(
@@ -29,24 +28,9 @@ my $result = GetOptions(
 
 print "wimax = $wimax\n";
 
-my $nodeinfo;
-
-if ( defined( $host )) {
-	$nodeinfo = getNodeInfoByHost($host);
-	if ( $nodeinfo->{'hostname'} ne $host ) {
-		die "did not find host $host from $APIHOSTBASE";
-		exit;
-	}
-	$node = $nodeinfo->{'node'};
-} elsif ( defined( $node )) {
-	$nodeinfo = getNodeInfoByNode($node);
-	if ( $nodeinfo->{'node'} ne $node ) {
-		die "did not find node $node from $APINODEBASE";
-		exit;
-	}
-	$host = $nodeinfo->{'hostname'};
-} else {
-	die "did not specify a node or host, loser!";
+my $nodeinfo = getNodeInfo($node);
+if ( $nodeinfo->{'node'} ne $node ) {
+	die "did not find node $node from $APIBASE";
 	exit;
 }
 
@@ -121,23 +105,11 @@ if ( $device eq "WGT" ) {
 	}
 	print SED "s/PTP_ARCH_PTP/net4521/g\n";
 	$hwclock = 1;
-} elsif ( $device eq "NET4826" ) {
-	$waniface   = "eth0";
-	print SED "s/PTP_ARCH_PTP/net4826/g\n";
-	$hwclock = 1;
 } elsif ( $device eq "MR3201A" ) {
 	$waniface   = "eth0";
 	print SED "s/PTP_ARCH_PTP/atheros/g\n";
-} elsif ( $device eq "RSTA" ) {
-	$waniface = "eth0";
-	if ($bridge) {
-		$pubifaces = "eth1";
-	}
-	else {
-		$privifaces = "eth1";
-	}
-	print SED "s/PTP_ARCH_PTP/routerstation/g\n";
-} elsif ( $device eq "WNDR3800" ) {
+}
+elsif ( $device eq "WNDR3800" ) {
 	$waniface = "eth1";
 	if ($bridge) {
 		$pubifaces  = "eth0.1";
@@ -151,7 +123,8 @@ if ( $device eq "WGT" ) {
 	} else {
 		$privifaces = "eth0.1";
 	}
-} elsif ( $device eq "WZR600DHP" || $device eq "AIRROUTER" ) {
+}
+elsif ( $device eq "WZR600DHP" || $device eq "AIRROUTER" ) {
 	$waniface = "eth1";
 	if ($bridge) {
 		$pubifaces  = "eth0";
@@ -161,6 +134,7 @@ if ( $device eq "WGT" ) {
 }
 
 print SED "s/PTP_WANIFACE_PTP/$waniface/g\n";
+print SED "s/PTP_PRIVIFACES_PTP/$privifaces/g\n";
 print SED "s/PTP_PUBIFACES_PTP/$pubifaces/g\n";
 
 if ( ! defined($masklen) ||  !defined($pubaddr) ) {
@@ -175,19 +149,14 @@ my $mask    = $ip->mask();
 print SED "s/PTP_PUBNET_PTP/$netaddr/g\n";
 print SED "s/PTP_PUBNETMASK_PTP/$mask/g\n";
 
-if ( defined($privaddr)) {
-	print "privaddr = $privaddr\n";
-
+if ( defined($privifaces)) {
 	$ip      = NetAddr::IP::Lite->new("$privaddr/$privmasklen");
 	$network = $ip->network();
 	$netaddr = $network->addr();
 	$mask    = $ip->mask();
 
-	print SED "s/PTP_PRIVIFACES_PTP/$privifaces/g\n";
 	print SED "s/PTP_PRIVNET_PTP/$netaddr/g\n";
 	print SED "s/PTP_PRIVNETMASK_PTP/$mask/g\n";
-} else {
-	print "privifaces not defined\n";
 }
 close SED;
 
@@ -219,6 +188,391 @@ while (<FILES>) {
 	chown( $uid, $gid, $dest );
 }
 
+if (   $device eq "ALIX"
+	|| $device eq "NET4521"
+	|| $device eq "MR3201A"
+	|| $device eq "WNDR3800"
+	|| $device eq "WZR600DHP"
+	|| $device eq "AIRROUTER"
+	|| $device eq "WDR3600" )
+{
+
+# if alix or net4521 or mr3201a, remove the vlan configuration from etc/config/network
+	system(
+"mv output/etc/config/network output/etc/config/network.orig ; tail -n +`grep -n 'loopback' output/etc/config/network.orig | cut -d: -f 1` output/etc/config/network.orig > output/etc/config/network ; rm output/etc/config/network.orig"
+	);
+}
+if ( $device eq "WNDR3800" ) {
+
+	# if wndr3800, append vlan/led config taken from default r34240
+	open( NETWORKOUT, ">>output/etc/config/network" );
+	open( SYSTEMOUT,  ">>output/etc/config/system" );
+	print NETWORKOUT <<EOF;
+
+config switch
+	option name	rtl8366s
+	option reset	1
+	option enable_vlan 1
+	# Blinkrate: 0=43ms; 1=84ms; 2=120ms; 3=170ms; 4=340ms; 5=670ms
+	option blinkrate	2
+
+config switch_vlan
+	option device	rtl8366s
+	option vlan 	1
+	option ports	"0 1 2 3 5t"
+
+config switch_port
+	# Port 1 controls the GREEN configuration of LEDs for
+	# the switch and the section does not correspond to a real
+	# switch port.
+	#
+	# 0=LED off; 1=Collision/FDX; 2=Link/activity; 3=1000 Mb/s;
+	# 4=100 Mb/s; 5=10 Mb/s; 6=1000 Mb/s+activity; 7=100 Mb/s+activity;
+	# 8=10 Mb/s+activity; 9=10/100 Mb/s+activity; 10: Fiber;
+	# 11: Fault; 12: Link/activity(tx); 13: Link/activity(rx);
+	# 14: Link (master); 15: separate register
+
+	option device		rtl8366s
+	option port		1
+	option led		6
+
+config switch_port
+	# Port 2 controls the ORANGE configuration of LEDs for
+	# the switch and the section does not correspond to a real
+	# switch port.
+	#
+	# See the key above for switch port 1 for the meaning of the
+	# 'led' setting below.
+	
+	option device		rtl8366s
+	option port		2
+	option led		9
+
+config switch_port
+	# Port 5 controls the configuration of the WAN LED and the
+	# section does not correspond to a real switch port.
+	#
+	# To toggle the use of green or orange LEDs for the WAN port,
+	# see the LED setting for wndr3700:green:wan in /etc/config/system.
+	#
+	# See the key above for switch port 1 for the meaning of the
+	# 'led' setting below.
+
+	option device		rtl8366s
+	option port		5
+	option led		2
+EOF
+	print SYSTEMOUT <<EOF;
+
+config led 'led_wan'
+	option name 'WAN LED (green)'
+	option sysfs 'wndr3700:green:wan'
+	option default '0'
+
+config led 'led_usb'
+	option name 'USB'
+	option sysfs 'wndr3700:green:usb'
+	option trigger 'usbdev'
+	option dev '1-1'
+	option interval '50'
+EOF
+}
+if ( $device eq "WZR600DHP" ) {
+
+	# if wzr600dhp, append vlan/led config taken from default r35052
+	open( NETWORKOUT, ">>output/etc/config/network" );
+	open( SYSTEMOUT,  ">>output/etc/config/system" );
+	print NETWORKOUT <<EOF;
+
+config switch
+	option reset '1'
+	option enable_vlan '1'
+	option name 'switch0'   
+ 
+config switch_vlan
+	option vlan '1'
+	option ports '0 1 2 3 4'
+	option device 'switch0' 
+EOF
+
+	print SYSTEMOUT <<EOF;
+
+config led 'led_diag'
+	option name 'DIAG'
+	option sysfs 'buffalo:red:diag'
+	option default '0'
+
+config led 'led_router'
+	option name 'ROUTER'
+	option sysfs 'buffalo:green:router'
+	option trigger 'netdev'
+	option dev 'eth1'
+	option mode 'link tx rx'
+
+config led 'led_usb'
+	option name 'USB'
+	option sysfs 'buffalo:green:usb'
+	option trigger 'usbdev'
+	option dev '1-1'
+	option interval '50'
+EOF
+
+	close(NETWORKOUT);
+	close(SYSTEMOUT);
+}
+
+if ( $device eq "WDR3600" ) {
+	open( NETWORKOUT,  ">>output/etc/config/network" );
+	open( WIRELESSOUT, ">output/etc/config/wireless" );
+	open( SYSTEMOUT,   ">>output/etc/config/system" );
+
+	print NETWORKOUT <<EOF;
+
+config switch
+        option name 'switch0'
+        option reset '1'
+        option enable_vlan '1'
+
+config switch_vlan
+        option device 'switch0'
+        option vlan '1'
+        option ports '0t 2 3 4 5'
+
+config switch_vlan
+        option device 'switch0'
+        option vlan '2'
+        option ports '0t 1'
+EOF
+
+	print WIRELESSOUT <<EOF;
+config wifi-device  radio0
+        option type     mac80211
+        option channel  11
+        option hwmode   11ng
+        option path     'platform/ar934x_wmac'
+        option htmode   HT20
+        list ht_capab   LDPC
+        list ht_capab   SHORT-GI-20
+        list ht_capab   SHORT-GI-40
+        list ht_capab   TX-STBC
+        list ht_capab   RX-STBC1
+        list ht_capab   DSSS_CCK-40
+        # REMOVE THIS LINE TO ENABLE WIFI:
+        # option disabled 1
+
+config wifi-iface
+        option device   radio0
+        option network  pub
+        option mode     ap
+        option ssid     www.personaltelco.net/notyet
+        option encryption none
+
+config wifi-device  radio1
+        option type     mac80211
+        option channel  36
+        option hwmode   11na
+        option path     'pci0000:00/0000:00:00.0'
+        option htmode   HT20
+        list ht_capab   LDPC
+        list ht_capab   SHORT-GI-20
+        list ht_capab   SHORT-GI-40
+        list ht_capab   TX-STBC
+        list ht_capab   RX-STBC1
+        list ht_capab   DSSS_CCK-40
+        # REMOVE THIS LINE TO ENABLE WIFI:
+        # option disabled 1
+
+config wifi-iface
+        option device   radio1
+        option network  pub
+        option mode     ap
+        option ssid	www.personaltelco.net/notyet
+        option encryption none
+EOF
+
+	print SYSTEMOUT <<EOF;
+
+config led 'led_usb1'
+        option name 'USB1'
+        option sysfs 'tp-link:green:usb1'
+        option trigger 'usbdev'
+        option dev '1-1.1'
+        option interval '50'
+
+config led 'led_usb2'
+        option name 'USB2'
+        option sysfs 'tp-link:green:usb2'
+        option trigger 'usbdev'
+        option dev '1-1.2'
+        option interval '50'
+
+config led 'led_wlan2g'
+        option name 'WLAN2G'
+        option sysfs 'tp-link:blue:wlan2g'
+        option trigger 'phy0tpt'
+
+EOF
+
+	close(SYSTEMOUT);
+	close(WIRELESSOUT);
+	close(NETWORKOUT);
+}
+
+if ( $device eq "AIRROUTER" ) {
+
+	# if airrouter, append vlan config taken from r37493
+	open( NETWORKOUT,  ">>output/etc/config/network" );
+	open( WIRELESSOUT, ">output/etc/config/wireless" );
+
+	print NETWORKOUT <<EOF;
+
+config switch
+	option name 'switch0'
+	option reset '1'
+	option enable_vlan '1'
+			
+config switch_vlan
+	option device 'switch0'
+	option vlan '1'
+	option ports '0 1 2 3 4'
+EOF
+
+	print WIRELESSOUT <<EOF;
+config wifi-device  radio0
+	option type     mac80211
+	option channel  1
+	option hwmode   11ng
+	option path     'pci0000:00/0000:00:00.0'
+	option htmode   HT20
+	list ht_capab   SHORT-GI-40
+	list ht_capab   TX-STBC
+	list ht_capab   RX-STBC1
+	list ht_capab   DSSS_CCK-40
+	# REMOVE THIS LINE TO ENABLE WIFI:
+	# option disabled 1
+       
+config wifi-iface
+	option device   radio0
+	option network  pub  
+	option mode     ap
+	option ssid     www.personaltelco.net/notyet
+	option encryption none
+EOF
+
+	close(NETWORKOUT);
+	close(WIRELESSOUT);
+}
+
+if ( $device eq "WNDR3800" || $device eq "WZR600DHP" ) {
+	open( WIRELESSOUT, ">output/etc/config/wireless" );
+	print WIRELESSOUT <<EOF;
+config wifi-device  radio0
+	option type     mac80211
+	option channel  11
+	option hwmode	11ng
+	option path	'pci0000:00/0000:00:11.0'
+	option htmode	HT20
+	list ht_capab	SHORT-GI-40
+	list ht_capab	TX-STBC
+	list ht_capab	RX-STBC1
+	list ht_capab	DSSS_CCK-40
+	# REMOVE THIS LINE TO ENABLE WIFI:
+	#option disabled 1
+
+config wifi-iface
+	option device   radio0
+	option network	pub  
+	option mode     ap
+	option ssid     www.personaltelco.net/notyet
+	option encryption none
+
+config wifi-device  radio1
+	option type     mac80211
+	option channel  36
+	option hwmode	11na
+	option path	'pci0000:00/0000:00:12.0'
+	option htmode	HT20
+	list ht_capab	SHORT-GI-40
+	list ht_capab	TX-STBC
+	list ht_capab	RX-STBC1
+	list ht_capab	DSSS_CCK-40
+	# REMOVE THIS LINE TO ENABLE WIFI:
+	#option disabled 1
+
+config wifi-iface
+	option device   radio1
+	option network  pub
+	option mode     ap
+	option ssid	www.personaltelco.net/notyet
+	option encryption none
+EOF
+	close(WIRELESSOUT);
+}
+
+if ( $device eq "ALIX" ) {
+
+	# delete the etc/config/wireless
+	system("rm output/etc/config/wireless");
+}
+if ( !defined($privifaces) ) {
+
+	# delete the priv network configuration from etc/config/network
+	open( NETWORKIN,  "output/etc/config/network" );
+	open( NETWORKOUT, ">output/etc/config/network.out" );
+	while (<NETWORKIN>) {
+    	my $output = 1;
+		chomp;
+
+		if ( $_ =~ /priv/ ) {
+			$output = 0;
+			print "output off\n";
+		}
+		if ( $_ =~ /pub/ ) {
+			$output = 1;
+		}
+
+		if ($output) {
+			print NETWORKOUT "$_\n";
+		}
+	}
+	system("mv output/etc/config/network.out output/etc/config/network");
+
+	# delete the priv network configuration from etc/config/dhcp
+	open( DHCPIN,  "output/etc/config/dhcp" );
+	open( DHCPOUT, ">output/etc/config/dhcp.out" );
+	while (<DHCPIN>) {
+    	my $output = 1;
+		chomp;
+
+		if ( $_ =~ /^config dhcp priv/ ) {
+			$output = 0;
+			print "output off\n";
+		}
+		if ( $_ =~ /^config dhcp pub/ ) {
+			$output = 1;
+		}
+
+		if ($output) {
+			print DHCPOUT "$_\n";
+		}
+	}
+	system("mv output/etc/config/dhcp.out output/etc/config/dhcp");
+
+	# delete the priv network rules from etc/init.d/firewall_rss
+	open( FIREWALLIN,  "output/etc/init.d/firewall_rss" );
+	open( FIREWALLOUT, ">output/etc/init.d/firewall_rss.out" );
+	while (<FIREWALLIN>) {
+		chomp;
+
+		if ( $_ !~ /PRIVNET/ ) {
+			print FIREWALLOUT "$_\n";
+		}
+	}
+	system(
+		"mv output/etc/init.d/firewall_rss.out output/etc/init.d/firewall_rss");
+	chmod( 0755, "output/etc/init.d/firewall_rss" );
+}
+
 open( LINKS, "find etc usr root www -type l |" );
 
 while (<LINKS>) {
@@ -235,12 +589,6 @@ while (<LINKS>) {
 	print "cp -a $src $dest\n";
 
 	system("cp -a $src $dest");
-}
-
-if ( !defined($privaddr) ) {
-	unlink "output/etc/rc.d/S46firewall_private";
-	unlink "output/etc/init.d/firewall_private"; 
-	unlink "output/etc/uci-defaults/ptp.private.defaults";
 }
 
 if ( $filter ne "NONE" ) {
@@ -281,7 +629,7 @@ if ( $filter ne "NONE" ) {
 }\n";
 	}
 
-	if ( defined($privaddr) && ( $filter eq "PRIV" || $filter eq "BOTH" ) ) {
+	if ( defined($privifaces) && ( $filter eq "PRIV" || $filter eq "BOTH" ) ) {
 		print FILTER "
     
 [ \"\$INTERFACE\" = \"priv\" ] && {
@@ -351,9 +699,6 @@ if ( $device eq "ALIX" ) {
 } elsif ( $device eq "AIRROUTER" ) {
 	$imagename =
 	  "ar71xx/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin";
-} elsif ( $device eq "RSTA" ) {
-	$imagename = 
-	  "ar71xx/openwrt-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
 }
 
 open( FIS, ">output/usr/bin/fetch_image.sh" );
@@ -391,44 +736,33 @@ while (<WWW>) {
 	chown( $uid, $gid, $dest );
 }
 
-sub getNodeInfoByNode {
+sub getNodeInfo {
 	my $node     = shift;
 	my $nodeinfo = {};
-	my $url      = $APINODEBASE . $node;
+	my $url      = $APIBASE . $node;
 	print $url, "\n" if $DEBUG;
 	my $json = get($url);
 	print Dumper($json) if $DEBUG;
 	if ( defined($json) ) {
+
 		$nodeinfo = decode_json($json);
 		my $ret = $nodeinfo->{'data'};
 		print Dumper($ret) if $DEBUG;
 		return $ret;
 	}
+
 }
 
-sub getNodeInfoByHost {
-	my $host     = shift;
-	my $nodeinfo = {};
-	my $url      = $APIHOSTBASE . $host;
+sub getLogo {
+	my $logo = shift;
+	my $url  = $IMGBASE . $logo;
 	print $url, "\n" if $DEBUG;
-	my $json = get($url);
-	print Dumper($json) if $DEBUG;
-	if ( defined($json) ) {
-		$nodeinfo = decode_json($json);
-		my $ret = $nodeinfo->{'data'};
-		print Dumper($ret) if $DEBUG;
-		return $ret;
+	my $img = get($url);
+	if ( defined($img) ) {
+		open( IMGOUT, "> output/www/images/" . $logo )
+		  or die "couldn't write out downloaded image $logo: " . $!;
+		print IMGOUT $img;
+		close IMGOUT;
 	}
 }
 
-my $imgname = "$node.png";
-my $url = $IMGBASE . $imgname;
-my $img = get($url);
-if ( defined($img) ) {
-	open( IMGOUT, "> output/www/images/$imgname")
-		or die "couldn't write out downloaded image $imgname: " . $!;
-	print IMGOUT $img;
-	close IMGOUT;
-} else {
-	print "No node logo\n";
-}	
