@@ -223,7 +223,7 @@ while (<FILES>) {
 	chown( $uid, $gid, $dest );
 }
 
-open( LINKS, "find etc usr root www -type l |" );
+open( LINKS, "find etc usr root -type l |" );
 
 while (<LINKS>) {
 	chomp;
@@ -368,15 +368,17 @@ scp russell\@iris.personaltelco.net:src/openwrt/bin/$imagename /tmp/
 EOF
 system("chmod 755 output/usr/bin/fetch_image.sh");
 
-open( WWW, "find www -type f | grep -v nodes |" );
+open( WWW, "find splash/htdocs -type f | grep -v .gitignore |" );
 
 while (<WWW>) {
 	chomp;
 	my $src    = $_;
 	my @path   = split( '/', $src );
 	my $fname  = pop @path;
-	my $outdir = join( '/', "output", @path );
-	my $dest   = join( '/', "output", @path, $fname );
+	shift(@path);
+	shift(@path);
+	my $outdir = join( '/', "output", "www", @path);
+	my $dest   = join( '/', "output", "www", @path, $fname );
 
 	# print "source = $src ; outdir = $outdir ; dest = $dest\n";
 
@@ -394,6 +396,9 @@ while (<WWW>) {
 	chmod( $mode, $dest );
 	chown( $uid, $gid, $dest );
 }
+
+system("pushd output/www ; ln -sf /tmp/users.html . ; popd");
+
 
 sub getNodeInfoByNode {
 	my $node     = shift;
