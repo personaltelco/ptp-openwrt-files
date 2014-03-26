@@ -66,13 +66,7 @@ my $hwclock     = $nodeinfo->{'hwclock'};
 
 open( SED, ">foocab.sed" ) or die "can't open foocab.sed: " . $!;
 foreach my $k ( keys %$nodeinfo ) {
-	# too many slashes in the URLs for SED
-	if ( $k ~~ [ 'wikiurl', 'url', 'rss' ] ) {    
-		next;
-	}
-
-	#	print $k,' ',$nodeinfo->{$k},"\n";
-	my $sed = "s/PTP_" . uc($k) . "_PTP/" . $nodeinfo->{$k} . "/g\n";
+	my $sed = "s|PTP_" . uc($k) . "_PTP|" . $nodeinfo->{$k} . "|g\n";
 	print $sed if $DEBUG;
 	print SED $sed;
 }
