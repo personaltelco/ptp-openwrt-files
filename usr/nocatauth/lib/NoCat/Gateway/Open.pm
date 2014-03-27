@@ -135,7 +135,11 @@ sub not_found {
 sub capture {
     my ( $self, $peer, $request ) = @_;
     my $host	= $peer->gateway_ip;
-    my $url	= $self->url_encode( $request->{URL} );
+    my $bare   = $request->{URL};
+    if ($bare =~ /generate_204/) {
+       $bare = "https://personaltelco.net/";
+    }
+    my $url    = $self->url_encode( $bare );
 
     $self->log( 8, "Capturing peer", $peer->ip );
     $self->redirect( $peer => "http://$host/?redirect=$url" );
