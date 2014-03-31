@@ -64,6 +64,10 @@ my $privaddr    = $nodeinfo->{'privaddr'};
 my $privmasklen = $nodeinfo->{'privmasklen'};
 my $hwclock     = $nodeinfo->{'hwclock'};
 
+if ( !defined( $nodeinfo->{'logo'} ) ) {
+	$nodeinfo->{'logo'} = "ptp-logo-comm-wire-223x223.png";
+}
+
 open( SED, ">foocab.sed" ) or die "can't open foocab.sed: " . $!;
 foreach my $k ( keys %$nodeinfo ) {
 	my $sed = "s|PTP_" . uc($k) . "_PTP|" . $nodeinfo->{$k} . "|g\n";
