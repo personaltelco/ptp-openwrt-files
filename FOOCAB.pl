@@ -95,7 +95,7 @@ if ( !defined( $pubifaces )) {
 	$pubifaces = "";
 }
 
-if ( $device eq "WGT" ) {
+if ( $device eq "WGT634U" ) {
 	$waniface = "eth0.1";
 	if ($bridge) {
 		$pubifaces  = "eth0.0";
@@ -348,7 +348,7 @@ if ( $device eq "ALIX" ) {
 } elsif ( $device eq "WDR3600" ) {
 	$imagename =
 	  "ar71xx/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin";
-} elsif ( $device eq "WGT" ) {
+} elsif ( $device eq "WGT634U" ) {
 	$imagename = "brcm47xx/openwrt-brcm47xx-squashfs.trx";
 } elsif ( $device eq "AIRROUTER" ) {
 	$imagename =
