@@ -349,7 +349,7 @@ if ( $device eq "ALIX" ) {
 	$imagename =
 	  "ar71xx/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WGT634U" ) {
-	$imagename = "brcm47xx/openwrt-brcm47xx-squashfs.trx";
+	$imagename = "brcm47xx/openwrt-brcm47xx-legacy-squashfs.trx";
 } elsif ( $device eq "AIRROUTER" ) {
 	$imagename =
 	  "ar71xx/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin";
