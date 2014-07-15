@@ -200,7 +200,7 @@ my $mask    = $ip->mask();
 print SED "s/PTP_PUBNET_PTP/$netaddr/g\n";
 print SED "s/PTP_PUBNETMASK_PTP/$mask/g\n";
 
-if ( defined($privaddr)) {
+if ( $privaddr ) {
 	print "privaddr = $privaddr\n";
 
 	$ip      = NetAddr::IP::Lite->new("$privaddr/$privmasklen");
