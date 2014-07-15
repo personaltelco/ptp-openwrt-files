@@ -64,13 +64,36 @@ my $privaddr    = $nodeinfo->{'privaddr'};
 my $privmasklen = $nodeinfo->{'privmasklen'};
 my $hwclock     = $nodeinfo->{'hwclock'};
 
+sub trim($)
+{
+	my $string = shift;
+	$string =~ s/^\s+//;
+	$string =~ s/\s+$//;
+	return $string;
+}
+# Left trim function to remove leading whitespace
+sub ltrim($)
+{
+	my $string = shift;
+	$string =~ s/^\s+//;
+	return $string;
+}
+# Right trim function to remove trailing whitespace
+sub rtrim($)
+{
+	my $string = shift;
+	$string =~ s/\s+$//;
+	return $string;
+}
+
+
 if ( !defined( $nodeinfo->{'logo'} ) ) {
 	$nodeinfo->{'logo'} = "ptp-logo-comm-wire-223x223.png";
 }
 
 open( SED, ">foocab.sed" ) or die "can't open foocab.sed: " . $!;
 foreach my $k ( keys %$nodeinfo ) {
-	my $sed = "s|PTP_" . uc($k) . "_PTP|" . $nodeinfo->{$k} . "|g\n";
+	my $sed = "s|PTP_" . uc($k) . "_PTP|" . trim($nodeinfo->{$k}) . "|g\n";
 	print $sed if $DEBUG;
 	print SED $sed;
 }
