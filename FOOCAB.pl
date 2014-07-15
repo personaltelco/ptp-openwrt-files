@@ -262,7 +262,7 @@ while (<LINKS>) {
 	system("cp -a $src $dest");
 }
 
-if ( !defined($privaddr) ) {
+if ( ! $privaddr ) {
 	unlink "output/etc/rc.d/S46firewall_private";
 	unlink "output/etc/init.d/firewall_private"; 
 	unlink "output/etc/uci-defaults/ptp.private.defaults";
