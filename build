@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+
+# Command line tool to generate configuration files for a node.
+
+
+import generate
+import sys
+
+
+if __name__ == '__main__':
+    sys.exit(generate.main(sys.argv))
