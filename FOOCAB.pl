@@ -183,6 +183,9 @@ if ( $device eq "WGT634U" ) {
 	} else {
 		$privifaces = "eth0";
 	}
+} elsif ( $device eq "ROCKET" ) {
+	$waniface = "eth0";
+	$pubifaces = "";
 }
 
 print SED "s/PTP_WANIFACE_PTP/$waniface/g\n";
@@ -379,6 +382,8 @@ if ( $device eq "ALIX" ) {
 } elsif ( $device eq "RSTA" ) {
 	$imagename = 
 	  "ar71xx/openwrt-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
+} elsif ( $device eq "ROCKET" ) {
+	$imagename = "ar71xx/openwrt-ar71xx-generic-ubnt-rocket-m-squashfs-sysupgrade.bin";
 }
 
 open( FIS, ">output/usr/bin/fetch_image.sh" );
