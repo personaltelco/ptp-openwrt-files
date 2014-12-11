@@ -9,7 +9,7 @@ set dhcp.@dnsmasq[0].expandhosts=0
 set dhcp.@dnsmasq[0].nohosts=0
 # rebind_protection off in order to support resolution of .ptp addresses
 set dhcp.@dnsmasq[0].rebind_protection=0
-set dhcp.@dnsmasq[0].notinterface=PTP_WANIFACE_PTP
+add_list dhcp.@dnsmasq[0].notinterface=PTP_WANIFACE_PTP
 add_list dhcp.@dnsmasq[0].server=/ptp/74.85.245.161
 add_list dhcp.@dnsmasq[0].server=/11.10.in-addr.arpa/74.85.245.161
 rename dhcp.lan=pub
@@ -32,6 +32,10 @@ set network.pub.ipaddr=PTP_PUBADDR_PTP
 set network.pub.netmask=PTP_PUBNETMASK_PTP
 set network.pub.ip6addr=PTP_PUB6PREFIX_PTP1/64
 
+set network.ptp=interface
+set network.ptp.ifname=ptp
+set network.ptp.proto=none
+
 delete network.wan6
 # prevent ip6assign from vaporising olsr6d routes
 delete network.pub.ip6assign
@@ -42,7 +46,26 @@ delete openvpn.sample_server
 delete openvpn.sample_client
 set openvpn.ptp=openvpn
 set openvpn.ptp.enabled=1
-set openvpn.ptp.config=/etc/openvpn/client.conf
+set openvpn.ptp.client=1
+set openvpn.ptp.dev_type=tap
+set openvpn.ptp.dev=ptp
+set openvpn.ptp.proto=udp
+set openvpn.ptp.remote='iris.personaltelco.net 1195'
+set openvpn.ptp.tun_mtu=1280
+set openvpn.ptp.resolv_retry=infinite
+set openvpn.ptp.nobind=1
+set openvpn.ptp.user=nobody
+set openvpn.ptp.group=nogroup
+set openvpn.ptp.ca=/etc/openvpn/keys/ptp-ca.crt
+set openvpn.ptp.cert=/etc/openvpn/keys/PTP_HOSTNAME_PTP.crt
+set openvpn.ptp.key=/etc/openvpn/keys/PTP_HOSTNAME_PTP.key
+set openvpn.ptp.script_security=2
+set openvpn.ptp.up=/etc/openvpn/client.sh
+set openvpn.ptp.status=/tmp/openvpn-status.log
+set openvpn.ptp.persist_key=1
+set openvpn.ptp.persist_tun=1
+set openvpn.ptp.comp_lzo=yes
+set openvpn.ptp.verb=3
 commit openvpn
 
 set system.@system[0].hostname=PTP_HOSTNAME_PTP

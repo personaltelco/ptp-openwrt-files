@@ -1,0 +1,25 @@
+#!/bin/sh
+
+source /lib/functions/network.sh
+KNOD_PUBLIC=74.85.245.161
+KNOD_PTP=10.11.4.5
+
+[ "$INTERFACE" = "ptp" ] && {
+	[ "$ACTION" = ifup ] && {
+		logger -t openvpn $(cat /proc/sys/kernel/hostname) up
+		uci set system.@system[0].log_ip=$KNOD_PTP
+		network_get_ipaddr addr "wan" && echo $addr > /tmp/wan_ipaddr
+		iptables -t nat -I POSTROUTING --source $addr -o ptp -j MASQUERADE
+		sleep 5
+		/etc/init.d/log restart
+		sleep 10
+		logger -t openvpn $(cat /proc/sys/kernel/hostname) up
+	}
+	[ "$ACTION" = ifdown ] && {
+		logger -t openvpn $(cat /proc/sys/kernel/hostname) down
+		iptables -t nat -D POSTROUTING --source $(cat /tmp/wan_ipaddr) -o ptp -j MASQUERADE
+		uci set system.@system[0].log_ip=$KNOD_PUBLIC
+		/etc/init.d/log restart
+		logger -t openvpn $(cat /proc/sys/kernel/hostname) down
+	}
+}

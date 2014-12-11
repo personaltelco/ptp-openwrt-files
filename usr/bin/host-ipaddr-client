@@ -1,0 +1,10 @@
+#!/bin/sh
+
+SALT="$(cat /etc/salt)"
+HOST=$1
+PORT=7862
+IPVER=$2
+
+PLAIN="$(cat /proc/sys/kernel/hostname) $(date +%s)"
+CHECK=$(echo "$PLAIN $SALT" | md5sum | cut -c1-8)
+echo "$PLAIN $CHECK" | ncat $IPVER --send-only -u $HOST 7862

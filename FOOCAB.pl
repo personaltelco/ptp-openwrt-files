@@ -64,15 +64,36 @@ my $privaddr    = $nodeinfo->{'privaddr'};
 my $privmasklen = $nodeinfo->{'privmasklen'};
 my $hwclock     = $nodeinfo->{'hwclock'};
 
+sub trim($)
+{
+	my $string = shift;
+	$string =~ s/^\s+//;
+	$string =~ s/\s+$//;
+	return $string;
+}
+# Left trim function to remove leading whitespace
+sub ltrim($)
+{
+	my $string = shift;
+	$string =~ s/^\s+//;
+	return $string;
+}
+# Right trim function to remove trailing whitespace
+sub rtrim($)
+{
+	my $string = shift;
+	$string =~ s/\s+$//;
+	return $string;
+}
+
+
+if ( !defined( $nodeinfo->{'logo'} ) ) {
+	$nodeinfo->{'logo'} = "ptp-logo-comm-wire-223x223.png";
+}
+
 open( SED, ">foocab.sed" ) or die "can't open foocab.sed: " . $!;
 foreach my $k ( keys %$nodeinfo ) {
-	# too many slashes in the URLs for SED
-	if ( $k ~~ [ 'wikiurl', 'url', 'rss' ] ) {    
-		next;
-	}
-
-	#	print $k,' ',$nodeinfo->{$k},"\n";
-	my $sed = "s/PTP_" . uc($k) . "_PTP/" . $nodeinfo->{$k} . "/g\n";
+	my $sed = "s|PTP_" . uc($k) . "_PTP|" . trim($nodeinfo->{$k}) . "|g\n";
 	print $sed if $DEBUG;
 	print SED $sed;
 }
@@ -97,7 +118,7 @@ if ( !defined( $pubifaces )) {
 	$pubifaces = "";
 }
 
-if ( $device eq "WGT" ) {
+if ( $device eq "WGT634U" ) {
 	$waniface = "eth0.1";
 	if ($bridge) {
 		$pubifaces  = "eth0.0";
@@ -179,7 +200,7 @@ my $mask    = $ip->mask();
 print SED "s/PTP_PUBNET_PTP/$netaddr/g\n";
 print SED "s/PTP_PUBNETMASK_PTP/$mask/g\n";
 
-if ( defined($privaddr)) {
+if ( $privaddr ) {
 	print "privaddr = $privaddr\n";
 
 	$ip      = NetAddr::IP::Lite->new("$privaddr/$privmasklen");
@@ -223,7 +244,7 @@ while (<FILES>) {
 	chown( $uid, $gid, $dest );
 }
 
-open( LINKS, "find etc usr root www -type l |" );
+open( LINKS, "find etc usr root -type l |" );
 
 while (<LINKS>) {
 	chomp;
@@ -241,7 +262,7 @@ while (<LINKS>) {
 	system("cp -a $src $dest");
 }
 
-if ( !defined($privaddr) ) {
+if ( ! $privaddr ) {
 	unlink "output/etc/rc.d/S46firewall_private";
 	unlink "output/etc/init.d/firewall_private"; 
 	unlink "output/etc/uci-defaults/ptp.private.defaults";
@@ -350,8 +371,8 @@ if ( $device eq "ALIX" ) {
 } elsif ( $device eq "WDR3600" ) {
 	$imagename =
 	  "ar71xx/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin";
-} elsif ( $device eq "WGT" ) {
-	$imagename = "brcm47xx/openwrt-brcm47xx-squashfs.trx";
+} elsif ( $device eq "WGT634U" ) {
+	$imagename = "brcm47xx/openwrt-brcm47xx-legacy-squashfs.trx";
 } elsif ( $device eq "AIRROUTER" ) {
 	$imagename =
 	  "ar71xx/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin";
@@ -368,15 +389,17 @@ scp russell\@iris.personaltelco.net:src/openwrt/bin/$imagename /tmp/
 EOF
 system("chmod 755 output/usr/bin/fetch_image.sh");
 
-open( WWW, "find www -type f | grep -v nodes |" );
+open( WWW, "find splash/htdocs -type f | grep -v .gitignore |" );
 
 while (<WWW>) {
 	chomp;
 	my $src    = $_;
 	my @path   = split( '/', $src );
 	my $fname  = pop @path;
-	my $outdir = join( '/', "output", @path );
-	my $dest   = join( '/', "output", @path, $fname );
+	shift(@path);
+	shift(@path);
+	my $outdir = join( '/', "output", "www", @path);
+	my $dest   = join( '/', "output", "www", @path, $fname );
 
 	# print "source = $src ; outdir = $outdir ; dest = $dest\n";
 
@@ -394,6 +417,9 @@ while (<WWW>) {
 	chmod( $mode, $dest );
 	chown( $uid, $gid, $dest );
 }
+
+system("pushd output/www ; ln -sf /tmp/users.html . ; popd");
+
 
 sub getNodeInfoByNode {
 	my $node     = shift;
