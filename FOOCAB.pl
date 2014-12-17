@@ -402,7 +402,6 @@ while (<WWW>) {
 	my @path   = split( '/', $src );
 	my $fname  = pop @path;
 	shift(@path);
-	shift(@path);
 	my $outdir = join( '/', "output", "www", @path);
 	my $dest   = join( '/', "output", "www", @path, $fname );
 
