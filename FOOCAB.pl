@@ -394,7 +394,7 @@ scp russell\@iris.personaltelco.net:src/openwrt/bin/$imagename /tmp/
 EOF
 system("chmod 755 output/usr/bin/fetch_image.sh");
 
-open( WWW, "find splash/htdocs -type f | grep -v .gitignore |" );
+open( WWW, "find splash -type f | grep -v .gitignore |" );
 
 while (<WWW>) {
 	chomp;
