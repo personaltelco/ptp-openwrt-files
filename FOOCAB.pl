@@ -386,6 +386,7 @@ if ( $device eq "ALIX" ) {
 	$imagename = "ar71xx/openwrt-ar71xx-generic-ubnt-rocket-m-squashfs-sysupgrade.bin";
 }
 
+system("mkdir -p output/usr/bin");
 open( FIS, ">output/usr/bin/fetch_image.sh" );
 print FIS <<EOF;
 #!/bin/sh
