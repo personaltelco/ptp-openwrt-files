@@ -17,6 +17,7 @@ set dhcp.pub.interface=pub
 set dhcp.pub.start=5
 set dhcp.pub.limit=1024
 set dhcp.pub.leasetime=1h
+set dhcp.pub.force=1
 commit dhcp
 
 # remove local https and cgi infrastructure

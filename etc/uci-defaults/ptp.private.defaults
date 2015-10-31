@@ -20,5 +20,6 @@ set dhcp.priv.interface=priv
 set dhcp.priv.start=100
 set dhcp.priv.limit=150
 set dhcp.priv.leasetime=12h
+set dhcp.priv.force=1
 commit dhcp
 EOF
