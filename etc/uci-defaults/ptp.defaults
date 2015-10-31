@@ -30,12 +30,15 @@ commit uhttpd
 
 rename network.lan=pub
 set network.pub.ipaddr=PTP_PUBADDR_PTP
+set network.pub.ifname='PTP_PUBIFACES_PTP'
 set network.pub.netmask=PTP_PUBNETMASK_PTP
 set network.pub.ip6addr=PTP_PUB6PREFIX_PTP1/64
 
 set network.ptp=interface
 set network.ptp.ifname=ptp
 set network.ptp.proto=none
+
+set network.wan.ifname=PTP_WANIFACE_PTP
 
 delete network.wan6
 # prevent ip6assign from vaporising olsr6d routes
