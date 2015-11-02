@@ -1,14 +1,9 @@
 #!/bin/sh
 
-lanif=$(uci get network.pub.ifname)
-if [ -z "$lanif" ] ; then
-	exit 0
-fi
-
 uci batch <<EOF
-set network.pub.ifname=""
+set network.pub.ifname="PTP_PUBIFACES_PTP"
 set network.priv=interface
-set network.priv.ifname=$lanif
+set network.priv.ifname="PTP_PRIVIFACES_PTP"
 set network.priv.type=bridge
 set network.priv.proto=static
 set network.priv.ipaddr=PTP_PRIVADDR_PTP

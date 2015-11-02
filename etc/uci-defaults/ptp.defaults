@@ -73,7 +73,7 @@ set openvpn.ptp.verb=3
 commit openvpn
 
 set system.@system[0].hostname=PTP_HOSTNAME_PTP
-set system.@system[0].timezone=PST8PDT
+set system.@system[0].timezone='PST8PDT,M3.2.0,M11.1.0'
 set system.@system[0].log_ip=74.85.245.161
 commit system
 
