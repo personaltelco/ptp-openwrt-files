@@ -360,7 +360,9 @@ if ($wimax) {
 # fetch_image.sh script
 
 my $imagename = "";
-if ( $device eq "ALIX" || $device eq "NET4521" || $device eq "NET4826" ) {
+if ( $device eq "ALIX")
+	$imagename = "x86/openwrt-x86-geode-combined-squashfs.img";
+} elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
 	$imagename = "x86/openwrt-x86-generic-combined-squashfs.img";
 } elsif ( $device eq "MR3201A" ) {
 	$imagename = "atheros/openwrt-ath25-combined.squashfs.img";
