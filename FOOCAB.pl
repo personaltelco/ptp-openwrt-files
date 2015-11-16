@@ -152,7 +152,7 @@ if ( $device eq "WGT634U" ) {
 	$hwclock = 1;
 } elsif ( $device eq "MR3201A" ) {
 	$waniface   = "eth0";
-	print SED "s/PTP_ARCH_PTP/atheros/g\n";
+	print SED "s/PTP_ARCH_PTP/ath25/g\n";
 } elsif ( $device eq "RSTA" ) {
 	$waniface = "eth0";
 	if ($bridge) {
@@ -360,12 +360,12 @@ if ($wimax) {
 # fetch_image.sh script
 
 my $imagename = "";
-if ( $device eq "ALIX")
+if ( $device eq "ALIX") {
 	$imagename = "x86/openwrt-x86-geode-combined-squashfs.img";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
 	$imagename = "x86/openwrt-x86-generic-combined-squashfs.img";
 } elsif ( $device eq "MR3201A" ) {
-	$imagename = "atheros/openwrt-ath25-combined.squashfs.img";
+	$imagename = "ath25/openwrt-ath25-combined.squashfs.img";
 } elsif ( $device eq "WNDR3800" ) {
 	$imagename = "ar71xx/openwrt-ar71xx-generic-wndr3800-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WZR600DHP" ) {
