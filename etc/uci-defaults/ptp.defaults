@@ -40,9 +40,10 @@ set network.ptp.proto=none
 
 set network.wan.ifname=PTP_WANIFACE_PTP
 
-delete network.wan6
-# prevent ip6assign from vaporising olsr6d routes
-delete network.pub.ip6assign
+set network.wan6.ifname='@wan'
+set network.wan6.proto='dhcpv6'
+set network.wan6.reqprefix='60'
+
 commit network
 
 delete openvpn.custom_config

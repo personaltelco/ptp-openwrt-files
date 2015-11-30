@@ -391,7 +391,7 @@ open( FIS, ">output/usr/bin/fetch_image.sh" );
 print FIS <<EOF;
 #!/bin/sh
 cd /tmp
-scp russell\@iris.personaltelco.net:src/openwrt/bin/$imagename /tmp/
+scp openwrt\@hawg:src/openwrt/bin/$imagename /tmp/
 EOF
 system("chmod 755 output/usr/bin/fetch_image.sh");
 
