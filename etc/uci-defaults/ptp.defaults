@@ -91,5 +91,6 @@ set wireless.@wifi-iface[1].ssid=test.personaltelco.net/PTP_DEVICE_PTP
 commit wireless
 EOF
 
-
+/etc/init.d/odhcpd disable
+/etc/init.d/odhcpd stop
 
