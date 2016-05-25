@@ -361,29 +361,29 @@ if ($wimax) {
 
 my $imagename = "";
 if ( $device eq "ALIX") {
-	$imagename = "x86/openwrt-x86-geode-combined-squashfs.img";
+	$imagename = "x86/geode/lede-x86-geode-combined-squashfs.img";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
-	$imagename = "x86/openwrt-x86-generic-combined-squashfs.img";
+	$imagename = "x86/generic/lede-x86-generic-combined-squashfs.img";
 } elsif ( $device eq "MR3201A" ) {
-	$imagename = "ath25/openwrt-ath25-combined.squashfs.img";
+	$imagename = "ath25/generic/lede-ath25-combined.squashfs.img";
 } elsif ( $device eq "WNDR3800" ) {
-	$imagename = "ar71xx/openwrt-ar71xx-generic-wndr3800-squashfs-sysupgrade.bin";
+	$imagename = "ar71xx/generic/lede-ar71xx-generic-wndr3800-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WZR600DHP" ) {
 	$imagename =
-	  "ar71xx/openwrt-ar71xx-generic-wzr-600dhp-squashfs-sysupgrade.bin";
+	  "ar71xx/generic/lede-ar71xx-generic-wzr-600dhp-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WDR3600" ) {
 	$imagename =
-	  "ar71xx/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin";
+	  "ar71xx/generic/lede-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WGT634U" ) {
-	$imagename = "brcm47xx/openwrt-brcm47xx-legacy-squashfs.trx";
+	$imagename = "brcm47xx/legacy/lede-brcm47xx-legacy-standard-squashfs.trx";
 } elsif ( $device eq "AIRROUTER" ) {
 	$imagename =
-	  "ar71xx/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin";
+	  "ar71xx/generic/lede-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin";
 } elsif ( $device eq "RSTA" ) {
 	$imagename = 
-	  "ar71xx/openwrt-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
+	  "ar71xx/generic/lede-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ROCKET" ) {
-	$imagename = "ar71xx/openwrt-ar71xx-generic-ubnt-rocket-m-squashfs-sysupgrade.bin";
+	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-rocket-m-squashfs-sysupgrade.bin";
 }
 
 system("mkdir -p output/usr/bin");
@@ -391,7 +391,7 @@ open( FIS, ">output/usr/bin/fetch_image.sh" );
 print FIS <<EOF;
 #!/bin/sh
 cd /tmp
-scp openwrt\@hawg:src/openwrt/bin/$imagename /tmp/
+scp openwrt\@hawg:src/lede/bin/targets/$imagename /tmp/
 EOF
 system("chmod 755 output/usr/bin/fetch_image.sh");
 
