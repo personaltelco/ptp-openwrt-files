@@ -363,7 +363,7 @@ my $imagename = "";
 if ( $device eq "ALIX") {
 	$imagename = "x86/geode/lede-x86-geode-combined-squashfs.img";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
-	$imagename = "x86/generic/lede-x86-generic-combined-squashfs.img";
+	$imagename = "x86/legacy/lede-x86-legacy-combined-squashfs.img";
 } elsif ( $device eq "MR3201A" ) {
 	$imagename = "ath25/generic/lede-ath25-combined.squashfs.img";
 } elsif ( $device eq "WNDR3800" ) {
