@@ -119,11 +119,11 @@ if ( !defined( $pubifaces )) {
 }
 
 if ( $device eq "WGT634U" ) {
-	$waniface = "eth0.1";
+	$waniface = "eth0.2";
 	if ($bridge) {
-		$pubifaces  = "eth0.0";
+		$pubifaces  = "eth0.1";
 	} else {
-		$privifaces = "eth0.0";
+		$privifaces = "eth0.1";
 	}
 	print SED "s/PTP_ARCH_PTP/wgt634u/g\n";
 } elsif ( $device eq "ALIX" ) {
