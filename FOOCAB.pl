@@ -15,7 +15,6 @@ my $iPV6SLASH48 = "2001:470:e962";
 
 my $host;
 my $node;
-my $wimax = 0;
 
 my $APINODEBASE = "https://personaltelco.net/api/v0/nodes/";
 my $APIHOSTBASE = "https://personaltelco.net/api/v0/hosts/";
@@ -23,11 +22,8 @@ my $IMGBASE = "https://personaltelco.net/splash/images/nodes/";
 
 my $result = GetOptions(
 	"host=s" => \$host,
-	"node=s" => \$node,
-	"wimax"  => \$wimax
+	"node=s" => \$node
 );
-
-print "wimax = $wimax\n";
 
 my $nodeinfo;
 
@@ -125,7 +121,6 @@ if ( $device eq "WGT634U" ) {
 	} else {
 		$privifaces = "eth0.1";
 	}
-	print SED "s/PTP_ARCH_PTP/wgt634u/g\n";
 } elsif ( $device eq "ALIX" || $device eq "APU") {
 	$waniface = "eth0";
 	if ($bridge) {
@@ -134,7 +129,6 @@ if ( $device eq "WGT634U" ) {
 		$pubifaces  = "eth1";
 		$privifaces = "eth2";
 	}
-	print SED "s/PTP_ARCH_PTP/alix2/g\n";
 	$hwclock = 1;
 } elsif ( $device eq "NET4521" ) {
 	$waniface = "eth0";
@@ -144,15 +138,12 @@ if ( $device eq "WGT634U" ) {
 	else {
 		$privifaces = "eth1";
 	}
-	print SED "s/PTP_ARCH_PTP/net4521/g\n";
 	$hwclock = 1;
 } elsif ( $device eq "NET4826" ) {
 	$waniface   = "eth0";
-	print SED "s/PTP_ARCH_PTP/net4826/g\n";
 	$hwclock = 1;
 } elsif ( $device eq "MR3201A" ) {
 	$waniface   = "eth0";
-	print SED "s/PTP_ARCH_PTP/ath25/g\n";
 } elsif ( $device eq "RSTA" ) {
 	$waniface = "eth0";
 	if ($bridge) {
@@ -161,7 +152,6 @@ if ( $device eq "WGT634U" ) {
 	else {
 		$privifaces = "eth1";
 	}
-	print SED "s/PTP_ARCH_PTP/routerstation/g\n";
 } elsif ( $device eq "WNDR3800" ) {
 	$waniface = "eth1";
 	if ($bridge) {
@@ -347,14 +337,6 @@ start() {
 	open( CRONTAB, ">>output/etc/crontabs/root" );
 	print CRONTAB "0 0 * * *	/sbin/hwclock -w -u\n";
 	close(CRONTAB);
-}
-
-if ($wimax) {
-	open( CRONTAB, ">>output/etc/crontabs/root" );
-	print CRONTAB "*/5 * * * *     /usr/bin/motorola.sh > /dev/null 2>&1\n";
-	close(CRONTAB);
-
-	system("cp -a wimax/* output/");
 }
 
 # fetch_image.sh script
