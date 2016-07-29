@@ -126,7 +126,7 @@ if ( $device eq "WGT634U" ) {
 		$privifaces = "eth0.1";
 	}
 	print SED "s/PTP_ARCH_PTP/wgt634u/g\n";
-} elsif ( $device eq "ALIX" ) {
+} elsif ( $device eq "ALIX" || $device eq "APU") {
 	$waniface = "eth0";
 	if ($bridge) {
 		$pubifaces  = "eth1 eth2";
@@ -360,8 +360,10 @@ if ($wimax) {
 # fetch_image.sh script
 
 my $imagename = "";
-if ( $device eq "ALIX") {
+if ( $device eq "ALIX" ) {
 	$imagename = "x86/geode/lede-x86-geode-combined-squashfs.img";
+} elsif ( $device eq "APU" ) {
+	$imagename = "x86/64/lede-x86-64-combined-squashfs.img";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
 	$imagename = "x86/legacy/lede-x86-legacy-combined-squashfs.img";
 } elsif ( $device eq "MR3201A" ) {
