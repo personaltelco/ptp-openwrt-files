@@ -114,7 +114,7 @@ if ( !defined( $pubifaces )) {
 	$pubifaces = "";
 }
 
-if ( $device eq "WGT634U" ) {
+if ( $device eq "DIR860L" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	$waniface = "eth0.2";
 	if ($bridge) {
 		$pubifaces  = "eth0.1";
@@ -158,13 +158,6 @@ if ( $device eq "WGT634U" ) {
 		$pubifaces  = "eth0";
 	} else {
 		$privifaces = "eth0";
-	}
-} elsif ( $device eq "WDR3600" ) {
-	$waniface = "eth0.2";
-	if ($bridge) {
-		$pubifaces  = "eth0.1";
-	} else {
-		$privifaces = "eth0.1";
 	}
 } elsif ( $device eq "WZR600DHP" || $device eq "AIRROUTER" ) {
 	$waniface = "eth1";
@@ -346,6 +339,8 @@ if ( $device eq "ALIX" ) {
 	$imagename = "x86/geode/lede-x86-geode-combined-squashfs.img";
 } elsif ( $device eq "APU" ) {
 	$imagename = "x86/64/lede-x86-64-combined-squashfs.img";
+} elsif ( $device eq "DIR860L" ) {
+	$imagename = "ramips/mt7621/lede-ramips-mt7621-dir-860l-b1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
 	$imagename = "x86/legacy/lede-x86-legacy-combined-squashfs.img";
 } elsif ( $device eq "MR3201A" ) {
@@ -353,19 +348,15 @@ if ( $device eq "ALIX" ) {
 } elsif ( $device eq "WNDR3800" ) {
 	$imagename = "ar71xx/generic/lede-ar71xx-generic-wndr3800-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WZR600DHP" ) {
-	$imagename =
-	  "ar71xx/generic/lede-ar71xx-generic-wzr-600dhp-squashfs-sysupgrade.bin";
+	$imagename = "ar71xx/generic/lede-ar71xx-generic-wzr-600dhp-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WDR3600" ) {
-	$imagename =
-	  "ar71xx/generic/lede-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin";
+	$imagename = "ar71xx/generic/lede-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WGT634U" ) {
 	$imagename = "brcm47xx/legacy/lede-brcm47xx-legacy-standard-squashfs.trx";
 } elsif ( $device eq "AIRROUTER" ) {
-	$imagename =
-	  "ar71xx/generic/lede-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin";
+	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin";
 } elsif ( $device eq "RSTA" ) {
-	$imagename = 
-	  "ar71xx/generic/lede-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
+	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ROCKET" ) {
 	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-rocket-m-squashfs-sysupgrade.bin";
 }
