@@ -166,7 +166,7 @@ if ( $device eq "DIR860L" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	} else {
 		$privifaces = "eth0";
 	}
-} elsif ( $device eq "ROCKET" ) {
+} elsif ( $device eq "ROCKET" || $device eq "MR24") {
 	$waniface = "eth0";
 	$pubifaces = "";
 }
@@ -359,6 +359,8 @@ if ( $device eq "ALIX" ) {
 	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ROCKET" ) {
 	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-rocket-m-squashfs-sysupgrade.bin";
+} elsif ( $device eq "MR24" ) {
+	$imagename = "apm821xx/nand/lede-apm821xx-nand-mr24-squashfs-sysupgrade.tar";
 }
 
 system("mkdir -p output/usr/bin");

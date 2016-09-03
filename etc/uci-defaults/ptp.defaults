@@ -38,8 +38,11 @@ set network.ptp=interface
 set network.ptp.ifname=ptp
 set network.ptp.proto=none
 
+set network.wan=interface
+set network.wan.proto=dhcp
 set network.wan.ifname=PTP_WANIFACE_PTP
 
+set network.wan6=interface
 set network.wan6.ifname='@wan'
 set network.wan6.proto='dhcpv6'
 set network.wan6.reqprefix='60'
