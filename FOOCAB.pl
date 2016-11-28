@@ -11,7 +11,7 @@ use Data::Dumper;
 my $DEBUG = 1;
 
 # IPv6 prefix - this one belongs to PTP
-my $iPV6SLASH48 = "2001:470:e962";
+my $iPV6SLASH48 = "2001:470:8307";
 
 my $host;
 my $node;
