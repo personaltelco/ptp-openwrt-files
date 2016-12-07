@@ -10,8 +10,5 @@
 /usr/bin/client-status.sh
 /usr/bin/rss
 /usr/bin/watch_traffic
-/usr/bin/wimax-down
-/usr/bin/wimax-sig
-/usr/bin/wimax-up
 /usr/nocatauth/
 /www/
