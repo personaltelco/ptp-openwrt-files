@@ -169,6 +169,14 @@ if ( $device eq "DIR860L" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 } elsif ( $device eq "ROCKET" || $device eq "MR24") {
 	$waniface = "eth0";
 	$pubifaces = "";
+} elsif ( $device eq "RB493G") {
+	$waniface = "eth1.1";
+	if ($bridge) {
+		$pubifaces = "eth0 eth0.1";
+	} else {
+		$pubifaces = "eth0";
+		$privifaces = "eth1.1";
+	}
 }
 
 print SED "s/PTP_WANIFACE_PTP/$waniface/g\n";
@@ -335,7 +343,9 @@ start() {
 # fetch_image.sh script
 
 my $imagename = "";
-if ( $device eq "ALIX" ) {
+if ( $device eq "AIRROUTER" ) {
+	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin";
+} elsif ( $device eq "ALIX" ) {
 	$imagename = "x86/geode/lede-x86-geode-combined-squashfs.img";
 } elsif ( $device eq "APU" ) {
 	$imagename = "x86/64/lede-x86-64-combined-squashfs.img";
@@ -343,24 +353,24 @@ if ( $device eq "ALIX" ) {
 	$imagename = "ramips/mt7621/lede-ramips-mt7621-dir-860l-b1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
 	$imagename = "x86/legacy/lede-x86-legacy-combined-squashfs.img";
+} elsif ( $device eq "MR24" ) {
+	$imagename = "apm821xx/nand/lede-apm821xx-nand-mr24-squashfs-sysupgrade.tar";
 } elsif ( $device eq "MR3201A" ) {
 	$imagename = "ath25/generic/lede-ath25-combined.squashfs.img";
-} elsif ( $device eq "WNDR3800" ) {
-	$imagename = "ar71xx/generic/lede-ar71xx-generic-wndr3800-squashfs-sysupgrade.bin";
-} elsif ( $device eq "WZR600DHP" ) {
-	$imagename = "ar71xx/generic/lede-ar71xx-generic-wzr-600dhp-squashfs-sysupgrade.bin";
+} elsif ( $device eq "RB493G" ) {
+	$imagename = "ar71xx/mikrotik/lede-ar71xx-mikrotik-nand-large-squashfs-sysupgrade.bin";
+} elsif ( $device eq "ROCKET" ) {
+	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-rocket-m-squashfs-sysupgrade.bin";
+} elsif ( $device eq "RSTA" ) {
+	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WDR3600" ) {
 	$imagename = "ar71xx/generic/lede-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WGT634U" ) {
 	$imagename = "brcm47xx/legacy/lede-brcm47xx-legacy-standard-squashfs.trx";
-} elsif ( $device eq "AIRROUTER" ) {
-	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin";
-} elsif ( $device eq "RSTA" ) {
-	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
-} elsif ( $device eq "ROCKET" ) {
-	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-rocket-m-squashfs-sysupgrade.bin";
-} elsif ( $device eq "MR24" ) {
-	$imagename = "apm821xx/nand/lede-apm821xx-nand-mr24-squashfs-sysupgrade.tar";
+} elsif ( $device eq "WNDR3800" ) {
+	$imagename = "ar71xx/generic/lede-ar71xx-generic-wndr3800-squashfs-sysupgrade.bin";
+} elsif ( $device eq "WZR600DHP" ) {
+	$imagename = "ar71xx/generic/lede-ar71xx-generic-wzr-600dhp-squashfs-sysupgrade.bin";
 }
 
 system("mkdir -p output/usr/bin");
