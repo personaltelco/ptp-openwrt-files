@@ -170,11 +170,11 @@ if ( $device eq "DIR860L" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	$waniface = "eth0";
 	$pubifaces = "";
 } elsif ( $device eq "RB493G") {
-	$waniface = "eth1.1";
+	$waniface = "eth1.2";
 	if ($bridge) {
-		$pubifaces = "eth0 eth0.1";
+		$pubifaces = "eth0.1 eth1.1";
 	} else {
-		$pubifaces = "eth0";
+		$pubifaces = "eth0.1";
 		$privifaces = "eth1.1";
 	}
 }
