@@ -87,14 +87,26 @@ set system.@system[0].log_ip=74.85.245.161
 commit system
 
 set wireless.radio0.disabled=0
-set wireless.@wifi-iface[0].network=pub
-set wireless.@wifi-iface[0].ifname=wlan0
-set wireless.@wifi-iface[0].ssid=test.personaltelco.net/PTP_DEVICE_PTP
-
 set wireless.radio1.disabled=0
-set wireless.@wifi-iface[1].network=pub
-set wireless.@wifi-iface[1].ifname=wlan1
-set wireless.@wifi-iface[1].ssid=test.personaltelco.net/PTP_DEVICE_PTP
+
+delete wireless.default_radio0
+delete wireless.default_radio1
+
+add wireless wifi-iface
+set wireless.@wifi-iface[-1].device=radio0
+set wireless.@wifi-iface[-1].network=pub
+set wireless.@wifi-iface[-1].ifname=wlan0
+set wireless.@wifi-iface[-1].mode=ap
+set wireless.@wifi-iface[-1].ssid=test.personaltelco.net/PTP_DEVICE_PTP
+set wireless.@wifi-iface[-1].encryption=none
+
+add wireless wifi-iface
+set wireless.@wifi-iface[-1].device=radio1
+set wireless.@wifi-iface[-1].network=pub
+set wireless.@wifi-iface[-1].ifname=wlan1
+set wireless.@wifi-iface[-1].mode=ap
+set wireless.@wifi-iface[-1].ssid=test.personaltelco.net/PTP_DEVICE_PTP
+set wireless.@wifi-iface[-1].encryption=none
 
 commit wireless
 EOF
