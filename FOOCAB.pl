@@ -152,14 +152,7 @@ if ( $device eq "DIR860L" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	else {
 		$privifaces = "eth1";
 	}
-} elsif ( $device eq "WNDR3800" ) {
-	$waniface = "eth1";
-	if ($bridge) {
-		$pubifaces  = "eth0";
-	} else {
-		$privifaces = "eth0";
-	}
-} elsif ( $device eq "WZR600DHP" || $device eq "AIRROUTER" ) {
+} elsif ( $device eq "WNDR3800" || $device eq "WZR600DHP" || $device eq "AIRROUTER" ) {
 	$waniface = "eth1";
 	if ($bridge) {
 		$pubifaces  = "eth0.1";
