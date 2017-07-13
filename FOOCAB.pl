@@ -339,7 +339,7 @@ my $imagename = "";
 if ( $device eq "AIRROUTER" ) {
 	$imagename = "ar71xx/generic/lede-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ALIX" ) {
-	$imagename = "x86/geode/lede-x86-geode-combined-squashfs.img";
+	$imagename = "x86/geode/lede-x86-geode-combined-squashfs.img.gz";
 } elsif ( $device eq "APU" ) {
 	$imagename = "x86/64/lede-x86-64-combined-squashfs.img";
 } elsif ( $device eq "DIR860L" ) {
