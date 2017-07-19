@@ -446,4 +446,27 @@ if ( defined($img) ) {
 	close IMGOUT;
 } else {
 	print "No node logo\n";
-}	
+}
+
+my $pki = $ENV{'PKI'};
+system("cp $pki/private/$host.key output/etc/openvpn/keys/");
+system("cp $pki/issued/$host.crt output/etc/openvpn/keys/");
+
+my $salt = `dd if=/dev/random bs=6 count=1 2>/dev/null | base64`;
+chomp($salt);
+
+open( PASS, "pass");
+my $pass = <PASS>;
+close(PASS);
+chomp($pass);
+
+open( CMD, "-|", "openssl passwd -1 -salt $salt $pass" );
+my $hash = <CMD>;
+close CMD;
+chomp($hash);
+
+open( FIX, ">output/etc/uci-defaults/ptp.passwd.default" );
+print FIX <<EOF;
+#!/bin/sh
+sed -i 's|root::|root:$hash:|' /etc/shadow
+EOF

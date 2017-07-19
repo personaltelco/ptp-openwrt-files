@@ -61,7 +61,7 @@ set openvpn.ptp.client=1
 set openvpn.ptp.dev_type=tap
 set openvpn.ptp.dev=ptp
 set openvpn.ptp.proto=udp
-set openvpn.ptp.remote='drei.personaltelco.net 1195'
+set openvpn.ptp.remote='iris.personaltelco.net 1195'
 set openvpn.ptp.tun_mtu=1468
 set openvpn.ptp.cipher=AES-256-CBC
 set openvpn.ptp.auth=SHA256
@@ -78,6 +78,8 @@ set openvpn.ptp.status=/tmp/openvpn-status.log
 set openvpn.ptp.persist_key=1
 set openvpn.ptp.persist_tun=1
 set openvpn.ptp.comp_lzo=yes
+set openvpn.ptp.tls_remote=1
+set openvpn.ptp.auth_nocache=1
 set openvpn.ptp.verb=3
 commit openvpn
 
