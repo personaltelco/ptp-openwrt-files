@@ -470,3 +470,6 @@ print FIX <<EOF;
 #!/bin/sh
 sed -i 's|root::|root:$hash:|' /etc/shadow
 EOF
+
+my $hostkeys = $ENV{'HOSTKEYDIR'};
+system("cp $hostkeys/dropbear/$host.key output/etc/dropbear/dropbear_rsa_host_key");
