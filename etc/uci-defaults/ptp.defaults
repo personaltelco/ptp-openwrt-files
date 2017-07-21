@@ -78,7 +78,7 @@ set openvpn.ptp.status=/tmp/openvpn-status.log
 set openvpn.ptp.persist_key=1
 set openvpn.ptp.persist_tun=1
 set openvpn.ptp.comp_lzo=yes
-set openvpn.ptp.tls_remote=1
+set openvpn.ptp.remote_cert_tls=server
 set openvpn.ptp.auth_nocache=1
 set openvpn.ptp.verb=3
 commit openvpn
