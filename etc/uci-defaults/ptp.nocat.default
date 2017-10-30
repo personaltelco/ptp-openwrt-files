@@ -1,0 +1,22 @@
+#!/bin/sh
+
+. /lib/functions.sh
+
+rm /tmp/initialize.fw
+
+preauth_host() {
+        local section="$1"
+        local _mac
+        local _ip
+
+        config_get _mac "$section" mac
+        config_get _ip "$section" ip
+
+        [ -n "$_ip" ] && [ -n "_$mac" ] && echo /usr/nocatauth/bin/access.fw permit $_mac $_ip Member >> /tmp/initialize.fw
+}
+
+config_load dhcp
+config_foreach preauth_host host
+
+awk '{ split($4,a,".") ; if(a[1] == 10 && a[2] == 11) { printf "%03d%03d %s\n",a[3],a[4],$0 } }' /tmp/initialize.fw | sort -u | cut -d' ' -f 2- >>/usr/nocatauth/bin/initialize.fw
+rm /tmp/initialize.fw
