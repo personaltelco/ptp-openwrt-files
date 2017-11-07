@@ -2,7 +2,7 @@
 
 . /lib/functions.sh
 
-rm /tmp/initialize.fw
+[ -f /tmp/initialize.fw ] && rm /tmp/initialize.fw
 
 preauth_host() {
         local section="$1"
@@ -17,6 +17,8 @@ preauth_host() {
 
 config_load dhcp
 config_foreach preauth_host host
+
+[ -f /tmp/initialize.fw ] || exit 0
 
 awk '{ split($4,a,".") ; if(a[1] == 10 && a[2] == 11) { printf "%03d%03d %s\n",a[3],a[4],$0 } }' /tmp/initialize.fw | sort -u | cut -d' ' -f 2- >>/usr/nocatauth/bin/initialize.fw
 rm /tmp/initialize.fw
