@@ -341,7 +341,7 @@ if ( $device eq "AIRROUTER" ) {
 } elsif ( $device eq "ALIX" ) {
 	$imagename = "x86/geode/lede-x86-geode-combined-squashfs.img.gz";
 } elsif ( $device eq "APU" ) {
-	$imagename = "x86/64/lede-x86-64-combined-squashfs.img";
+	$imagename = "x86/64/lede-x86-64-combined-squashfs.img.gz";
 } elsif ( $device eq "DIR860L" ) {
 	$imagename = "ramips/mt7621/lede-ramips-mt7621-dir-860l-b1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
