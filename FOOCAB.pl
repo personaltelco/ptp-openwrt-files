@@ -347,7 +347,7 @@ if ( $device eq "AIRROUTER" ) {
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
 	$imagename = "x86/legacy/openwrt-x86-legacy-combined-squashfs.img";
 } elsif ( $device eq "MR24" ) {
-	$imagename = "apm821xx/nand/openwrt-apm821xx-nand-mr24-squashfs-sysupgrade.tar";
+	$imagename = "apm821xx/nand/openwrt-apm821xx-nand-meraki_mr24-squashfs-sysupgrade.tar";
 } elsif ( $device eq "MR3201A" ) {
 	$imagename = "ath25/generic/openwrt-ath25-combined.squashfs.img";
 } elsif ( $device eq "RB493G" ) {
