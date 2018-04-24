@@ -349,7 +349,7 @@ if ( $device eq "AIRROUTER" ) {
 } elsif ( $device eq "MR24" ) {
 	$imagename = "apm821xx/nand/openwrt-apm821xx-nand-meraki_mr24-squashfs-sysupgrade.tar";
 } elsif ( $device eq "MR3201A" ) {
-	$imagename = "ath25/generic/openwrt-ath25-combined.squashfs.img";
+	$imagename = "ath25/generic/openwrt-ath25-generic-squashfs-sysupgrade.bin";
 } elsif ( $device eq "RB493G" ) {
 	$imagename = "ar71xx/mikrotik/openwrt-ar71xx-mikrotik-nand-large-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ROCKET" ) {
