@@ -345,7 +345,7 @@ if ( $device eq "AIRROUTER" ) {
 } elsif ( $device eq "DIR860L" ) {
 	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-dir-860l-b1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
-	$imagename = "x86/legacy/openwrt-x86-legacy-combined-squashfs.img";
+	$imagename = "x86/legacy/openwrt-x86-legacy-combined-squashfs.img.gz";
 } elsif ( $device eq "MR24" ) {
 	$imagename = "apm821xx/nand/openwrt-apm821xx-nand-meraki_mr24-squashfs-sysupgrade.tar";
 } elsif ( $device eq "MR3201A" ) {
