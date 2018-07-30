@@ -114,7 +114,7 @@ if ( !defined( $pubifaces )) {
 	$pubifaces = "";
 }
 
-if ( $device eq "DIR860L" || $device eq "WDR3600" || $device eq "WGT634U" ) {
+if ( $device eq "DIR860L" || $device eq "ERX" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	$waniface = "eth0.2";
 	if ($bridge) {
 		$pubifaces  = "eth0.1";
@@ -344,6 +344,8 @@ if ( $device eq "AIRROUTER" ) {
 	$imagename = "x86/64/openwrt-x86-64-combined-squashfs.img.gz";
 } elsif ( $device eq "DIR860L" ) {
 	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-dir-860l-b1-squashfs-sysupgrade.bin";
+} elsif ( $device eq "ERX" ) {
+	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-ubnt-erx-squashfs-sysupgrade.tar";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
 	$imagename = "x86/legacy/openwrt-x86-legacy-combined-squashfs.img.gz";
 } elsif ( $device eq "MR24" ) {
