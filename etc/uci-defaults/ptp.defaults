@@ -111,6 +111,29 @@ set wireless.@wifi-iface[-1].ssid=test.personaltelco.net/PTP_DEVICE_PTP
 set wireless.@wifi-iface[-1].encryption=none
 
 commit wireless
+
+set snmpd.@system[0].sysContact='info@personaltelco.net'
+set snmpd.@system[0].sysName='PTP_HOSTNAME_PTP'
+set snmpd.@system[0].sysLocation='NodePTP_NODE_PTP'
+
+set snmpd.public.community='sPecial0ps'
+set snmpd.public6.community='sPecial0ps'
+
+delete snmpd.private
+delete snmpd.private6
+delete snmpd.private_v1
+delete snmpd.private_v2c
+delete snmpd.private_usm
+delete snmpd.private_access
+
+delete snmpd.@exec[0]
+
+add snmpd exec
+set snmpd.@exec[-1].name=assoc-count
+set snmpd.@exec[-1].prog='/usr/bin/assoc-count'
+
+commit snmpd
+
 EOF
 
 /etc/init.d/odhcpd disable
