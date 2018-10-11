@@ -203,7 +203,7 @@ if ( $privaddr ) {
 }
 close SED;
 
-open( FILES, "find etc lib usr root -type f |" );
+open( FILES, "find etc lib root -type f |" );
 
 while (<FILES>) {
 	chomp;
