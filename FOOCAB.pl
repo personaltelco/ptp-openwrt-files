@@ -231,7 +231,7 @@ while (<FILES>) {
 	chown( $uid, $gid, $dest );
 }
 
-open( LINKS, "find etc usr root -type l |" );
+open( LINKS, "find etc root -type l |" );
 
 while (<LINKS>) {
 	chomp;
