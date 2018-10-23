@@ -170,6 +170,14 @@ if ( $device eq "DIR860L" || $device eq "ERX" || $device eq "WDR3600" || $device
 		$pubifaces = "eth0.1";
 		$privifaces = "eth1.1";
 	}
+} elsif ( $device eq "ESPBIN") {
+	$waniface = "wan";
+	if ($bridge) {
+		$pubifaces = "lan0 lan1";
+	} else {
+		$pubifaces = "lan0";
+		$privifaces = "lan1";
+	}
 }
 
 print SED "s/PTP_WANIFACE_PTP/$waniface/g\n";
@@ -346,6 +354,8 @@ if ( $device eq "AIRROUTER" ) {
 	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-dir-860l-b1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ERX" ) {
 	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-ubnt-erx-squashfs-sysupgrade.tar";
+} elsif ( $device eq "ESPBIN" ) {
+	$imagename = "mvebu/cortexa53/openwrt-mvebu-cortexa53-globalscale-espressobin-squashfs-sdcard.img.gz";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
 	$imagename = "x86/legacy/openwrt-x86-legacy-combined-squashfs.img.gz";
 } elsif ( $device eq "MR24" ) {
