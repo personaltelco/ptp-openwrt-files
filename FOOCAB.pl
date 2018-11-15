@@ -369,13 +369,13 @@ if ( $device eq "AIRROUTER" ) {
 } elsif ( $device eq "RSTA" ) {
 	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WDR3600" ) {
-	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin";
+	$imagename = "ath79/generic/openwrt-ath79-generic-tplink_tl-wdr3600-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WGT634U" ) {
 	$imagename = "brcm47xx/legacy/openwrt-brcm47xx-legacy-standard-squashfs.trx";
 } elsif ( $device eq "WNDR3800" ) {
-	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-wndr3800-squashfs-sysupgrade.bin";
+	$imagename = "ath79/generic/openwrt-ath79-generic-netgear_wndr3800-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WZR600DHP" ) {
-	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-wzr-600dhp-squashfs-sysupgrade.bin";
+	$imagename = "ath79/generic/openwrt-ath79-generic-buffalo_wzr-hp-ag300h-squashfs-sysupgrade.bin";
 }
 
 system("mkdir -p output/usr/bin");
