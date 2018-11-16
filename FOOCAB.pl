@@ -152,12 +152,19 @@ if ( $device eq "DIR860L" || $device eq "ERX" || $device eq "WDR3600" || $device
 	else {
 		$privifaces = "eth1";
 	}
-} elsif ( $device eq "WNDR3800" || $device eq "WZR600DHP" || $device eq "AIRROUTER" ) {
+} elsif ( $device eq "WNDR3800" || $device eq "WZR600DHP" ) {
 	$waniface = "eth1";
 	if ($bridge) {
 		$pubifaces  = "eth0.1";
 	} else {
 		$privifaces = "eth0.1";
+	}
+} elsif ( $device eq "AIRROUTER" ) {
+	$waniface = "eth0";
+	if ($bridge) {
+		$pubifaces  = "eth1.1";
+	} else {
+		$privifaces = "eth1.1";
 	}
 } elsif ( $device eq "ROCKET" || $device eq "MR24") {
 	$waniface = "eth0";
@@ -345,7 +352,7 @@ start() {
 
 my $imagename = "";
 if ( $device eq "AIRROUTER" ) {
-	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin";
+	$imagename = "ath79/generic/openwrt-ath79-generic-ubnt_airrouter-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ALIX" ) {
 	$imagename = "x86/geode/openwrt-x86-geode-combined-squashfs.img.gz";
 } elsif ( $device eq "APU" ) {
