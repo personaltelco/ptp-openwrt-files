@@ -360,7 +360,7 @@ if ( $device eq "AIRROUTER" ) {
 } elsif ( $device eq "DIR860L" ) {
 	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-dir-860l-b1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ERX" ) {
-	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-ubnt-erx-squashfs-sysupgrade.tar";
+	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-ubnt-erx-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ESPBIN" ) {
 	$imagename = "mvebu/cortexa53/openwrt-mvebu-cortexa53-globalscale-espressobin-squashfs-sdcard.img.gz";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
