@@ -365,7 +365,7 @@ if ( $device eq "AIRROUTER" ) {
 } elsif ( $device eq "APU" ) {
 	$imagename = "x86/64/openwrt-x86-64-combined-squashfs.img.gz";
 } elsif ( $device eq "DIR860L" ) {
-	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-dir-860l-b1-squashfs-sysupgrade.bin";
+	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-dlink_dir-860l-b1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ERX" ) {
 	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-ubnt-erx-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ESPBIN" ) {
