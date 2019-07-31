@@ -10,8 +10,8 @@ set dhcp.@dnsmasq[0].nohosts=0
 # rebind_protection off in order to support resolution of .ptp addresses
 set dhcp.@dnsmasq[0].rebind_protection=0
 add_list dhcp.@dnsmasq[0].notinterface=PTP_WANIFACE_PTP
-add_list dhcp.@dnsmasq[0].server=/ptp/199.223.125.93
-add_list dhcp.@dnsmasq[0].server=/11.10.in-addr.arpa/199.223.125.93
+add_list dhcp.@dnsmasq[0].server=/ptp/140.211.9.122
+add_list dhcp.@dnsmasq[0].server=/11.10.in-addr.arpa/140.211.9.122
 rename dhcp.lan=pub
 set dhcp.pub.interface=pub
 set dhcp.pub.start=5
@@ -77,7 +77,7 @@ set openvpn.ptp.up=/etc/openvpn/client.sh
 set openvpn.ptp.status=/tmp/openvpn-status.log
 set openvpn.ptp.persist_key=1
 set openvpn.ptp.persist_tun=1
-set openvpn.ptp.comp_lzo=yes
+set openvpn.ptp.compress=lzo
 set openvpn.ptp.remote_cert_tls=server
 set openvpn.ptp.auth_nocache=1
 set openvpn.ptp.verb=3
@@ -85,7 +85,7 @@ commit openvpn
 
 set system.@system[0].hostname=PTP_HOSTNAME_PTP
 set system.@system[0].timezone='PST8PDT,M3.2.0,M11.1.0'
-set system.@system[0].log_ip=199.223.125.93
+set system.@system[0].log_ip=140.211.9.122
 commit system
 
 set wireless.radio0.disabled=0
@@ -111,6 +111,29 @@ set wireless.@wifi-iface[-1].ssid=test.personaltelco.net/PTP_DEVICE_PTP
 set wireless.@wifi-iface[-1].encryption=none
 
 commit wireless
+
+set snmpd.@system[0].sysContact='info@personaltelco.net'
+set snmpd.@system[0].sysName='PTP_HOSTNAME_PTP'
+set snmpd.@system[0].sysLocation='NodePTP_NODE_PTP'
+
+set snmpd.public.community='sPecial0ps'
+set snmpd.public6.community='sPecial0ps'
+
+delete snmpd.private
+delete snmpd.private6
+delete snmpd.private_v1
+delete snmpd.private_v2c
+delete snmpd.private_usm
+delete snmpd.private_access
+
+delete snmpd.@exec[0]
+
+add snmpd exec
+set snmpd.@exec[-1].name=assoc-count
+set snmpd.@exec[-1].prog='/usr/bin/assoc-count'
+
+commit snmpd
+
 EOF
 
 /etc/init.d/odhcpd disable

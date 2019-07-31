@@ -114,7 +114,7 @@ if ( !defined( $pubifaces )) {
 	$pubifaces = "";
 }
 
-if ( $device eq "DIR860L" || $device eq "WDR3600" || $device eq "WGT634U" ) {
+if ( $device eq "DIR860L" || $device eq "ERX" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	$waniface = "eth0.2";
 	if ($bridge) {
 		$pubifaces  = "eth0.1";
@@ -152,12 +152,26 @@ if ( $device eq "DIR860L" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	else {
 		$privifaces = "eth1";
 	}
-} elsif ( $device eq "WNDR3800" || $device eq "WZR600DHP" || $device eq "AIRROUTER" ) {
+} elsif ( $device eq "WNDR3800" ) {
+	$waniface = "eth1";
+	if ($bridge) {
+		$pubifaces  = "eth0";
+	} else {
+		$privifaces = "eth0";
+	}
+} elsif ( $device eq "WZR600DHP" ) {
 	$waniface = "eth1";
 	if ($bridge) {
 		$pubifaces  = "eth0.1";
 	} else {
 		$privifaces = "eth0.1";
+	}
+} elsif ( $device eq "AIRROUTER" ) {
+	$waniface = "eth0";
+	if ($bridge) {
+		$pubifaces  = "eth1.1";
+	} else {
+		$privifaces = "eth1.1";
 	}
 } elsif ( $device eq "ROCKET" || $device eq "MR24") {
 	$waniface = "eth0";
@@ -169,6 +183,14 @@ if ( $device eq "DIR860L" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	} else {
 		$pubifaces = "eth0.1";
 		$privifaces = "eth1.1";
+	}
+} elsif ( $device eq "ESPBIN") {
+	$waniface = "wan";
+	if ($bridge) {
+		$pubifaces = "lan0 lan1";
+	} else {
+		$pubifaces = "lan0";
+		$privifaces = "lan1";
 	}
 }
 
@@ -203,7 +225,7 @@ if ( $privaddr ) {
 }
 close SED;
 
-open( FILES, "find etc lib usr root -type f |" );
+open( FILES, "find etc lib root -type f |" );
 
 while (<FILES>) {
 	chomp;
@@ -231,7 +253,7 @@ while (<FILES>) {
 	chown( $uid, $gid, $dest );
 }
 
-open( LINKS, "find etc usr root -type l |" );
+open( LINKS, "find etc root -type l |" );
 
 while (<LINKS>) {
 	chomp;
@@ -337,19 +359,23 @@ start() {
 
 my $imagename = "";
 if ( $device eq "AIRROUTER" ) {
-	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin";
+	$imagename = "ath79/generic/openwrt-ath79-generic-ubnt_airrouter-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ALIX" ) {
 	$imagename = "x86/geode/openwrt-x86-geode-combined-squashfs.img.gz";
 } elsif ( $device eq "APU" ) {
 	$imagename = "x86/64/openwrt-x86-64-combined-squashfs.img.gz";
 } elsif ( $device eq "DIR860L" ) {
-	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-dir-860l-b1-squashfs-sysupgrade.bin";
+	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-dlink_dir-860l-b1-squashfs-sysupgrade.bin";
+} elsif ( $device eq "ERX" ) {
+	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-ubnt-erx-squashfs-sysupgrade.bin";
+} elsif ( $device eq "ESPBIN" ) {
+	$imagename = "mvebu/cortexa53/openwrt-mvebu-cortexa53-globalscale_espressobin-squashfs-sdcard.img.gz";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
-	$imagename = "x86/legacy/openwrt-x86-legacy-combined-squashfs.img";
+	$imagename = "x86/legacy/openwrt-x86-legacy-combined-squashfs.img.gz";
 } elsif ( $device eq "MR24" ) {
-	$imagename = "apm821xx/nand/openwrt-apm821xx-nand-meraki_mr24-squashfs-sysupgrade.tar";
+	$imagename = "apm821xx/nand/openwrt-apm821xx-nand-meraki_mr24-squashfs-sysupgrade.bin";
 } elsif ( $device eq "MR3201A" ) {
-	$imagename = "ath25/generic/openwrt-ath25-combined.squashfs.img";
+	$imagename = "ath25/generic/openwrt-ath25-generic-squashfs-sysupgrade.bin";
 } elsif ( $device eq "RB493G" ) {
 	$imagename = "ar71xx/mikrotik/openwrt-ar71xx-mikrotik-nand-large-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ROCKET" ) {
@@ -357,13 +383,13 @@ if ( $device eq "AIRROUTER" ) {
 } elsif ( $device eq "RSTA" ) {
 	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WDR3600" ) {
-	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin";
+	$imagename = "ath79/generic/openwrt-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WGT634U" ) {
 	$imagename = "brcm47xx/legacy/openwrt-brcm47xx-legacy-standard-squashfs.trx";
 } elsif ( $device eq "WNDR3800" ) {
-	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-wndr3800-squashfs-sysupgrade.bin";
+	$imagename = "ath79/generic/openwrt-ath79-generic-netgear_wndr3800-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WZR600DHP" ) {
-	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-wzr-600dhp-squashfs-sysupgrade.bin";
+	$imagename = "ath79/generic/openwrt-ath79-generic-buffalo_wzr-hp-ag300h-squashfs-sysupgrade.bin";
 }
 
 system("mkdir -p output/usr/bin");
