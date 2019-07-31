@@ -505,6 +505,10 @@ if ( defined($img) ) {
 }
 
 my $pki = $ENV{'PKI'};
+if ( !defined($pki) ) {
+	exit 0;
+}
+
 system("cp $pki/private/$host.key output/etc/openvpn/keys/");
 system("cp $pki/issued/$host.crt output/etc/openvpn/keys/");
 
