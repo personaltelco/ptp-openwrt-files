@@ -15,6 +15,7 @@ my $iPV6SLASH48 = "2001:470:e962";
 
 my $host;
 my $node;
+my $url;
 
 my $APINODEBASE = "https://personaltelco.net/api/v0/nodes/";
 my $APIHOSTBASE = "https://personaltelco.net/api/v0/hosts/";
@@ -22,7 +23,8 @@ my $IMGBASE = "https://personaltelco.net/splash/images/nodes/";
 
 my $result = GetOptions(
 	"host=s" => \$host,
-	"node=s" => \$node
+	"node=s" => \$node,
+	"url=s" => \$url
 );
 
 my $nodeinfo;
@@ -41,8 +43,16 @@ if ( defined( $host )) {
 		exit;
 	}
 	$host = $nodeinfo->{'hostname'};
+} elsif ( defined( $url )) {
+	$nodeinfo = getNodeInfoByUrl($url);
+	if ( $nodeinfo->{'node'} eq '' ) {
+		die "did not find node data from $url";
+		exit;
+	}
+	$node = $nodeinfo->{'node'};
+	$host = $nodeinfo->{'hostname'};
 } else {
-	die "did not specify a node or host, loser!";
+	die "did not specify a node or host or url, loser!";
 	exit;
 }
 
@@ -451,6 +461,20 @@ sub getNodeInfoByHost {
 	my $host     = shift;
 	my $nodeinfo = {};
 	my $url      = $APIHOSTBASE . $host;
+	print $url, "\n" if $DEBUG;
+	my $json = get($url);
+	print Dumper($json) if $DEBUG;
+	if ( defined($json) ) {
+		$nodeinfo = decode_json($json);
+		my $ret = $nodeinfo->{'data'};
+		print Dumper($ret) if $DEBUG;
+		return $ret;
+	}
+}
+
+sub getNodeInfoByUrl {
+	my $url      = shift;
+	my $nodeinfo = {};
 	print $url, "\n" if $DEBUG;
 	my $json = get($url);
 	print Dumper($json) if $DEBUG;
