@@ -92,6 +92,14 @@ sub rtrim($)
 	return $string;
 }
 
+my $imgname = "$node.png";
+my $imgurl;
+if (( index $nodeinfo->{'logo'}, "://" ) > 0) {
+	$imgurl = $nodeinfo->{'logo'};
+	$nodeinfo->{'logo'} = $imgname;
+} else {
+	$imgurl = $IMGBASE . $imgname;
+}
 
 if ( !defined( $nodeinfo->{'logo'} ) ) {
 	$nodeinfo->{'logo'} = "ptp-logo-comm-wire-223x223.png";
@@ -486,16 +494,14 @@ sub getNodeInfoByUrl {
 	}
 }
 
-my $imgname = "$node.png";
-my $url = $IMGBASE . $imgname;
-my $img = get($url);
+my $img = get($imgurl);
 if ( defined($img) ) {
 	open( IMGOUT, "> output/www/images/$imgname")
 		or die "couldn't write out downloaded image $imgname: " . $!;
 	print IMGOUT $img;
 	close IMGOUT;
 } else {
-	print "No node logo\n";
+	print "No node logo at $imgurl\n";
 }
 
 my $pki = $ENV{'PKI'};
