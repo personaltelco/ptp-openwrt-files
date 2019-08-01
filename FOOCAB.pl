@@ -15,6 +15,7 @@ my $iPV6SLASH48 = "2001:470:e962";
 
 my $host;
 my $node;
+my $url;
 
 my $APINODEBASE = "https://personaltelco.net/api/v0/nodes/";
 my $APIHOSTBASE = "https://personaltelco.net/api/v0/hosts/";
@@ -22,7 +23,8 @@ my $IMGBASE = "https://personaltelco.net/splash/images/nodes/";
 
 my $result = GetOptions(
 	"host=s" => \$host,
-	"node=s" => \$node
+	"node=s" => \$node,
+	"url=s" => \$url
 );
 
 my $nodeinfo;
@@ -41,8 +43,16 @@ if ( defined( $host )) {
 		exit;
 	}
 	$host = $nodeinfo->{'hostname'};
+} elsif ( defined( $url )) {
+	$nodeinfo = getNodeInfoByUrl($url);
+	if ( $nodeinfo->{'node'} eq '' ) {
+		die "did not find node data from $url";
+		exit;
+	}
+	$node = $nodeinfo->{'node'};
+	$host = $nodeinfo->{'hostname'};
 } else {
-	die "did not specify a node or host, loser!";
+	die "did not specify a node or host or url, loser!";
 	exit;
 }
 
@@ -82,6 +92,14 @@ sub rtrim($)
 	return $string;
 }
 
+my $imgname = "$node.png";
+my $imgurl;
+if (( index $nodeinfo->{'logo'}, "://" ) > 0) {
+	$imgurl = $nodeinfo->{'logo'};
+	$nodeinfo->{'logo'} = $imgname;
+} else {
+	$imgurl = $IMGBASE . $imgname;
+}
 
 if ( !defined( $nodeinfo->{'logo'} ) ) {
 	$nodeinfo->{'logo'} = "ptp-logo-comm-wire-223x223.png";
@@ -462,19 +480,35 @@ sub getNodeInfoByHost {
 	}
 }
 
-my $imgname = "$node.png";
-my $url = $IMGBASE . $imgname;
-my $img = get($url);
+sub getNodeInfoByUrl {
+	my $url      = shift;
+	my $nodeinfo = {};
+	print $url, "\n" if $DEBUG;
+	my $json = get($url);
+	print Dumper($json) if $DEBUG;
+	if ( defined($json) ) {
+		$nodeinfo = decode_json($json);
+		my $ret = $nodeinfo->{'data'};
+		print Dumper($ret) if $DEBUG;
+		return $ret;
+	}
+}
+
+my $img = get($imgurl);
 if ( defined($img) ) {
 	open( IMGOUT, "> output/www/images/$imgname")
 		or die "couldn't write out downloaded image $imgname: " . $!;
 	print IMGOUT $img;
 	close IMGOUT;
 } else {
-	print "No node logo\n";
+	print "No node logo at $imgurl\n";
 }
 
 my $pki = $ENV{'PKI'};
+if ( !defined($pki) ) {
+	exit 0;
+}
+
 system("cp $pki/private/$host.key output/etc/openvpn/keys/");
 system("cp $pki/issued/$host.crt output/etc/openvpn/keys/");
 
