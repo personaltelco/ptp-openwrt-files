@@ -115,15 +115,15 @@ foreach my $k ( keys %$nodeinfo ) {
 if ( !defined( $nodeinfo->{'dhcpstart'} ) ) {
 	$nodeinfo->{'dhcpstart'} = 5;
 	print "dhcpstart not found, setting  to " . $nodeinfo->{'dhcpstart'}, "\n";
-	my $sed = "s/PTP_DHCPSTART_PTP/" . $nodeinfo->{'dhcpstart'} . "/g\n";
+	my $sed = "s|PTP_DHCPSTART_PTP|" . $nodeinfo->{'dhcpstart'} . "|g\n";
 	print $sed if $DEBUG;
 	print SED $sed;
 }
 
 my @octets = split( /\./, $nodeinfo->{'pubaddr'} );
-printf( SED "s/PTP_PUB6PREFIX_PTP/%s:%02x%02x::/g\n",
+printf( SED "s|PTP_PUB6PREFIX_PTP|%s:%02x%02x::|g\n",
 	$iPV6SLASH48, $octets[2], $octets[3] );
-printf( SED "s/PTP_VPN6ADDRESS_PTP/%s::%02x%02x/g\n",
+printf( SED "s|PTP_VPN6ADDRESS_PTP|%s::%02x%02x|g\n",
 	$iPV6SLASH48, $octets[2], $octets[3] );
 
 print "DEVICE=" . $nodeinfo->{'device'} . "\n";
@@ -212,8 +212,8 @@ if ( $device eq "DIR860L" || $device eq "ERX" || $device eq "WDR3600" || $device
 	}
 }
 
-print SED "s/PTP_WANIFACE_PTP/$waniface/g\n";
-print SED "s/PTP_PUBIFACES_PTP/$pubifaces/g\n";
+print SED "s|PTP_WANIFACE_PTP|$waniface|g\n";
+print SED "s|PTP_PUBIFACES_PTP|$pubifaces|g\n";
 
 if ( ! defined($masklen) ||  !defined($pubaddr) ) {
   die "Not enough information to compute network! pubaddr: " . $pubaddr . " masklen: " . $masklen ;
@@ -224,8 +224,8 @@ my $network = $ip->network();
 my $netaddr = $network->addr();
 my $mask    = $ip->mask();
 
-print SED "s/PTP_PUBNET_PTP/$netaddr/g\n";
-print SED "s/PTP_PUBNETMASK_PTP/$mask/g\n";
+print SED "s|PTP_PUBNET_PTP|$netaddr|g\n";
+print SED "s|PTP_PUBNETMASK_PTP|$mask|g\n";
 
 if ( $privaddr ) {
 	print "privaddr = $privaddr\n";
@@ -235,9 +235,9 @@ if ( $privaddr ) {
 	$netaddr = $network->addr();
 	$mask    = $ip->mask();
 
-	print SED "s/PTP_PRIVIFACES_PTP/$privifaces/g\n";
-	print SED "s/PTP_PRIVNET_PTP/$netaddr/g\n";
-	print SED "s/PTP_PRIVNETMASK_PTP/$mask/g\n";
+	print SED "s|PTP_PRIVIFACES_PTP|$privifaces|g\n";
+	print SED "s|PTP_PRIVNET_PTP|$netaddr|g\n";
+	print SED "s|PTP_PRIVNETMASK_PTP|$mask|g\n";
 } else {
 	print "privifaces not defined\n";
 }
