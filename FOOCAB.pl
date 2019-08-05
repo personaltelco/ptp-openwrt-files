@@ -210,6 +210,8 @@ if ( $device eq "DIR860L" || $device eq "ERX" || $device eq "WDR3600" || $device
 		$pubifaces = "lan0";
 		$privifaces = "lan1";
 	}
+} else {
+	die "Missing or unknown device: " . $device;
 }
 
 print SED "s|PTP_WANIFACE_PTP|$waniface|g\n";
