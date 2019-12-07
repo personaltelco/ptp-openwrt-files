@@ -132,7 +132,7 @@ if ( !defined( $pubifaces )) {
 	$pubifaces = "";
 }
 
-if ( $device eq "DIR860L" || $device eq "ERX" || $device eq "WDR3600" || $device eq "WGT634U" ) {
+if ( $device eq "DIR860L" || $device eq "ERX" || $device eq "MT300N" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	$waniface = "eth0.2";
 	if ($bridge) {
 		$pubifaces  = "eth0.1";
@@ -396,6 +396,8 @@ if ( $device eq "AIRROUTER" ) {
 	$imagename = "apm821xx/nand/openwrt-apm821xx-nand-meraki_mr24-squashfs-sysupgrade.bin";
 } elsif ( $device eq "MR3201A" ) {
 	$imagename = "ath25/generic/openwrt-ath25-generic-squashfs-sysupgrade.bin";
+} elsif ( $device eq "MT300N" ) {
+	$imagename = "ramips/mt76x8/openwrt-ramips-mt76x8-glinet_gl-mt300n-v2-squashfs-sysupgrade.bin";
 } elsif ( $device eq "RB493G" ) {
 	$imagename = "ar71xx/mikrotik/openwrt-ar71xx-mikrotik-nand-large-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ROCKET" ) {
