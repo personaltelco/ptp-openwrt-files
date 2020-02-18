@@ -407,7 +407,7 @@ if ( $device eq "AIRROUTER" ) {
 } elsif ( $device eq "WDR3600" ) {
 	$imagename = "ath79/generic/openwrt-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WGT634U" ) {
-	$imagename = "brcm47xx/legacy/openwrt-brcm47xx-legacy-standard-squashfs.trx";
+	$imagename = "bcm47xx/legacy/openwrt-bcm47xx-legacy-standard-squashfs.trx";
 } elsif ( $device eq "WNDR3800" ) {
 	$imagename = "ath79/generic/openwrt-ath79-generic-netgear_wndr3800-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WZR600DHP" ) {
