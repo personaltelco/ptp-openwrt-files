@@ -381,7 +381,7 @@ my $imagename = "";
 if ( $device eq "AIRROUTER" ) {
 	$imagename = "ath79/generic/openwrt-ath79-generic-ubnt_airrouter-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ALIX" ) {
-	$imagename = "x86/geode/openwrt-x86-geode-combined-squashfs.img.gz";
+	$imagename = "x86/geode/openwrt-x86-geode-generic-squashfs-combined.img.gz";
 } elsif ( $device eq "APU" ) {
 	$imagename = "x86/64/openwrt-x86-64-combined-squashfs.img.gz";
 } elsif ( $device eq "DIR860L" ) {
