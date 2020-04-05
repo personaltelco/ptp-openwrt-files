@@ -132,12 +132,19 @@ if ( !defined( $pubifaces )) {
 	$pubifaces = "";
 }
 
-if ( $device eq "DIR860L" || $device eq "ERX" || $device eq "MT300N" || $device eq "WDR3600" || $device eq "WGT634U" ) {
+if ( $device eq "DIR860L" || $device eq "MT300N" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	$waniface = "eth0.2";
 	if ($bridge) {
 		$pubifaces  = "eth0.1";
 	} else {
 		$privifaces = "eth0.1";
+	}
+} elsif ( $device eq "ERX" ) {
+	$waniface = "eth0";
+	if ($bridge) {
+		$pubifaces = "eth1 eth2 eth3 eth4";
+	} else {
+		$privifaces = "eth1 eth2 eth3 eth4";
 	}
 } elsif ( $device eq "ALIX" || $device eq "APU") {
 	$waniface = "eth0";
