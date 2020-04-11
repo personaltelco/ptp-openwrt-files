@@ -132,12 +132,19 @@ if ( !defined( $pubifaces )) {
 	$pubifaces = "";
 }
 
-if ( $device eq "DIR860L" || $device eq "MT300N" || $device eq "WDR3600" || $device eq "WGT634U" ) {
+if ( $device eq "MT300N" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	$waniface = "eth0.2";
 	if ($bridge) {
 		$pubifaces  = "eth0.1";
 	} else {
 		$privifaces = "eth0.1";
+	}
+} elsif ( $device eq "DIR860L" ) {
+	$waniface = "wan";
+	if ($bridge) {
+		$pubifaces = "lan1 lan2 lan3 lan4";
+	} else {
+		$privifaces = "lan1 lan2 lan3 lan4";
 	}
 } elsif ( $device eq "ERX" ) {
 	$waniface = "eth0";
