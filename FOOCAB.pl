@@ -205,7 +205,7 @@ if ( $device eq "MT300N" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	} else {
 		$privifaces = "eth0.1";
 	}
-} elsif ( $device eq "ROCKET" || $device eq "MR24") {
+} elsif ( $device eq "BULLET" || $device eq "ROCKET" || $device eq "MR24") {
 	$waniface = "eth0";
 	$pubifaces = "";
 } elsif ( $device eq "RB493G") {
@@ -398,6 +398,8 @@ if ( $device eq "AIRROUTER" ) {
 	$imagename = "x86/geode/openwrt-x86-geode-generic-squashfs-combined.img.gz";
 } elsif ( $device eq "APU" ) {
 	$imagename = "x86/64/openwrt-x86-64-combined-squashfs.img.gz";
+} elsif ( $device eq "BULLET" ) {
+	$imagename = "ath79/generic/openwrt-ath79-generic-ubnt_bullet-m-ar7241-squashfs-sysupgrade.bin";
 } elsif ( $device eq "DIR860L" ) {
 	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-dlink_dir-860l-b1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ERX" ) {
