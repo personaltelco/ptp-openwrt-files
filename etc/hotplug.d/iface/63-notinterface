@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ "$INTERFACE" = "wan" ] && {
+	[ "$ACTION" = ifup ] && {
+		uci delete dhcp.@dnsmasq[0].notinterface
+		uci add_list dhcp.@dnsmasq[0].notinterface=$DEVICE
+		/etc/init.d/dnsmasq reload
+        }
+};
+

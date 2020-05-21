@@ -9,7 +9,6 @@ set dhcp.@dnsmasq[0].expandhosts=0
 set dhcp.@dnsmasq[0].nohosts=0
 # rebind_protection off in order to support resolution of .ptp addresses
 set dhcp.@dnsmasq[0].rebind_protection=0
-add_list dhcp.@dnsmasq[0].notinterface=PTP_WANIFACE_PTP
 add_list dhcp.@dnsmasq[0].server=/ptp/10.11.4.5
 add_list dhcp.@dnsmasq[0].server=/11.10.in-addr.arpa/10.11.4.5
 rename dhcp.lan=pub
