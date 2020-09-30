@@ -427,7 +427,7 @@ if ( $device eq "AIRROUTER" ) {
 } elsif ( $device eq "WNDR3800" ) {
 	$imagename = "ath79/generic/openwrt-ath79-generic-netgear_wndr3800-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WZR600DHP" ) {
-	$imagename = "ath79/generic/openwrt-ath79-generic-buffalo_wzr-hp-ag300h-squashfs-sysupgrade.bin";
+	$imagename = "ath79/generic/openwrt-ath79-generic-buffalo_wzr-600dhp-squashfs-sysupgrade.bin";
 }
 
 system("mkdir -p output/usr/bin");
