@@ -415,7 +415,7 @@ if ( $device eq "AIRROUTER" ) {
 } elsif ( $device eq "MT300N" ) {
 	$imagename = "ramips/mt76x8/openwrt-ramips-mt76x8-glinet_gl-mt300n-v2-squashfs-sysupgrade.bin";
 } elsif ( $device eq "RB493G" ) {
-	$imagename = "ar71xx/mikrotik/openwrt-ar71xx-mikrotik-nand-large-squashfs-sysupgrade.bin";
+	$imagename = "ath79/mikrotik/openwrt-ath79-mikrotik-mikrotik_routerboard-493g-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ROCKET" ) {
 	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-ubnt-rocket-m-squashfs-sysupgrade.bin";
 } elsif ( $device eq "RSTA" ) {
