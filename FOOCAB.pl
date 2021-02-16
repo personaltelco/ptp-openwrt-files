@@ -205,7 +205,7 @@ if ( $device eq "MT300N" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	} else {
 		$privifaces = "eth0.1";
 	}
-} elsif ( $device eq "BULLET" || $device eq "ROCKET" || $device eq "MR24") {
+} elsif ( $device eq "BULLET" || $device eq "ROCKET" || $device eq "MR24" || $device eq "LINKIT") {
 	$waniface = "eth0";
 	$pubifaces = "";
 } elsif ( $device eq "RB493G") {
@@ -406,6 +406,8 @@ if ( $device eq "AIRROUTER" ) {
 	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-ubnt_edgerouter-x-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ESPBIN" ) {
 	$imagename = "mvebu/cortexa53/openwrt-mvebu-cortexa53-globalscale_espressobin-squashfs-sdcard.img.gz";
+} elsif ( $device eq "LINKIT" ) {
+	$imagename = "ramips/mt76x8/openwrt-ramips-mt76x8-mediatek_linkit-smart-7688-squashfs-sysupgrade.bin";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
 	$imagename = "x86/legacy/openwrt-x86-legacy-generic-squashfs-combined.img.gz";
 } elsif ( $device eq "MR24" ) {
