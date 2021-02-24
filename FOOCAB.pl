@@ -563,4 +563,5 @@ sed -i 's|root::|root:$hash:|' /etc/shadow
 EOF
 
 my $hostkeys = $ENV{'HOSTKEYDIR'};
-system("cp $hostkeys/dropbear/$host.key output/etc/dropbear/dropbear_rsa_host_key");
+system("cp $hostkeys/dropbear/$host-ed25519.key output/etc/dropbear/dropbear_ed25519_host_key");
+system("cp $hostkeys/dropbear/$host-rsa.key output/etc/dropbear/dropbear_rsa_host_key");
