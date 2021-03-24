@@ -5,7 +5,7 @@ WANIFACE=/tmp/waniface
 [ "$INTERFACE" = "wan" ] && {
 	[ "$ACTION" = ifup ] && {
 		echo $DEVICE > $WANIFACE
-		iptables -v -t nat -I POSTROUTING -o $DEVICE -j MASQUERADE	
+		iptables -v -t nat -I POSTROUTING -o $DEVICE -j MASQUERADE
 	}
 	[ "$ACTION" = ifdown ] && {
 		if [ -f $WANIFACE ]; then
