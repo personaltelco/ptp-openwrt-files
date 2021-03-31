@@ -4,19 +4,17 @@ PUBIFACE=/tmp/pubiface
 
 [ "$INTERFACE" = "pub" ] && {
         [ "$ACTION" = ifup ] && {
-		echo $DEVICE > $PUBIFACE
         	# iptables -I FORWARD -i $DEVICE -p tcp --syn -m multiport --dports 6881:6889 -m recent --set --name TORRENTS -m limit --limit 5/min -j LOG --log-prefix 'TORRENT:' --log-level 7
         	iptables -I FORWARD -i $DEVICE -p tcp --syn -m multiport --dports 6881:6889 -m recent --set --name TORRENTS  -j DROP
         	iptables -I FORWARD -i $DEVICE -m recent --name TORRENTS --update --seconds 300 -j DROP
         	iptables -I FORWARD -i $DEVICE -m recent --name TORRENTS --update --reap --seconds 300 -j DROP
+		echo $DEVICE > $PUBIFACE
         }
-        [ "$ACTION" = ifdown ] && {
-		if [ -f $PUBIFACE ]; then
-			pubiface=$(cat $PUBIFACE)
-			# iptables -D FORWARD -i $pubiface -p tcp --syn -m multiport --dports 6881:6889 -m recent --set --name TORRENTS -m limit --limit 5/min -j LOG --log-prefix 'TORRENT:' --log-level 7
-			iptables -D FORWARD -i $pubiface -p tcp --syn -m multiport --dports 6881:6889 -m recent --set --name TORRENTS  -j DROP
-			iptables -D FORWARD -i $pubiface -m recent --name TORRENTS --update --seconds 300 -j DROP
-			iptables -D FORWARD -i $pubiface E-m recent --name TORRENTS --update --reap --seconds 300 -j DROP
-		fi
+        [ "$ACTION" = ifdown ] && [ -f $PUBIFACE ] && {
+		DEVICE=$(cat $PUBIFACE)
+		# iptables -D FORWARD -i $DEVICE -p tcp --syn -m multiport --dports 6881:6889 -m recent --set --name TORRENTS -m limit --limit 5/min -j LOG --log-prefix 'TORRENT:' --log-level 7
+		iptables -D FORWARD -i $DEVICE -p tcp --syn -m multiport --dports 6881:6889 -m recent --set --name TORRENTS  -j DROP
+		iptables -D FORWARD -i $DEVICE -m recent --name TORRENTS --update --seconds 300 -j DROP
+		iptables -D FORWARD -i $DEVICE -m recent --name TORRENTS --update --reap --seconds 300 -j DROP
         }
 };

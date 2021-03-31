@@ -4,13 +4,12 @@ WANIFACE=/tmp/waniface
 
 [ "$INTERFACE" = "wan" ] && {
 	[ "$ACTION" = ifup ] && {
-		echo $DEVICE > $WANIFACE
 		iptables -v -t nat -I POSTROUTING -o $DEVICE -j MASQUERADE
+		echo $DEVICE > $WANIFACE
 	}
-	[ "$ACTION" = ifdown ] && {
-		if [ -f $WANIFACE ]; then
-			iptables -v -t nat -D POSTROUTING -o $(cat $WANIFACE) -j MASQUERADE
-		fi
+	[ "$ACTION" = ifdown ] && [ -f $WANIFACE ] && {
+		DEVICE=$(cat $WANIFACE)
+		iptables -v -t nat -D POSTROUTING -o $DEVICE -j MASQUERADE
 	}
 };
 

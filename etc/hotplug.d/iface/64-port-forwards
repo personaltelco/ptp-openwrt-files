@@ -1,0 +1,14 @@
+#!/bin/sh
+
+WANIFACE=/tmp/waniface
+    
+[ "$INTERFACE" = "wan" ] && {
+	[ "$ACTION" = ifup ] && {
+		# iptables -t nat -A PREROUTING -i $DEVICE -p tcp --dport 80 -j DNAT --to 192.168.11.2:80
+		echo $DEVICE > $WANIFACE 
+	}
+	[ "$ACTION" = ifdown ] && [ -f $WANIFACE ] && {
+		DEVICE=$(cat /tmp/waniface)
+		# iptables -t nat -D PREROUTING -i $DEVICE -p tcp --dport 80 -j DNAT --to 192.168.11.2:80
+	}
+}

@@ -357,9 +357,7 @@ if ( $filter ne "NONE" ) {
 	}
 
 	if ( defined($privaddr) && ( $filter eq "PRIV" || $filter eq "BOTH" ) ) {
-		print FILTER "
-    
-[ \"\$INTERFACE\" = \"priv\" ] && {
+		print FILTER "[ \"\$INTERFACE\" = \"priv\" ] && {
 	[ \"\$ACTION\" = ifup ] && {
 		# prevent PRIV destinations from being reached from the public or ptp (vpn) interfaces
 		iptables -I FORWARD -o br-priv -i br-pub -j DROP

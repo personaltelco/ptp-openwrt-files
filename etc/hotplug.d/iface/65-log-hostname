@@ -1,10 +1,5 @@
 #!/bin/sh
 
 [ "$INTERFACE" = "wan" ] && {
-	[ "$ACTION" = ifup ] && {
-		logger -t $(cat /proc/sys/kernel/hostname) hostname
-	}
-	[ "$ACTION" = ifdown ] && {
-		logger -t $(cat /proc/sys/kernel/hostname) hostname
-	}
+	logger -t $(cat /proc/sys/kernel/hostname) hostname $ACTION
 }
