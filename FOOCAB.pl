@@ -69,6 +69,8 @@ my $pubaddr     = $nodeinfo->{'pubaddr'};
 my $privaddr    = $nodeinfo->{'privaddr'};
 my $privmasklen = $nodeinfo->{'privmasklen'};
 my $hwclock     = $nodeinfo->{'hwclock'};
+my @pubifaces;
+my @privifaces;
 
 sub trim($)
 {
@@ -315,7 +317,7 @@ while (<LINKS>) {
 if ( ! $privaddr ) {
 	unlink "output/etc/rc.d/S46firewall_private";
 	unlink "output/etc/init.d/firewall_private"; 
-	unlink "output/etc/uci-defaults/ptp.private.defaults";
+	unlink "output/etc/uci-defaults/ptp.02.private";
 }
 
 if ( $filter ne "NONE" ) {
@@ -371,6 +373,29 @@ if ( $filter ne "NONE" ) {
 	}
 
 	close(FILTER);
+}
+
+if ($pubifaces || $privifaces) {
+	open( IFACES, ">output/etc/uci-defaults/ptp.05.ifaces" );
+
+	print IFACES "#!/bin/sh
+
+uci batch <<EOF
+";
+
+	@pubifaces = split / /,$pubifaces;
+	for (@pubifaces) {
+		print IFACES "add_list network.br0.ports=$_\n";
+	}
+	@privifaces = split / /,$privifaces;
+	for (@privifaces) {
+		print IFACES "add_list network.br1.ports=$_\n";
+	}
+
+	print IFACES "commit network\n";
+	print IFACES "EOF\n";
+
+	close(IFACES);
 }
 
 if ($hwclock) {
@@ -554,7 +579,7 @@ my $hash = <CMD>;
 close CMD;
 chomp($hash);
 
-open( FIX, ">output/etc/uci-defaults/ptp.passwd.default" );
+open( FIX, ">output/etc/uci-defaults/ptp.03.passwd" );
 print FIX <<EOF;
 #!/bin/sh
 sed -i 's|root::|root:$hash:|' /etc/shadow

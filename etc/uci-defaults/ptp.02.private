@@ -1,10 +1,12 @@
 #!/bin/sh
 
 uci batch <<EOF
-set network.pub.ifname="PTP_PUBIFACES_PTP"
+set network.br1=device
+set network.@device[-1].name=br-priv
+set network.@device[-1].type=bridge
+
 set network.priv=interface
-set network.priv.ifname="PTP_PRIVIFACES_PTP"
-set network.priv.type=bridge
+set network.priv.device=br-priv
 set network.priv.proto=static
 set network.priv.ipaddr=PTP_PRIVADDR_PTP
 set network.priv.netmask=PTP_PRIVNETMASK_PTP

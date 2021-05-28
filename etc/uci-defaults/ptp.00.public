@@ -28,23 +28,30 @@ delete uhttpd.main.cgi_prefix
 commit uhttpd
 
 delete network.globals
+delete network.lan
+delete network.@device[0]
 
-rename network.lan=pub
+set network.br0=device
+set network.@device[-1].name=br-pub
+set network.@device[-1].type=bridge
+
+set network.pub=interface
+set network.pub.proto=static
+set network.pub.device=br-pub
 set network.pub.ipaddr=PTP_PUBADDR_PTP
-set network.pub.ifname='PTP_PUBIFACES_PTP'
 set network.pub.netmask=PTP_PUBNETMASK_PTP
 delete network.pub.ip6assign
 
 set network.ptp=interface
-set network.ptp.ifname=ptp
+set network.ptp.device=ptp
 set network.ptp.proto=none
 
 set network.wan=interface
 set network.wan.proto=dhcp
-set network.wan.ifname=PTP_WANIFACE_PTP
+set network.wan.device=PTP_WANIFACE_PTP
 
 set network.wan6=interface
-set network.wan6.ifname='@wan'
+set network.wan6.device='@wan'
 set network.wan6.proto='dhcpv6'
 set network.wan6.reqprefix='60'
 
