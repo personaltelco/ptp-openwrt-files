@@ -138,6 +138,34 @@ set snmpd.@exec[-1].prog='/usr/bin/assoc-count'
 
 commit snmpd
 
+delete olsrd.@LoadPlugin[4]
+delete olsrd.@LoadPlugin[3]
+delete olsrd.@LoadPlugin[2]
+delete olsrd.@LoadPlugin[1]
+delete olsrd.@LoadPlugin[0]
+set olsrd.@olsrd[-1].IpVersion=4
+set olsrd.@olsrd[-1].LinkQualityFishEye=0
+
+del_list olsrd.@Interface[0].interface=wlan
+add_list olsrd.@Interface[0].interface=ptp
+add_list olsrd.@Interface[0].interface=pub
+
+add olsrd Hna4
+set olsrd.@Hna4[-1].netaddr=PTP_PUBNET_PTP
+set olsrd.@Hna4[-1].netmask=PTP_PUBNETMASK_PTP
+
+commit olsrd
+
+delete olsrd6.@LoadPlugin[0]
+set olsrd6.@olsrd[-1].IpVersion=6
+set olsrd6.@olsrd[-1].LinkQualityFishEye=0
+
+del_list olsrd6.@Interface[0].interface=wlan
+add_list olsrd6.@Interface[0].interface=ptp
+add_list olsrd6.@Interface[0].interface=pub
+
+commit olsrd6
+
 EOF
 
 /etc/init.d/odhcpd disable

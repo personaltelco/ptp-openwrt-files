@@ -3,8 +3,6 @@
 /etc/init.d/
 /etc/snmp/snmpd.conf
 /etc/nocat.conf
-/etc/olsrd.conf
-/etc/olsr6d.conf
 /lib/upgrade/keep.d/
 /usr/bin/assoc_count
 /usr/bin/client-status.sh
