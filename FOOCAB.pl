@@ -501,7 +501,7 @@ while (<WWW>) {
 	chown( $uid, $gid, $dest );
 }
 
-system("pushd output/www ; ln -sf /tmp/users.html . ; popd");
+system("cd output/www ; ln -sf /tmp/users.html .");
 
 
 sub getNodeInfoByNode {
