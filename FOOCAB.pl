@@ -56,6 +56,8 @@ if ( defined( $host )) {
 	exit;
 }
 
+my @pubifaces;
+my @privifaces;
 my $vpniface    = "ptp";
 my $logo        = $nodeinfo->{'logo'};
 my $bridge      = $nodeinfo->{'bridge'};
@@ -69,8 +71,6 @@ my $pubaddr     = $nodeinfo->{'pubaddr'};
 my $privaddr    = $nodeinfo->{'privaddr'};
 my $privmasklen = $nodeinfo->{'privmasklen'};
 my $hwclock     = $nodeinfo->{'hwclock'};
-my @pubifaces;
-my @privifaces;
 
 sub trim($)
 {
@@ -423,7 +423,7 @@ start() {
 
 my $imagename = "";
 if ( $device eq "AIRROUTER" ) {
-	$imagename = "ath79/generic/openwrt-ath79-generic-ubnt_airrouter-squashfs-sysupgrade.bin";
+	$imagename = "ath79/tiny/openwrt-ath79-tiny-ubnt_airrouter-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ALIX" ) {
 	$imagename = "x86/geode/openwrt-x86-geode-generic-squashfs-combined.img.gz";
 } elsif ( $device eq "APU" ) {

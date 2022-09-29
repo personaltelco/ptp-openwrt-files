@@ -13,6 +13,7 @@ set network.priv.netmask=PTP_PRIVNETMASK_PTP
 commit network
 
 set dhcp.priv=dhcp
+set dhcp.priv.dhcpv4=server
 set dhcp.priv.dhcpv6='server'
 set dhcp.priv.ra='server'
 set dhcp.priv.interface=priv
