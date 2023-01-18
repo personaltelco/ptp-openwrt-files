@@ -162,6 +162,13 @@ if ( $device eq "MT300N" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	} else {
 		$privifaces = "lan2 lan3 lan4 lan5 lan6 lan7 lan8";
 	}
+} elsif ( $device eq "M300" ) {
+	$waniface = "eth0";
+	if ($bridge) {
+		$pubifaces = "eth1 eth2 eth3 sweth3 sweth4 sweth5 sweth6 sweth7";
+	} else {
+		$privifaces = "eth1 eth2 eth3 sweth3 sweth4 sweth5 sweth6 sweth7";
+	}
 } elsif ( $device eq "ALIX" || $device eq "APU") {
 	$waniface = "eth0";
 	if ($bridge) {
@@ -442,6 +449,8 @@ if ( $device eq "AIRROUTER" ) {
 	$imagename = "ramips/mt76x8/openwrt-ramips-mt76x8-mediatek_linkit-smart-7688-squashfs-sysupgrade.bin";
 } elsif ( $device eq "NET4521" || $device eq "NET4826" ) {
 	$imagename = "x86/legacy/openwrt-x86-legacy-generic-squashfs-combined.img.gz";
+} elsif ( $device eq "M300" ) {
+	$imagename = "qoriq/generic/openwrt-qoriq-generic-watchguard_firebox-m300-squashfs-sysupgrade.img.gz";
 } elsif ( $device eq "MR24" ) {
 	$imagename = "apm821xx/nand/openwrt-apm821xx-nand-meraki_mr24-squashfs-sysupgrade.bin";
 } elsif ( $device eq "MR3201A" ) {
