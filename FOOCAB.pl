@@ -141,7 +141,7 @@ if ( $device eq "MT300N" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 	} else {
 		$privifaces = "eth0.1";
 	}
-} elsif ( $device eq "DIR860L" ) {
+} elsif ( $device eq "DIR860L" || $device eq "E8450") {
 	$waniface = "wan";
 	if ($bridge) {
 		$pubifaces = "lan1 lan2 lan3 lan4";
@@ -439,6 +439,8 @@ if ( $device eq "AIRROUTER" ) {
 	$imagename = "ath79/generic/openwrt-ath79-generic-ubnt_bullet-m-ar7241-squashfs-sysupgrade.bin";
 } elsif ( $device eq "DIR860L" ) {
 	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-dlink_dir-860l-b1-squashfs-sysupgrade.bin";
+} elsif ( $device eq "E8450" ) {
+	$imagename = "mediatek/mt7622/openwrt-mediatek-mt7622-linksys_e8450-ubi-squashfs-sysupgrade.itb";
 } elsif ( $device eq "ERX" ) {
 	$imagename = "ramips/mt7621/openwrt-ramips-mt7621-ubnt_edgerouter-x-squashfs-sysupgrade.bin";
 } elsif ( $device eq "ESPBIN" ) {
