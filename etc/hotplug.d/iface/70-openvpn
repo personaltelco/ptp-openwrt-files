@@ -12,6 +12,7 @@ KNOD_PTP=10.11.4.5
 		iptables -t nat -I POSTROUTING --source $addr -o ptp -j MASQUERADE
 		sleep 5
 		/etc/init.d/log restart
+		/etc/init.d/dnsmasq restart
 		sleep 10
 		logger -t openvpn $(cat /proc/sys/kernel/hostname) up
 	}
@@ -20,6 +21,7 @@ KNOD_PTP=10.11.4.5
 		iptables -t nat -D POSTROUTING --source $(cat /tmp/wan_ipaddr) -o ptp -j MASQUERADE
 		uci set system.@system[0].log_ip=$KNOD_PUBLIC
 		/etc/init.d/log restart
+		/etc/init.d/dnsmasq restart
 		logger -t openvpn $(cat /proc/sys/kernel/hostname) down
 	}
 }
