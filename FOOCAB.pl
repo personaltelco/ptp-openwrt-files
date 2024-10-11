@@ -165,9 +165,9 @@ if ( $device eq "MT300N" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 } elsif ( $device eq "M300" ) {
 	$waniface = "eth0";
 	if ($bridge) {
-		$pubifaces = "eth1 eth2 eth3 sweth3 sweth4 sweth5 sweth6 sweth7";
+		$pubifaces = "eth1 eth2 sweth3 sweth4 sweth5 sweth6 sweth7";
 	} else {
-		$privifaces = "eth1 eth2 eth3 sweth3 sweth4 sweth5 sweth6 sweth7";
+		$privifaces = "eth1 eth2 sweth3 sweth4 sweth5 sweth6 sweth7";
 	}
 } elsif ( $device eq "ALIX" || $device eq "APU") {
 	$waniface = "eth0";
