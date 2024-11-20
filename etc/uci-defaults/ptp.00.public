@@ -71,7 +71,6 @@ set openvpn.ptp.dev=ptp
 set openvpn.ptp.proto=udp4
 add_list openvpn.ptp.remote='iris.personaltelco.net 1195'
 add_list openvpn.ptp.remote='drei.personaltelco.net 1195'
-set openvpn.ptp.tun_mtu=1468
 set openvpn.ptp.cipher=AES-256-CBC
 set openvpn.ptp.auth=SHA256
 set openvpn.ptp.resolv_retry=infinite
