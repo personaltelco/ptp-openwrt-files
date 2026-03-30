@@ -240,6 +240,13 @@ if ( $device eq "MT300N" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 		$pubifaces = "lan0";
 		$privifaces = "lan1";
 	}
+} elsif ( $device eq "W1700K") {
+	$waniface = "wan";
+	if ($bridge) {
+		$pubifaces = "lan2 lan3 lan4";
+	} else {
+		$privifaces = "lan2 lan3 lan4";
+	}
 } else {
 	die "Missing or unknown device: " . $device;
 }
@@ -467,6 +474,8 @@ if ( $device eq "AIRROUTER" ) {
 	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-ubnt-rocket-m-squashfs-sysupgrade.bin";
 } elsif ( $device eq "RSTA" ) {
 	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
+} elsif ( $device eq "W1700K" ) {
+	$imagename = "airoha/an7581/openwrt-airoha-an7581-gemtek_w1700k-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WDR3600" ) {
 	$imagename = "ath79/generic/openwrt-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WGT634U" ) {
