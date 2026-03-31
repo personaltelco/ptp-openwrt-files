@@ -45,10 +45,6 @@ set network.pub.ipaddr=PTP_PUBADDR_PTP
 set network.pub.netmask=PTP_PUBNETMASK_PTP
 delete network.pub.ip6assign
 
-set network.ptp=interface
-set network.ptp.device=ptp
-set network.ptp.proto=none
-
 set network.wan=interface
 set network.wan.proto=dhcp
 set network.wan.device=PTP_WANIFACE_PTP
@@ -58,36 +54,32 @@ set network.wan6.device='@wan'
 set network.wan6.proto='dhcpv6'
 set network.wan6.reqprefix='60'
 
-commit network
+set network.ptp=interface
+set network.ptp.proto=openvpn
+set network.ptp.enabled=1
+set network.ptp.client=1
+set network.ptp.dev_type=tap
+set network.ptp.dev=ptp
+add_list network.ptp.remote='drei.personaltelco.net 1195 udp4'
+add_list network.ptp.remote='iris.personaltelco.net 1195 udp4'
+set network.ptp.cipher=AES-256-GCM
+set network.ptp.auth=SHA256
+set network.ptp.resolv_retry=infinite
+set network.ptp.nobind=1
+set network.ptp.user=nobody
+set network.ptp.group=nogroup
+set network.ptp.ca=/etc/openvpn/keys/ptp-ca.crt
+set network.ptp.cert=/etc/openvpn/keys/PTP_HOSTNAME_PTP.crt
+set network.ptp.key=/etc/openvpn/keys/PTP_HOSTNAME_PTP.key
+set network.ptp.script_security=3
+set network.ptp.status=/tmp/network-status.log
+set network.ptp.persist_key=1
+set network.ptp.persist_tun=1
+set network.ptp.remote_cert_tls=server
+set network.ptp.auth_nocache=1
+set network.ptp.verb=3
 
-delete openvpn.custom_config
-delete openvpn.sample_server
-delete openvpn.sample_client
-set openvpn.ptp=openvpn
-set openvpn.ptp.enabled=1
-set openvpn.ptp.client=1
-set openvpn.ptp.dev_type=tap
-set openvpn.ptp.dev=ptp
-set openvpn.ptp.proto=udp4
-add_list openvpn.ptp.remote='iris.personaltelco.net 1195'
-add_list openvpn.ptp.remote='drei.personaltelco.net 1195'
-set openvpn.ptp.cipher=AES-256-CBC
-set openvpn.ptp.auth=SHA256
-set openvpn.ptp.resolv_retry=infinite
-set openvpn.ptp.nobind=1
-set openvpn.ptp.user=nobody
-set openvpn.ptp.group=nogroup
-set openvpn.ptp.ca=/etc/openvpn/keys/ptp-ca.crt
-set openvpn.ptp.cert=/etc/openvpn/keys/PTP_HOSTNAME_PTP.crt
-set openvpn.ptp.key=/etc/openvpn/keys/PTP_HOSTNAME_PTP.key
-set openvpn.ptp.script_security=2
-set openvpn.ptp.status=/tmp/openvpn-status.log
-set openvpn.ptp.persist_key=1
-set openvpn.ptp.persist_tun=1
-set openvpn.ptp.remote_cert_tls=server
-set openvpn.ptp.auth_nocache=1
-set openvpn.ptp.verb=3
-commit openvpn
+commit network
 
 set system.@system[0].hostname=PTP_HOSTNAME_PTP
 set system.@system[0].timezone='PST8PDT,M3.2.0,M11.1.0'
