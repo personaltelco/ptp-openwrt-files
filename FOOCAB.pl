@@ -475,7 +475,7 @@ if ( $device eq "AIRROUTER" ) {
 } elsif ( $device eq "RSTA" ) {
 	$imagename = "ar71xx/generic/openwrt-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin";
 } elsif ( $device eq "W1700K" ) {
-	$imagename = "airoha/an7581/openwrt-airoha-an7581-gemtek_w1700k-squashfs-sysupgrade.bin";
+	$imagename = "airoha/an7581/openwrt-airoha-an7581-gemtek_w1700k-ubi-squashfs-sysupgrade.itb";
 } elsif ( $device eq "WDR3600" ) {
 	$imagename = "ath79/generic/openwrt-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin";
 } elsif ( $device eq "WGT634U" ) {
