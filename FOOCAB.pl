@@ -11,7 +11,7 @@ use Data::Dumper;
 my $DEBUG = 1;
 
 # IPv6 prefix - this one belongs to PTP
-my $iPV6SLASH48 = "2001:470:ebfd";
+my $IPV6SLASH48 = "2001:470:ebfd";
 
 my $host;
 my $node;
@@ -124,9 +124,9 @@ if ( !defined( $nodeinfo->{'dhcpstart'} ) ) {
 
 my @octets = split( /\./, $nodeinfo->{'pubaddr'} );
 printf( SED "s|PTP_PUB6PREFIX_PTP|%s:%02x%02x::|g\n",
-	$iPV6SLASH48, $octets[2], $octets[3] );
+	$IPV6SLASH48, $octets[2], $octets[3] );
 printf( SED "s|PTP_VPN6ADDRESS_PTP|%s::%02x%02x|g\n",
-	$iPV6SLASH48, $octets[2], $octets[3] );
+	$IPV6SLASH48, $octets[2], $octets[3] );
 
 print "DEVICE=" . $nodeinfo->{'device'} . "\n";
 
