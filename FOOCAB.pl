@@ -253,6 +253,7 @@ if ( $device eq "MT300N" || $device eq "WDR3600" || $device eq "WGT634U" ) {
 
 print SED "s|PTP_WANIFACE_PTP|$waniface|g\n";
 print SED "s|PTP_PUBIFACES_PTP|$pubifaces|g\n";
+print SED "s|PTP_VPN6ROUTE_PTP|$IPV6SLASH48::1|g\n";
 
 if ( ! defined($masklen) ||  !defined($pubaddr) ) {
   die "Not enough information to compute network! pubaddr: " . $pubaddr . " masklen: " . $masklen ;
