@@ -56,7 +56,7 @@ set network.wan6.reqprefix='60'
 
 set network.ptp=interface
 set network.ptp.proto=openvpn
-set network.ptp.enabled=1
+set network.ptp.disabled=0
 set network.ptp.client=1
 set network.ptp.dev_type=tap
 set network.ptp.dev=ptp
